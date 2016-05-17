@@ -25,7 +25,7 @@ public class Column : MonoBehaviour {
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Sound" && !hasFallen) {
-			Debug.Log(col.gameObject.transform.position);
+			//Debug.Log(col.gameObject.transform.position);
 			transform.RotateAround (transform.position, transform.right, -90);
 			hasFallen = true;
 		}
