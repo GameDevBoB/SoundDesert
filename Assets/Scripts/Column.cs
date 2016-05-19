@@ -4,10 +4,19 @@ using System.Collections;
 public class Column : MonoBehaviour {
     //public Vector3 fallRotation;
 	private bool hasFallen;
+    private Material elementMat;
+   
+				
+    private float hiddenColumn = 0.2f;
+    private float visibleColumn = 1f;
+    private Color prevColor;
+    
 	// Use this for initialization
 	void Start () {
 		hasFallen = false;
-	}
+        elementMat = GetComponent<MeshRenderer>().material;
+        prevColor = elementMat.color;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -29,5 +38,17 @@ public class Column : MonoBehaviour {
 			transform.RotateAround (transform.position, transform.right, -90);
 			hasFallen = true;
 		}
+    }
+
+    public void GetAlpha()
+    {
+       prevColor.a = hiddenColumn;
+       elementMat.color = prevColor;
+    }
+
+    public void BackToNormalAlpha()
+    {
+        prevColor.a = visibleColumn;
+        elementMat.color = prevColor;
     }
 }
