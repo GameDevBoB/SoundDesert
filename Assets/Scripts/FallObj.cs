@@ -3,7 +3,9 @@ using System.Collections;
 
 public class FallObj : MonoBehaviour {
 
-	private Rigidbody rb;
+    public GameObject soundObj;
+
+    private Rigidbody rb;
 
 	void Awake()
 	{
@@ -20,10 +22,20 @@ public class FallObj : MonoBehaviour {
 	
 	}
 
-	void OnCollisionEnter(Collision col)
+    void MakeSound()
+    {
+        soundObj.SetActive(true);
+        soundObj.SendMessage("Expand");
+    }
+
+    void OnCollisionEnter(Collision col)
 	{
 		if (col.gameObject.tag == "Sound")
 			rb.useGravity = true;
+
+        if (col.gameObject.tag == "Desert") {
+            MakeSound();
+        }
 	}
 	
 	void OnTriggerEnter(Collider col)
