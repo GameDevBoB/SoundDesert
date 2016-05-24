@@ -15,6 +15,7 @@ public class Player : MonoBehaviour {
     private float startTimeShoot;
     private RaycastHit hit;
 	private LineRenderer myAimPreview;
+    private bool joyPad;
 
     void Awake()
     {
@@ -32,30 +33,10 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(Input.GetKey(KeyCode.W))
-            Move(transform.forward);
-        if (Input.GetKey(KeyCode.S))
-            Move(-transform.forward);
-        if (Input.GetKey(KeyCode.D))
-            Move(transform.right);
-        if (Input.GetKey(KeyCode.A))
-            Move(-transform.right);
-        if (Input.GetMouseButton(0))
-        {
-            if ((Time.time - startTimeShoot) > coolDown || startTimeShoot == 0)
-            {
-                //MakeSound();
-                ShootSoundWave();
-                startTimeShoot = Time.time;
-            }
-        }
 
-        if (Input.GetKey(KeyCode.Space))
-        {
-            MakeSound();
-        }
-
-        if (Input.GetButtonDown("MakeSound"))
+        MoveJoyPad();
+        RotateJoyPad();
+        if (Input.GetButton("MakeSound"))
         {
             if ((Time.time - startTimeShoot) > coolDown || startTimeShoot == 0)
             {
@@ -64,12 +45,48 @@ public class Player : MonoBehaviour {
             }
         }
 
-        Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1 << LayerMask.NameToLayer("Floor"));
-        //Vector3 mouse2World = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Vector3.Distance(Camera.main.transform.position, hit.transform.position), Input.mousePosition.z));
-        //Debug.DrawLine(transform.position, hit.point, Color.red, 1);
-        transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
-		myAimPreview.SetPosition (0, spawnPointWave.position);
-		myAimPreview.SetPosition (1, spawnPointWave.position + spawnPointWave.forward * waveVelocity * waveDuration);
+        if (Input.GetKeyDown(KeyCode.J))
+            joyPad = true;
+
+        if (Input.GetKeyDown(KeyCode.N))
+            joyPad = false;
+        if (joyPad == false)
+        {
+            if (Input.GetKey(KeyCode.W))
+                Move(transform.forward);
+            if (Input.GetKey(KeyCode.S))
+                Move(-transform.forward);
+            if (Input.GetKey(KeyCode.D))
+                Move(transform.right);
+            if (Input.GetKey(KeyCode.A))
+                Move(-transform.right);
+            if (Input.GetMouseButton(0))
+            {
+                if ((Time.time - startTimeShoot) > coolDown || startTimeShoot == 0)
+                {
+                    //MakeSound();
+                    ShootSoundWave();
+                    startTimeShoot = Time.time;
+                }
+            }
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                MakeSound();
+            }
+
+          
+
+            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1 << LayerMask.NameToLayer("Floor"));
+            //Vector3 mouse2World = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Vector3.Distance(Camera.main.transform.position, hit.transform.position), Input.mousePosition.z));
+            //Debug.DrawLine(transform.position, hit.point, Color.red, 1);
+
+            transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+            
+        }
+        myAimPreview.SetPosition(0, spawnPointWave.position);
+        myAimPreview.SetPosition(1, spawnPointWave.position + spawnPointWave.forward * waveVelocity * waveDuration);
+
     }
 
     void Move(Vector3 direction)
@@ -95,22 +112,22 @@ public class Player : MonoBehaviour {
         float y = Input.GetAxis("LeftAnalY");
         if (x > 0.1)
         {
-            Vector3 s = new Vector3(transform.position.x + (x * speed), transform.position.y, transform.position.z - (y * speed));
+            Vector3 s = new Vector3(transform.position.x + (x * (speed + 0.3f)), transform.position.y, transform.position.z - (y * (speed + 0.3f)));
             rb.MovePosition(s);
         }
         if (x < -0.1)
         {
-            Vector3 s = new Vector3(transform.position.x + (x * speed), transform.position.y, transform.position.z - (y * speed));
+            Vector3 s = new Vector3(transform.position.x + (x * (speed + 0.3f)), transform.position.y, transform.position.z - (y * (speed + 0.3f)));
             rb.MovePosition(s);
         }
         if (y > 0.1)
         {
-            Vector3 s = new Vector3(transform.position.x + (x * speed), transform.position.y, transform.position.z - (y * speed));
+            Vector3 s = new Vector3(transform.position.x + (x * (speed + 0.3f)), transform.position.y, transform.position.z - (y * (speed + 0.3f)));
             rb.MovePosition(s);
         }
         if (y < -0.1)
         {
-            Vector3 s = new Vector3(transform.position.x + (x * speed), transform.position.y, transform.position.z - (y * speed));
+            Vector3 s = new Vector3(transform.position.x + (x * (speed + 0.3f)), transform.position.y, transform.position.z - (y * (speed + 0.3f)));
 
             rb.MovePosition(s);
         }
@@ -123,22 +140,22 @@ public class Player : MonoBehaviour {
         float yl = Input.GetAxis("RightAnalY");
         if (xl > 0.1)
         {
-            lookAt.position = new Vector3(transform.position.x - xl, transform.position.y, transform.position.z + yl);
+            lookAt.position = new Vector3(transform.position.x + yl, transform.position.y, transform.position.z - yl);
             transform.LookAt(lookAt);
         }
         if (xl < -0.1)
         {
-            lookAt.position = new Vector3(transform.position.x - xl, transform.position.y, transform.position.z + yl);
+            lookAt.position = new Vector3(transform.position.x + xl, transform.position.y, transform.position.z - yl);
             transform.LookAt(lookAt);
         }
         if (yl > 0.1)
         {
-            lookAt.position = new Vector3(transform.position.x - xl, transform.position.y, transform.position.z + yl);
+            lookAt.position = new Vector3(transform.position.x + xl, transform.position.y, transform.position.z - yl);
             transform.LookAt(lookAt);
         }
         if (yl < -0.1)
         {
-            lookAt.position = new Vector3(transform.position.x - xl, transform.position.y, transform.position.z + yl);
+            lookAt.position = new Vector3(transform.position.x + xl, transform.position.y, transform.position.z - yl);
             transform.LookAt(lookAt);
         }
     }
