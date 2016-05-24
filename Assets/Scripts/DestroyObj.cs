@@ -38,7 +38,7 @@ public class DestroyObj : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col)
 	{
-		if (col.gameObject.tag == "Sound") {
+		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
             mymesh.enabled = false;
             myCollider.enabled = false;
             myObstacle.enabled = false;
@@ -50,7 +50,7 @@ public class DestroyObj : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider col)
 	{
-		if (col.gameObject.tag == "Sound") {
+		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
 			mymesh.enabled = false;
             myCollider.enabled = false;
             myObstacle.enabled = false;

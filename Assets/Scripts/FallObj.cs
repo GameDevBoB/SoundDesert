@@ -30,8 +30,11 @@ public class FallObj : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
 	{
-		if (col.gameObject.tag == "Sound")
+		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj)
 			rb.useGravity = true;
+
+        if (col.gameObject.tag == "SoundWave" && rb.useGravity && col.gameObject != soundObj)
+            MakeSound();
 
         if (col.gameObject.tag == "Desert") {
             MakeSound();
@@ -40,7 +43,15 @@ public class FallObj : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider col)
 	{
-		if (col.gameObject.tag == "Sound")
-			rb.useGravity = true;
-	}
+        if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj)
+            rb.useGravity = true;
+
+        if (col.gameObject.tag == "SoundWave" && rb.useGravity && col.gameObject != soundObj)
+            MakeSound();
+
+        if (col.gameObject.tag == "Desert")
+        {
+            MakeSound();
+        }
+    }
 }

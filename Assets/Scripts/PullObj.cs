@@ -6,12 +6,12 @@ public class PullObj : MonoBehaviour {
 	public float pullForce;
     public GameObject soundObj;
 
-    private bool hasPulled;
+    //private bool hasPulled;
 	private Rigidbody rb;
 	
 	// Use this for initialization
 	void Start () {
-		hasPulled = false;
+		//hasPulled = false;
 		rb = GetComponent<Rigidbody> (); 
 	}
 	
@@ -28,23 +28,23 @@ public class PullObj : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
 	{
-		if (col.gameObject.tag == "Sound" && !hasPulled) {
+		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject!=soundObj) {
 			//transform.RotateAround (transform.position, transform.right, -90);
 			rb.MovePosition(transform.position + col.transform.forward * pullForce);
             MakeSound();
-			hasPulled = true;
+			//hasPulled = true;
 		}
 	}
 	
 	void OnTriggerEnter(Collider col)
 	{
-		if (col.gameObject.tag == "Sound" && !hasPulled) {
+		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
 			//Debug.Log(col.gameObject.transform.position);
 			//transform.RotateAround (transform.position, transform.right, -90);
 			
 			rb.MovePosition(transform.position + col.transform.forward * pullForce);
             MakeSound();
-			hasPulled = true;
+			//hasPulled = true;
 		}
 	}
 }

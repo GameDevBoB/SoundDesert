@@ -36,23 +36,33 @@ public class Column : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Sound" && !hasFallen) {
-            MakeSound();
-            transform.RotateAround (transform.position, transform.right, -90);
-			hasFallen = true;
+        if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
+            if (!hasFallen)
+            {
+                MakeSound();
+                transform.RotateAround(transform.position, transform.right, -90);
+                hasFallen = true;
+            }
+            else if (col.gameObject.tag == "SoundWave")
+                MakeSound();
             
         }
     }
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Sound" && !hasFallen) {
-            MakeSound();
-            //Debug.Log(col.gameObject.transform.position);
-            transform.RotateAround (transform.position, transform.right, -90);
-			hasFallen = true;
-          /*  if(GameObject.FindWithTag("Enemy").position)*/
-		}
+        if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj)
+        {
+            if (!hasFallen)
+            {
+                MakeSound();
+                transform.RotateAround(transform.position, transform.right, -90);
+                hasFallen = true;
+            }
+            else if (col.gameObject.tag == "SoundWave")
+                MakeSound();
+
+        }
     }
 
     public void GetAlpha()
