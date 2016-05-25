@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Sound : MonoBehaviour {
+public class SoundSphere : MonoBehaviour {
     public float range;
     public float duration;
 

@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyBehaviour : MonoBehaviour {
-    private NavMeshAgent agent;
+public class Enemy : MonoBehaviour {
+    private NavMeshAgent myAgent;
    // public Transform destination;
    // public float hearRange;
 
 
 	// Use this for initialization
-	void Start () {
-        agent = GetComponent<NavMeshAgent>();
+	void Awake () {
+        myAgent = GetComponent<NavMeshAgent>();
 	}
 	
 	// Update is called once per frame
@@ -30,10 +30,10 @@ public class EnemyBehaviour : MonoBehaviour {
         */
     }
 
-    void OnTriggerEnter(Collider trig) {
-        if (trig.gameObject.tag == "Sound") {
+    void OnTriggerEnter(Collider col) {
+        if (col.gameObject.tag == "Sound") {
             // agent.SetDestination(trig.gameObject.transform.position);
-            agent.destination = trig.gameObject.transform.position;
+            myAgent.destination = col.gameObject.transform.position;
         }
     }
 }

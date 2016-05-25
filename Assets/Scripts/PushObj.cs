@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PullObj : MonoBehaviour {
+public class PushObj : MonoBehaviour {
 	//public Vector3 fallRotation;
 	public float pullForce;
     public GameObject soundObj;
@@ -10,7 +10,7 @@ public class PullObj : MonoBehaviour {
 	private Rigidbody rb;
 	
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		//hasPulled = false;
 		rb = GetComponent<Rigidbody> (); 
 	}

@@ -48,12 +48,12 @@
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\Column.cs" />
      <Compile Include="Assets\Scripts\DestroyObj.cs" />
-     <Compile Include="Assets\Scripts\EnemyBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\FallObj.cs" />
      <Compile Include="Assets\Scripts\HideObject.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
-     <Compile Include="Assets\Scripts\PullObj.cs" />
-     <Compile Include="Assets\Scripts\Sound.cs" />
+     <Compile Include="Assets\Scripts\PushObj.cs" />
+     <Compile Include="Assets\Scripts\SoundSphere.cs" />
      <Compile Include="Assets\Scripts\SoundWave.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

@@ -5,20 +5,23 @@ using System.Collections.Generic;
 public class HideObject : MonoBehaviour {
 
 	public Transform player;
-	public Transform myCamera;
-	public List <Transform> hiddenObjects;
+	public List <Transform> hiddenObjs;
 	public LayerMask myMask;
-
-
 
 	private Vector3 direction;
 	private float distance;
     private Transform currentHit;
+	private Transform myCamera;
     private Transform wasHidden;
+
+	void Awake()
+	{
+		myCamera = transform;
+	}
 
     // Use this for initialization
     void Start () {
-		hiddenObjects = new List<Transform> ();
+		hiddenObjs = new List<Transform> ();
 
 	
 	}
@@ -27,7 +30,7 @@ public class HideObject : MonoBehaviour {
 	void Update () {
 
 		FindPlayerDistance ();
-		StoreElements ();
+		StoreObjs ();
 	
 	}
 
@@ -40,7 +43,7 @@ public class HideObject : MonoBehaviour {
 
 	}
 
-	void StoreElements()
+	void StoreObjs()
 	{
 		RaycastHit[] hits = Physics.RaycastAll(myCamera.position, direction, distance, myMask);
 		for (int i = 0; i < hits.Length; i++)
@@ -48,19 +51,19 @@ public class HideObject : MonoBehaviour {
 
 			currentHit = hits[i].transform;
 			
-			if (!hiddenObjects.Contains(currentHit))
+			if (!hiddenObjs.Contains(currentHit))
 			{
-				hiddenObjects.Add(currentHit);
+				hiddenObjs.Add(currentHit);
                 currentHit.gameObject.SendMessage("GetAlpha");
             }
 
 		}
-		for (int i = 0; i < hiddenObjects.Count; i++)
+		for (int i = 0; i < hiddenObjs.Count; i++)
 		{
 			bool isHit = false;
 			for (int j = 0; j < hits.Length; j++)
 			{
-				if (hits[j].transform == hiddenObjects[i])
+				if (hits[j].transform == hiddenObjs[i])
 				{
 					isHit = true;
 					break;
@@ -68,9 +71,9 @@ public class HideObject : MonoBehaviour {
 			}
 			if (!isHit)
 			{
-				wasHidden = hiddenObjects[i];
+				wasHidden = hiddenObjs[i];
                 wasHidden.gameObject.SendMessage("BackToNormalAlpha");
-                hiddenObjects.RemoveAt(i);
+                hiddenObjs.RemoveAt(i);
 				i--;
 			}
 		}

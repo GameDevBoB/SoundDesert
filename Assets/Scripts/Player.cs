@@ -2,14 +2,15 @@
 using System.Collections;
 
 public class Player : MonoBehaviour {
-    public float speed;
-    public GameObject soundObj;
-    public float coolDown;
-    public GameObject wavePrefab;
-    public Transform spawnPointWave;
+    
+	public GameObject soundObj;
+	public GameObject wavePrefab;
+	public float speed;
+	public float coolDown;
     public float waveVelocity;
     public float waveDuration;
     public Transform lookAt;
+	public Transform spawnPointWave;
 
     private Rigidbody rb;
     private float startTimeShoot;

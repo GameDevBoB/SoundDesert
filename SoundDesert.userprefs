@@ -1,17 +1,17 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Column.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\HideObject.cs">
     <Files>
+      <File FileName="Assets\Scripts\Column.cs" Line="60" Column="34" />
       <File FileName="Assets\Scripts\Player.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\CameraFollow.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Column.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\DestroyObj.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\EnemyBehaviour.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\FallObj.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\HideObject.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PullObj.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Sound.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\HideObject.cs" Line="33" Column="11" />
       <File FileName="Assets\Scripts\SoundWave.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PushObj.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Enemy.cs" Line="36" Column="36" />
+      <File FileName="Assets\Scripts\SoundSphere.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
