@@ -17,6 +17,10 @@ public class Player : MonoBehaviour {
     private RaycastHit hit;
 	private LineRenderer myAimPreview;
     private bool joyPad;
+    private float xl;
+    private float yl;
+    private float x;
+    private float y;
 
     void Awake()
     {
@@ -34,7 +38,10 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        xl = Input.GetAxis("RightAnalX");
+        yl = Input.GetAxis("RightAnalY");
+        x = Input.GetAxis("LeftAnalX");
+        y = Input.GetAxis("LeftAnalY");
         MoveJoyPad();
         RotateJoyPad();
         if (Input.GetButton("MakeSound"))
@@ -109,8 +116,7 @@ public class Player : MonoBehaviour {
 
     void MoveJoyPad()
     {
-        float x = Input.GetAxis("LeftAnalX");
-        float y = Input.GetAxis("LeftAnalY");
+       
         if (x > 0.1)
         {
             Vector3 s = new Vector3(transform.position.x + (x * (speed + 0.3f)), transform.position.y, transform.position.z - (y * (speed + 0.3f)));
@@ -137,8 +143,7 @@ public class Player : MonoBehaviour {
 
     void RotateJoyPad()
     {
-        float xl = Input.GetAxis("RightAnalX");
-        float yl = Input.GetAxis("RightAnalY");
+      
         if (xl > 0.1)
         {
             lookAt.position = new Vector3(transform.position.x + yl, transform.position.y, transform.position.z - yl);
