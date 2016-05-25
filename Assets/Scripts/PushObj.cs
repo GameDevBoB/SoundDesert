@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PushObj : MonoBehaviour {
+public class PushObj : SoundAffected {
 	//public Vector3 fallRotation;
 	public float pullForce;
-    public GameObject soundObj;
 
     //private bool hasPulled;
 	private Rigidbody rb;
@@ -20,18 +19,12 @@ public class PushObj : MonoBehaviour {
 		
 	}
 
-    void MakeSound()
-    {
-        soundObj.SetActive(true);
-        soundObj.SendMessage("Expand");
-    }
-
     void OnCollisionEnter(Collision col)
 	{
 		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject!=soundObj) {
 			//transform.RotateAround (transform.position, transform.right, -90);
 			rb.MovePosition(transform.position + col.transform.forward * pullForce);
-            MakeSound();
+            MakeSound(col.transform.position);
 			//hasPulled = true;
 		}
 	}
@@ -43,7 +36,7 @@ public class PushObj : MonoBehaviour {
 			//transform.RotateAround (transform.position, transform.right, -90);
 			
 			rb.MovePosition(transform.position + col.transform.forward * pullForce);
-            MakeSound();
+            MakeSound(col.transform.position);
 			//hasPulled = true;
 		}
 	}

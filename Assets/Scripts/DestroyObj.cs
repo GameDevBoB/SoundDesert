@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DestroyObj : MonoBehaviour {
-    public GameObject soundObj;
+public class DestroyObj : SoundAffected {
 
     private MeshRenderer myMesh;
 	private ParticleSystem myParticle;
@@ -42,7 +41,7 @@ public class DestroyObj : MonoBehaviour {
             myMesh.enabled = false;
             myCollider.enabled = false;
             myObstacle.enabled = false;
-            MakeSound();
+            MakeSound(col.transform.position);
             myParticle.Play();
         }
 
@@ -54,7 +53,7 @@ public class DestroyObj : MonoBehaviour {
 			myMesh.enabled = false;
             myCollider.enabled = false;
             myObstacle.enabled = false;
-            MakeSound();
+            MakeSound(col.transform.position);
 			myParticle.Play();
 		}
 	}

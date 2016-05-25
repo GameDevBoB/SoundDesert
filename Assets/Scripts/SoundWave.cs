@@ -33,4 +33,18 @@ public class SoundWave : MonoBehaviour {
         Destroy(this.gameObject, duration);
         //spawPosition = transform.position;
     }
+
+	void OnCollisionEnter(Collision col)
+	{
+		//Debug.Log (col.gameObject.name);
+		if(col.gameObject.tag == "SoundAffected")
+			Destroy(this.gameObject);
+	}
+
+	void OnTriggerEnter(Collider col)
+	{
+		//Debug.Log (col.gameObject.name);
+		if(col.gameObject.tag == "SoundAffected")
+			Destroy(this.gameObject);
+	}
 }

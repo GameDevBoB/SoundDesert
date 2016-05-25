@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FallObj : MonoBehaviour {
-
-    public GameObject soundObj;
-
+public class FallObj : SoundAffected {
     private Rigidbody rb;
 
 	void Awake()
@@ -22,22 +19,16 @@ public class FallObj : MonoBehaviour {
 	
 	}
 
-    void MakeSound()
-    {
-        soundObj.SetActive(true);
-        soundObj.SendMessage("Expand");
-    }
-
     void OnCollisionEnter(Collision col)
 	{
 		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj)
 			rb.useGravity = true;
 
         if (col.gameObject.tag == "SoundWave" && rb.useGravity && col.gameObject != soundObj)
-            MakeSound();
+            MakeSound(col.transform.position);
 
         if (col.gameObject.tag == "Desert") {
-            MakeSound();
+            MakeSound(col.transform.position);
         }
 	}
 	
@@ -47,11 +38,11 @@ public class FallObj : MonoBehaviour {
             rb.useGravity = true;
 
         if (col.gameObject.tag == "SoundWave" && rb.useGravity && col.gameObject != soundObj)
-            MakeSound();
+            MakeSound(col.transform.position);
 
         if (col.gameObject.tag == "Desert")
         {
-            MakeSound();
+            MakeSound(col.transform.position);
         }
     }
 }

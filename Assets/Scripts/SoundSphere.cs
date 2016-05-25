@@ -10,23 +10,21 @@ public class SoundSphere : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         startScale = transform.localScale;
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (transform.localScale.magnitude < (startScale * range).magnitude)
-        {
-            transform.localScale = new Vector3(transform.localScale.x + range / duration, transform.localScale.y + range / duration, transform.localScale.z + range / duration);
-        }
-        else
-            gameObject.SetActive(false);
+        if (transform.localScale.magnitude < (startScale * range).magnitude) {
+			transform.localScale = new Vector3 (transform.localScale.x + range / duration, transform.localScale.y + range / duration, transform.localScale.z + range / duration);
+		} else
+			Destroy (this.gameObject);
 	
 	}
 
     public void Expand()
     {
-		transform.position = transform.parent.position;
+		//transform.position = transform.parent.position;
         transform.localScale = startScale;
     }
 }
