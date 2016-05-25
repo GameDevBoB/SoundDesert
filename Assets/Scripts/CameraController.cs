@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour {
     void Awake()
     {
         myCamera = transform;
-        
+        playerClass = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     // Use this for initialization
@@ -97,7 +97,7 @@ public class CameraController : MonoBehaviour {
 
     private void MoveCamera()
     {
-
+        if(playerClass.)
     }
 
 

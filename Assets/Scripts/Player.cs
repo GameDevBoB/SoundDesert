@@ -11,16 +11,21 @@ public class Player : MonoBehaviour {
     public float waveDuration;
     public Transform lookAt;
 	public Transform spawnPointWave;
+    [HideInInspector]
+    public float xl;
+    [HideInInspector]
+    public float yl;
+    [HideInInspector]
+    public float x;
+    [HideInInspector]
+    public float y;
 
     private Rigidbody rb;
     private float startTimeShoot;
     private RaycastHit hit;
 	private LineRenderer myAimPreview;
     private bool joyPad;
-    private float xl;
-    private float yl;
-    private float x;
-    private float y;
+   
 
     void Awake()
     {
