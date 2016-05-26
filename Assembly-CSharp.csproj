@@ -58,7 +58,6 @@
      <Compile Include="Assets\Scripts\SoundSphere.cs" />
      <Compile Include="Assets\Scripts\SoundWave.cs" />
      <Compile Include="Assets\Scripts\StaticColumn.cs" />
-     <Compile Include="Assets\Scripts\ciccio.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
