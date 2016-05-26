@@ -36,4 +36,8 @@ public class Enemy : MonoBehaviour {
             myAgent.destination = col.gameObject.transform.position;
         }
     }
+
+	public void Destroy(){
+		Destroy (gameObject);
+	}
 }

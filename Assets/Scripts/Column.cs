@@ -11,11 +11,13 @@ public class Column : SoundAffected {
     private float visibleColumn = 1f;
     private Color prevColor;
     private bool hasFallen;
+	private Rigidbody rb;
 
     void Awake()
     {
         elementMat = mymesh.GetComponent<MeshRenderer>().material;
         prevColor = elementMat.color;
+		rb = GetComponent<Rigidbody> ();
     }
 
 	// Use this for initialization
@@ -25,6 +27,7 @@ public class Column : SoundAffected {
 	
 	// Update is called once per frame
 	void Update () {
+
 	
 	}
 
@@ -35,12 +38,17 @@ public class Column : SoundAffected {
             {
                 MakeSound(col.transform.position);
                 transform.RotateAround(transform.position, transform.right, -90);
-                hasFallen = true;
+				hasFallen = true;
+
             }
             else if (col.gameObject.tag == "SoundWave")
                 MakeSound(col.transform.position);
             
         }
+		if (col.gameObject.tag == "Enemy" && rb.velocity!=Vector3.zero) {
+		
+			col.gameObject.SendMessage("Destroy");
+		}
     }
 
     void OnTriggerEnter(Collider col)
@@ -51,13 +59,19 @@ public class Column : SoundAffected {
             {
                 MakeSound(col.transform.position);
                 transform.RotateAround(transform.position, transform.right, -90);
-                hasFallen = true;
+				hasFallen = true;
             }
             else if (col.gameObject.tag == "SoundWave")
                 MakeSound(col.transform.position);
 
         }
+		if (col.gameObject.tag == "Enemy" && rb.velocity!=Vector3.zero) {
+			col.gameObject.SendMessage("Destroy");
+		}
+
     }
+
+
 
     public void GetAlpha()
     {
@@ -70,4 +84,6 @@ public class Column : SoundAffected {
         prevColor.a = visibleColumn;
         elementMat.color = prevColor;
     }
+
+
 }

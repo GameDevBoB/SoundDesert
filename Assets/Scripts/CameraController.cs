@@ -97,7 +97,7 @@ public class CameraController : MonoBehaviour {
 
     private void MoveCamera()
     {
-        if(playerClass.)
+//        if(playerClass.)
     }
 
 
