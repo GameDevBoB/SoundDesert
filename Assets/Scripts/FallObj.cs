@@ -39,7 +39,7 @@ public class FallObj : SoundAffected {
         }
 
 		if (col.gameObject.tag == "Enemy" && rb.velocity!=Vector3.zero) {
-			Debug.Log ("PASSO DI QUA");
+
 			col.gameObject.SendMessage("Destroy");
 		}
 	}
@@ -57,7 +57,7 @@ public class FallObj : SoundAffected {
             MakeSound(col.transform.position);
         }
 		if (col.gameObject.tag == "Enemy" && rb.velocity!=Vector3.zero) {
-			Debug.Log ("PASSO DI QUA");
+
 			col.gameObject.SendMessage("Destroy");
 		}
     }
