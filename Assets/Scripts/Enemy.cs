@@ -49,6 +49,9 @@ public class Enemy : MonoBehaviour {
 		if(isActive==true && (player.position.x-transform.position.x) < enemyField || isActive==true && (player.position.z-transform.position.z) < enemyField ){
 			myAgent.SetDestination(player.position);
 		}
+		if((player.position.x-transform.position.x) > enemyField || (player.position.z-transform.position.z) > enemyField){
+			myAgent.SetDestination(transform.position);
+		}
       /*  if (GameObject.FindWithTag("Sound") && (GameObject.FindWithTag("Sound").transform.position.x- gameObject.transform.position.x)< hearRange || GameObject.FindWithTag("Sound") && (GameObject.FindWithTag("Sound").transform.position.z - gameObject.transform.position.z) < hearRange) {
             agent.SetDestination(GameObject.FindWithTag("Sound").transform.position); 
         }
