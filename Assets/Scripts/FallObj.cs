@@ -38,7 +38,7 @@ public class FallObj : SoundAffected {
             MakeSound(col.transform.position);
         }
 
-		if (col.gameObject.tag == "Enemy" && rb.velocity!=Vector3.zero) {
+		if (col.gameObject.tag == "Enemy" && rb.velocity.magnitude > 0.5) {
 
 			col.gameObject.SetActive (false);
 		}

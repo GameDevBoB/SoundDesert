@@ -45,17 +45,21 @@ public class Enemy : MonoBehaviour {
     void MoveTo() {
 	/*	if(rb.velocity==Vector3.zero){
 			isActive=false;
-		}*/
+		}
 		if(isActive==true && (player.position.x-transform.position.x) < enemyField || isActive==true && (player.position.z-transform.position.z) < enemyField ){
 			myAgent.SetDestination(player.position);
 		}
 		if((player.position.x-transform.position.x) > enemyField || (player.position.z-transform.position.z) > enemyField){
 			myAgent.SetDestination(transform.position);
 		}
-      /*  if (GameObject.FindWithTag("Sound") && (GameObject.FindWithTag("Sound").transform.position.x- gameObject.transform.position.x)< hearRange || GameObject.FindWithTag("Sound") && (GameObject.FindWithTag("Sound").transform.position.z - gameObject.transform.position.z) < hearRange) {
+        if (GameObject.FindWithTag("Sound") && (GameObject.FindWithTag("Sound").transform.position.x- gameObject.transform.position.x)< hearRange || GameObject.FindWithTag("Sound") && (GameObject.FindWithTag("Sound").transform.position.z - gameObject.transform.position.z) < hearRange) {
             agent.SetDestination(GameObject.FindWithTag("Sound").transform.position); 
         }
         */
+        if (Vector3.Distance(player.position, transform.position) < enemyField)
+        {
+            myAgent.SetDestination(player.position);
+        }
     }
 
 	void Attack(){
@@ -80,9 +84,9 @@ public class Enemy : MonoBehaviour {
             // agent.SetDestination(trig.gameObject.transform.position);
 			myAgent.SetDestination(trig.gameObject.transform.position);
 
-			if((player.position.x-transform.position.x) < enemyField || (player.position.z-transform.position.z) < enemyField){
+		/*	if((player.position.x-transform.position.x) < enemyField || (player.position.z-transform.position.z) < enemyField){
 				myAgent.SetDestination(player.position);				
-			}
+			}*/
         }
 		if(trig.gameObject.tag=="LowerEdge"){
 			this.gameObject.SetActive (false);
