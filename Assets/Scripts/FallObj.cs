@@ -40,7 +40,7 @@ public class FallObj : SoundAffected {
 
 		if (col.gameObject.tag == "Enemy" && rb.velocity!=Vector3.zero) {
 
-			col.gameObject.SendMessage("Destroy");
+			col.gameObject.SetActive (false);
 		}
 	}
 	
@@ -58,7 +58,7 @@ public class FallObj : SoundAffected {
         }
 		if (col.gameObject.tag == "Enemy" && rb.velocity!=Vector3.zero) {
 
-			col.gameObject.SendMessage("Destroy");
+			col.gameObject.SetActive (false);
 		}
     }
 }

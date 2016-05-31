@@ -170,4 +170,16 @@ public class Player : MonoBehaviour {
             transform.LookAt(lookAt);
         }
     }
+	void OnTriggerEnter(Collider trig){
+		if(trig.gameObject.tag=="EnemyRange"){
+			trig.gameObject.GetComponentInParent<Enemy>().SetInRange(true);
+		}
+	}
+
+	void OnTriggerExit(Collider trig){
+		if(trig.gameObject.tag=="EnemyRange"){
+			trig.gameObject.GetComponentInParent<Enemy>().SetInRange(false);
+		}
+	}
+
 }
