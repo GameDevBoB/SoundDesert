@@ -43,9 +43,9 @@ public class Enemy : MonoBehaviour {
     }
 
     void MoveTo() {
-		if(rb.velocity==Vector3.zero){
+	/*	if(rb.velocity==Vector3.zero){
 			isActive=false;
-		}
+		}*/
 		if(isActive==true && (player.position.x-transform.position.x) < enemyField || isActive==true && (player.position.z-transform.position.z) < enemyField ){
 			myAgent.SetDestination(player.position);
 		}
@@ -73,6 +73,7 @@ public class Enemy : MonoBehaviour {
 
     void OnTriggerEnter(Collider trig) {
         if (trig.gameObject.tag == "Sound"){
+			isActive=true;
             // agent.SetDestination(trig.gameObject.transform.position);
 			myAgent.SetDestination(trig.gameObject.transform.position);
 
