@@ -9,6 +9,8 @@ public class Player : MonoBehaviour {
 	public float coolDown;
     public float waveVelocity;
     public float waveDuration;
+    public Transform camera;
+    public Transform cameraPos;
     public Transform lookAt;
 	public Transform spawnPointWave;
     [HideInInspector]
@@ -29,7 +31,7 @@ public class Player : MonoBehaviour {
 
     void Awake()
     {
-        lookAt.position = transform.position;
+        //lookAt.position = transform.position;
         rb = GetComponent<Rigidbody>();
         Physics.queriesHitTriggers = false;
 		myAimPreview = GetComponent<LineRenderer> ();
@@ -43,12 +45,14 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+       // cameraPos.position = camera.position;
         xl = Input.GetAxis("RightAnalX");
         yl = Input.GetAxis("RightAnalY");
         x = Input.GetAxis("LeftAnalX");
         y = Input.GetAxis("LeftAnalY");
         MoveJoyPad();
-        RotateJoyPad();
+        //RotateJoyPad();
+        CameraRotate();
         if (Input.GetButton("MakeSound"))
         {
             if ((Time.time - startTimeShoot) > coolDown || startTimeShoot == 0)
@@ -90,16 +94,16 @@ public class Player : MonoBehaviour {
 
           
 
-            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1 << LayerMask.NameToLayer("Floor"));
+            //Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1 << LayerMask.NameToLayer("Floor"));
             //Vector3 mouse2World = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Vector3.Distance(Camera.main.transform.position, hit.transform.position), Input.mousePosition.z));
             //Debug.DrawLine(transform.position, hit.point, Color.red, 1);
 
-            transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+            //transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
             
         }
         myAimPreview.SetPosition(0, spawnPointWave.position);
         myAimPreview.SetPosition(1, spawnPointWave.position + spawnPointWave.forward * waveVelocity * waveDuration);
-
+        
     }
 
     void Move(Vector3 direction)
@@ -146,7 +150,7 @@ public class Player : MonoBehaviour {
     }
 
 
-    void RotateJoyPad()
+   /* void RotateJoyPad()
     {
       
         if (xl > 0.1)
@@ -169,6 +173,16 @@ public class Player : MonoBehaviour {
             lookAt.position = new Vector3(transform.position.x + xl, transform.position.y, transform.position.z - yl);
             transform.LookAt(lookAt);
         }
+    }*/
+
+    void CameraRotate()
+    {
+
+        /*Vector3 pos = new Vector3(cameraPos.position.x - transform.position.x, lookAt.position.y, cameraPos.position.z - transform.position.z);
+        
+        lookAt.position = new Vector3(-pos.x, pos.y, -pos.z);*/
+        lookAt.position = new Vector3(cameraPos.position.x, 0.5f, cameraPos.position.z);
+        transform.LookAt(lookAt);
     }
 	void OnTriggerEnter(Collider trig){
 		if(trig.gameObject.tag=="EnemyRange"){
