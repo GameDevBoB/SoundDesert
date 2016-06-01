@@ -30,6 +30,7 @@ public class RPG_Camera : MonoBehaviour {
     private float distanceVel;
     private bool camBottom;
     private bool constraint;
+    private bool cursorOn;
     
     private static float halfFieldOfView;
     private static float planeAspect;
@@ -78,6 +79,22 @@ public class RPG_Camera : MonoBehaviour {
         cameraScript.cameraPivot = cameraPivot.transform;
     }
     
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if(cursorOn == true)
+            {
+                Cursor.visible = false;
+                cursorOn = false;
+            }
+            else
+            {
+                Cursor.visible = true;
+                cursorOn = true;
+            }
+        }
+    }
     
     void LateUpdate() {
         if (cameraPivot == null) {
@@ -115,7 +132,7 @@ public class RPG_Camera : MonoBehaviour {
             } else
                 mouseY -= Input.GetAxis("Mouse Y") * mouseSpeed;
        // } else
-            Cursor.visible = true; // if you want the cursor behavior of the version 1.0, change this line to "Screen.lockCursor = false;"
+            //Cursor.visible = true; // if you want the cursor behavior of the version 1.0, change this line to "Screen.lockCursor = false;"
         
         mouseY = ClampAngle(mouseY, -89.5f, 89.5f);
         mouseXSmooth = Mathf.SmoothDamp(mouseXSmooth, mouseX, ref mouseXVel, mouseSmoothingFactor);
