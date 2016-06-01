@@ -91,10 +91,10 @@ public class Player : MonoBehaviour
                 }
             }
 
-            if (Input.GetKey(KeyCode.Space))
+            /*if (Input.GetKey(KeyCode.Space))
             {
                 MakeSound();
-            }
+            }*/
 
 
 
