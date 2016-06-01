@@ -6,6 +6,7 @@ public class FallObj : SoundAffected {
 
 	void Awake()
 	{
+        
 		rb = GetComponent<Rigidbody> ();
 	}
 
@@ -35,7 +36,11 @@ public class FallObj : SoundAffected {
 		}
 
         if (col.gameObject.tag == "Desert") {
-            MakeSound(col.transform.position);
+            // MakeSound(col.transform.position);
+            /*Vector3 posSound = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
+            MakeSound(posSound);*/
+            Vector3 posSound = col.contacts[0].point;
+            MakeSound(posSound);
         }
 
 		if (col.gameObject.tag == "Enemy" && rb.velocity.magnitude > 0.5) {
@@ -54,7 +59,7 @@ public class FallObj : SoundAffected {
 
         if (col.gameObject.tag == "Desert")
         {
-            MakeSound(col.transform.position);
+             MakeSound(col.transform.position);
         }
 		if (col.gameObject.tag == "Enemy" && rb.velocity.magnitude>0.5f) {
 
