@@ -1,109 +1,94 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum EnemyState
+{
+    Disactive,
+    SoundCheck,
+    PlayerFollow,
+    Attack,
+    Idle
+};
+
 public class Enemy : MonoBehaviour {
-	public Transform player;
-	public float enemyField;
-	public bool isActive;
-	public bool inRange;
-	public bool canDestroyYou;
-	
-	private Rigidbody rb;
+    public float activeSoundPerception;
+    public float disactiveSoundPerception;
+    public float viewRange;
+    public float attackTime;
+    public float attackDelay;
+    public float attackAngle = 20;
+    public float attackRange = 5;
+    public float checkTime;
+
     private NavMeshAgent myAgent;
-	private float timerAttack;
-   // public Transform destination;
-   // public float hearRange;
+    private SphereCollider soundTrigger;
+    private EnemyState myState;
+    // public Transform destination;
+    // public float hearRange;
+    private GameObject player;
+    private float startSoundPerceived;
+    //private bool isActive;
+
+
+    
 
 
 	// Use this for initialization
 	void Awake () {
+        soundTrigger = GetComponent<SphereCollider>();
         myAgent = GetComponent<NavMeshAgent>();
-		rb= GetComponent<Rigidbody>();
-
+        player = GameObject.FindWithTag("Player");
 	}
 
-	void Start(){
-		isActive=false;
-		inRange=false;
-	}
+    void Start()
+    {
+        //isActive = false;
+        myState = EnemyState.Disactive;
+        soundTrigger.radius = disactiveSoundPerception / 2;
+    }
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
+	void Update ()
+    {
+        if (myState != EnemyState.Disactive)
+        {
+            if ((Time.time - startSoundPerceived) > checkTime)
+            {
+                CheckIfPlayerInSight();
+            }
+        }
+    }
 
     void FixedUpdate()
     {
-		Debug.Log ("inRange: "+inRange);
-		Debug.Log ("timerAttack: "+timerAttack);
-        MoveTo();
-		if(inRange==true){
-			Attack();
-		}
+        
     }
 
-    void MoveTo() {
-	/*	if(rb.velocity==Vector3.zero){
-			isActive=false;
-		}
-		if(isActive==true && (player.position.x-transform.position.x) < enemyField || isActive==true && (player.position.z-transform.position.z) < enemyField ){
-			myAgent.SetDestination(player.position);
-		}
-		if((player.position.x-transform.position.x) > enemyField || (player.position.z-transform.position.z) > enemyField){
-			myAgent.SetDestination(transform.position);
-		}
-        if (GameObject.FindWithTag("Sound") && (GameObject.FindWithTag("Sound").transform.position.x- gameObject.transform.position.x)< hearRange || GameObject.FindWithTag("Sound") && (GameObject.FindWithTag("Sound").transform.position.z - gameObject.transform.position.z) < hearRange) {
-            agent.SetDestination(GameObject.FindWithTag("Sound").transform.position); 
-        }
-        */
-        if (Vector3.Distance(player.position, transform.position) < enemyField)
-        {
-            myAgent.SetDestination(player.position);
+    void CheckIfPlayerInSight() {
+
+        if (Vector3.Distance(player.transform.position, transform.position) < viewRange)
+            myAgent.SetDestination(player.transform.position);
+    }
+
+    void CheckIfPlayerInAttackRange()
+    {
+
+    }
+
+    void OnTriggerEnter(Collider col) {
+        if (col.gameObject.tag == "Sound") {
+            if (myState == EnemyState.Disactive)
+            {
+                soundTrigger.radius = activeSoundPerception / 2;
+            }
+            myState = EnemyState.SoundCheck;
+            startSoundPerceived = Time.time;
+            myAgent.SetDestination(col.gameObject.transform.position);
+            //myAgent.destination = col.gameObject.transform.position;
         }
     }
 
-	void Attack(){
-
-		timerAttack+=Time.deltaTime;
-		if(/*attackDelay*/3 < timerAttack && timerAttack < 4 /*attackTime*/){
-			transform.Translate(Vector3.zero*Time.deltaTime);
-			canDestroyYou=true;
-		}
-		if(timerAttack>4 /*attackTime*/){
-			timerAttack=0;
-		}
-		if(canDestroyYou==true && inRange==true){
-			player.gameObject.SetActive(false);
-		}
-
-	}
-
-    void OnTriggerEnter(Collider trig) {
-        if (trig.gameObject.tag == "Sound"){
-			isActive=true;
-            // agent.SetDestination(trig.gameObject.transform.position);
-			myAgent.SetDestination(trig.gameObject.transform.position);
-
-		/*	if((player.position.x-transform.position.x) < enemyField || (player.position.z-transform.position.z) < enemyField){
-				myAgent.SetDestination(player.position);				
-			}*/
-        }
-		if(trig.gameObject.tag=="LowerEdge"){
-			this.gameObject.SetActive (false);
-		}
-
-    }
-	public void SetInRange(bool condition){
-		if(condition==true)
-			inRange=true;
-		if(condition==false){
-			inRange=false;
-			timerAttack=0;
-		}
-	}
-
-	/*public void Destroy(){
+	public void Destroy(){
 		Destroy (gameObject);
 	}
-*/
 }
