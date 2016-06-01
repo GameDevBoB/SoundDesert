@@ -132,13 +132,13 @@ public class RPG_Camera : MonoBehaviour {
        /* if (Input.GetMouseButton(1))
             RPG_Controller.instance.transform.rotation = Quaternion.Euler(RPG_Controller.instance.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, RPG_Controller.instance.transform.eulerAngles.z);
         */
-        desiredDistance = desiredDistance - Input.GetAxis("Mouse ScrollWheel") * mouseScroll;
+        /*desiredDistance = desiredDistance - Input.GetAxis("Mouse ScrollWheel") * mouseScroll;
 
         if (desiredDistance > distanceMax)
             desiredDistance = distanceMax;
 
         if (desiredDistance < 0.05)
-            desiredDistance = 0.05f;
+            desiredDistance = 0.05f;*/
     }
 
 

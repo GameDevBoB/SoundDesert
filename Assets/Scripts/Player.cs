@@ -13,6 +13,7 @@ public class Player : MonoBehaviour {
     public Transform cameraPos;
     public Transform lookAt;
 	public Transform spawnPointWave;
+    public float maxVertical;
     [HideInInspector]
     public float xl;
     [HideInInspector]
@@ -181,7 +182,8 @@ public class Player : MonoBehaviour {
         /*Vector3 pos = new Vector3(cameraPos.position.x - transform.position.x, lookAt.position.y, cameraPos.position.z - transform.position.z);
         
         lookAt.position = new Vector3(-pos.x, pos.y, -pos.z);*/
-        lookAt.position = new Vector3(cameraPos.position.x, 0.5f, cameraPos.position.z);
+        
+        lookAt.position = new Vector3(cameraPos.position.x, Mathf.Clamp(cameraPos.position.y, (-maxVertical / 10), maxVertical), cameraPos.position.z);
         transform.LookAt(lookAt);
     }
 
