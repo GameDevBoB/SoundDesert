@@ -19,7 +19,7 @@ public class ButtonObj : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == "Player" && col.gameObject.tag == "Cube")
+        if (col.gameObject.tag == "Player" || col.gameObject.tag == "Cube")
         {
             door.SendMessage("Close");
         }
