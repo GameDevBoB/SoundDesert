@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class StaticColumn : SoundAffected {
-
+    
 	void OnCollisionEnter(Collision col)
 	{
 		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
@@ -14,7 +14,7 @@ public class StaticColumn : SoundAffected {
 
 	void OnTriggerEnter(Collider col)
 	{
-		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj)
+		if ((/*col.gameObject.tag == "Sound" ||*/ col.gameObject.tag == "SoundWave") && col.gameObject != soundObj)
 		
 		{
 				MakeSound(col.transform.position);
