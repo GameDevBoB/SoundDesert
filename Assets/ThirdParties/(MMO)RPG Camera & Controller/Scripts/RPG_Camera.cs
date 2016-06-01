@@ -182,25 +182,27 @@ public class RPG_Camera : MonoBehaviour {
 
 
     void CharacterFade() {
-        if (RPG_Animation.instance == null)
+        if (RPG_Animation_CharacterFadeOnly.instance == null)
             return;
-        
+        Debug.Log("Jesoo è grande");
         if (distance < firstPersonThreshold)
-		    RPG_Animation.instance.GetComponent<Renderer>().enabled = false;
-	
+            RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().enabled = false;
+        
 	    else if (distance < characterFadeThreshold) {
-            RPG_Animation.instance.GetComponent<Renderer>().enabled = true;
+            RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().enabled = true;
 
             float characterAlpha = 1 - (characterFadeThreshold - distance) / (characterFadeThreshold - firstPersonThreshold);
-            if (RPG_Animation.instance.GetComponent<Renderer>().material.color.a != characterAlpha)
-                RPG_Animation.instance.GetComponent<Renderer>().material.color = new Color(RPG_Animation.instance.GetComponent<Renderer>().material.color.r, RPG_Animation.instance.GetComponent<Renderer>().material.color.g, RPG_Animation.instance.GetComponent<Renderer>().material.color.b, characterAlpha);
-			    
+            if (RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.a != characterAlpha)
+            {
+                RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color = new Color(RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.r, RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.g, RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.b, characterAlpha);
+                Debug.Log("Il grande Jesoo è entrato ed ha alphizzato tutto ");
+            }
 	    } else {
 
-            RPG_Animation.instance.GetComponent<Renderer>().enabled = true;
+            RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().enabled = true;
 
-            if (RPG_Animation.instance.GetComponent<Renderer>().material.color.a != 1)
-                RPG_Animation.instance.GetComponent<Renderer>().material.color = new Color(RPG_Animation.instance.GetComponent<Renderer>().material.color.r, RPG_Animation.instance.GetComponent<Renderer>().material.color.g, RPG_Animation.instance.GetComponent<Renderer>().material.color.b, 1);
+            if (RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.a != 1)
+                RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color = new Color(RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.r, RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.g, RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.b, 1);
 		}
     }
 
