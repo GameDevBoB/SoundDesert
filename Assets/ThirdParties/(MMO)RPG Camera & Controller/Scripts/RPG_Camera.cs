@@ -105,7 +105,7 @@ public class RPG_Camera : MonoBehaviour {
         bool constrainMouseY = camBottom && transform.position.y - cameraPivot.transform.position.y <= 0;
 
        // if (Input.GetMouseButton(0) || Input.GetMouseButton(1)) {
-            Cursor.visible = false; // if you want the cursor behavior of the version 1.0, change this line to "Screen.lockCursor = true;"
+         //   Cursor.visible = false; // if you want the cursor behavior of the version 1.0, change this line to "Screen.lockCursor = true;"
 
             mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
 
@@ -115,7 +115,7 @@ public class RPG_Camera : MonoBehaviour {
             } else
                 mouseY -= Input.GetAxis("Mouse Y") * mouseSpeed;
        // } else
-       //     Cursor.visible = true; // if you want the cursor behavior of the version 1.0, change this line to "Screen.lockCursor = false;"
+            Cursor.visible = true; // if you want the cursor behavior of the version 1.0, change this line to "Screen.lockCursor = false;"
         
         mouseY = ClampAngle(mouseY, -89.5f, 89.5f);
         mouseXSmooth = Mathf.SmoothDamp(mouseXSmooth, mouseX, ref mouseXVel, mouseSmoothingFactor);
@@ -129,9 +129,9 @@ public class RPG_Camera : MonoBehaviour {
         mouseYSmooth = ClampAngle(mouseYSmooth, mouseYMin, mouseYMax);
 
 
-        if (Input.GetMouseButton(1))
+       /* if (Input.GetMouseButton(1))
             RPG_Controller.instance.transform.rotation = Quaternion.Euler(RPG_Controller.instance.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, RPG_Controller.instance.transform.eulerAngles.z);
-
+        */
         desiredDistance = desiredDistance - Input.GetAxis("Mouse ScrollWheel") * mouseScroll;
 
         if (desiredDistance > distanceMax)
