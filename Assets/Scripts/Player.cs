@@ -78,7 +78,7 @@ public class Player : MonoBehaviour {
                 Move(transform.right);
             if (Input.GetKey(KeyCode.A))
                 Move(-transform.right);
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 if ((Time.time - startTimeShoot) > coolDown || startTimeShoot == 0)
                 {
