@@ -184,16 +184,5 @@ public class Player : MonoBehaviour {
         lookAt.position = new Vector3(cameraPos.position.x, 0.5f, cameraPos.position.z);
         transform.LookAt(lookAt);
     }
-	void OnTriggerEnter(Collider trig){
-		if(trig.gameObject.tag=="EnemyRange"){
-			trig.gameObject.GetComponentInParent<Enemy>().SetInRange(true);
-		}
-	}
-
-	void OnTriggerExit(Collider trig){
-		if(trig.gameObject.tag=="EnemyRange"){
-			trig.gameObject.GetComponentInParent<Enemy>().SetInRange(false);
-		}
-	}
 
 }
