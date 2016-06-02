@@ -209,17 +209,18 @@ public class RPG_Camera : MonoBehaviour {
             RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().enabled = true;
 
             float characterAlpha = 1 - (characterFadeThreshold - distance) / (characterFadeThreshold - firstPersonThreshold);
-            if (RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.a != characterAlpha)
+            if (RPG_Animation_CharacterFadeOnly.instance.transform.GetChild(0).GetComponent<Renderer>().material.color.a != characterAlpha)
             {
-                RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color = new Color(RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.r, RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.g, RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.b, characterAlpha);
+                // DA RIVEDERE COI NUOVI MATERIALI
+                //RPG_Animation_CharacterFadeOnly.instance.transform.GetChild(0).GetComponent<Renderer>().material.color = new Color(RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.r, RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.g, RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.b, characterAlpha);
                 Debug.Log("Il grande Jesoo è entrato ed ha alphizzato tutto ");
             }
 	    } else {
 
             RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().enabled = true;
-
-            if (RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.a != 1)
-                RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color = new Color(RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.r, RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.g, RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.b, 1);
+            // DA RIVEDERE COI NUOVI MATERIALI
+            //if (RPG_Animation_CharacterFadeOnly.instance.transform.GetChild(0).GetComponent<Renderer>().material.color.a != 1)
+                //RPG_Animation_CharacterFadeOnly.instance.transform.GetChild(0).GetComponent<Renderer>().material.color = new Color(RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.r, RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.g, RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.b, 1);
 		}
     }
 
