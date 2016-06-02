@@ -22,10 +22,16 @@ public class Enemy : MonoBehaviour {
     public float hitAngle = 30;
     public float hitRange = 10;
     public float checkTime;
+    public Color disactiveColor;
+    public Color soundCheckColor;
+    public Color playerFollowColor;
+    public Color attackColor;
+    public Color idleColor;
 
     private NavMeshAgent myAgent;
     private SphereCollider soundTrigger;
     public EnemyState myState;
+    private Material myMaterial;
     // public Transform destination;
     // public float hearRange;
     private GameObject player;
@@ -43,6 +49,7 @@ public class Enemy : MonoBehaviour {
     void Awake () {
         soundTrigger = GetComponent<SphereCollider>();
         myAgent = GetComponent<NavMeshAgent>();
+        myMaterial = GetComponent<MeshRenderer>().material;
         player = GameObject.FindWithTag("Player");
 	}
 
@@ -50,8 +57,10 @@ public class Enemy : MonoBehaviour {
     {
         //isActive = false;
         myState = EnemyState.Disactive;
+        SetEmissive(disactiveColor);
         soundTrigger.radius = disactiveSoundPerception / 2;
         isAttacking = false;
+        SetEmissive(Color.black);
     }
 	
 	// Update is called once per frame
@@ -60,7 +69,10 @@ public class Enemy : MonoBehaviour {
         if (myState != EnemyState.Disactive)
         {
             if (myAgent.remainingDistance < 0.5f && !isAttacking)
+            {
                 myState = EnemyState.Idle;
+                SetEmissive(idleColor);
+            }
             else
                 myAgent.Resume();
             if ((Time.time - startSoundPerceived) > checkTime && !isAttacking)
@@ -77,12 +89,13 @@ public class Enemy : MonoBehaviour {
 
     void CheckIfPlayerInSight()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) < viewRange)
+        if (Vector3.Distance(player.transform.position, transform.position) < viewRange && player.activeSelf)
         {
             if (CheckIfPlayerInAttackRange())
             {
                 Debug.Log("Giocatore in vista! Attacco");
                 myState = EnemyState.Attack;
+                SetEmissive(attackColor);
                 myAgent.Stop();
                 if (((Time.time - startAttack) > attackDelay || startAttack == 0) && !isAttacking)
                 {
@@ -94,6 +107,7 @@ public class Enemy : MonoBehaviour {
             {
                 myAgent.Resume();
                 myState = EnemyState.PlayerFollow;
+                SetEmissive(playerFollowColor);
                 myAgent.SetDestination(player.transform.position);
             }
         }
@@ -121,6 +135,7 @@ public class Enemy : MonoBehaviour {
                 soundTrigger.radius = activeSoundPerception / 2;
             }
             myState = EnemyState.SoundCheck;
+            SetEmissive(soundCheckColor);
             startSoundPerceived = Time.time;
             myAgent.Resume();
             myAgent.SetDestination(col.gameObject.transform.position);
@@ -141,6 +156,8 @@ public class Enemy : MonoBehaviour {
                 if (CheckIfPlayerHit())
                 {
                     player.SendMessage("GetDamage");
+                    myState = EnemyState.Idle;
+                    SetEmissive(idleColor);
                     //Debug.Log("Giocatore colpito!");
                 }
             }
@@ -153,4 +170,9 @@ public class Enemy : MonoBehaviour {
 	public void Destroy(){
 		gameObject.SetActive(false);
 	}
+
+    private void SetEmissive(Color newColor)
+    {
+        myMaterial.SetColor("_node_217", newColor);
+    }
 }
