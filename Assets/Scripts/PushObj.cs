@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PushObj : SoundAffected {
 	//public Vector3 fallRotation;
-	public float pullForce;
+	public float pushForce;
 
     //private bool hasPulled;
 	private Rigidbody rb;
@@ -22,8 +22,9 @@ public class PushObj : SoundAffected {
     void OnCollisionEnter(Collision col)
 	{
 		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject!=soundObj) {
-			//transform.RotateAround (transform.position, transform.right, -90);
-			rb.MovePosition(transform.position + col.transform.forward * pullForce);
+            //transform.RotateAround (transform.position, transform.right, -90);
+            Vector3 pushVector = new Vector3(col.transform.forward.x, 0, col.transform.forward.z);
+			rb.MovePosition(transform.position + pushVector * pushForce);
             MakeSound(col.transform.position);
 			//hasPulled = true;
 		}
@@ -32,10 +33,10 @@ public class PushObj : SoundAffected {
 	void OnTriggerEnter(Collider col)
 	{
 		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
-			//Debug.Log(col.gameObject.transform.position);
-			//transform.RotateAround (transform.position, transform.right, -90);
-			
-			rb.MovePosition(transform.position + col.transform.forward * pullForce);
+            //Debug.Log(col.gameObject.transform.position);
+            //transform.RotateAround (transform.position, transform.right, -90);
+            Vector3 pushVector = new Vector3(col.transform.forward.x, 0, col.transform.forward.z);
+            rb.MovePosition(transform.position + pushVector * pushForce);
             MakeSound(col.transform.position);
 			//hasPulled = true;
 		}
