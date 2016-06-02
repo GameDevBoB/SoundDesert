@@ -190,4 +190,8 @@ public class Player : MonoBehaviour
         transform.LookAt(lookAt);
     }
 
+    public void GetDamage()
+    {
+        gameObject.SetActive(false);
+    }
 }
