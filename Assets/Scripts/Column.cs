@@ -6,17 +6,17 @@ public class Column : SoundAffected {
     
     public GameObject mymesh;
 
-    private Material elementMat;
+    //private Material elementMat;
     private float hiddenColumn = 0.2f;
     private float visibleColumn = 1f;
-    private Color prevColor;
+    //private Color prevColor;
     private bool hasFallen;
 	private Rigidbody rb;
 
     void Awake()
     {
-        elementMat = mymesh.GetComponent<MeshRenderer>().material;
-        prevColor = elementMat.color;
+        //elementMat = mymesh.GetComponent<MeshRenderer>().material;
+        //prevColor = elementMat.color;
 		rb = GetComponent<Rigidbody> ();
     }
 
@@ -73,7 +73,7 @@ public class Column : SoundAffected {
 
 
 
-    public void GetAlpha()
+    /*public void GetAlpha()
     {
         prevColor.a = hiddenColumn;
         elementMat.color = prevColor;
@@ -83,7 +83,7 @@ public class Column : SoundAffected {
     {
         prevColor.a = visibleColumn;
         elementMat.color = prevColor;
-    }
+    }*/
 
 
 }
