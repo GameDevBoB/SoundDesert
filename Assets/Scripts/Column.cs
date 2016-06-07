@@ -45,7 +45,7 @@ public class Column : SoundAffected {
                 MakeSound(col.transform.position);
             
         }
-		if (col.gameObject.tag == "Enemy" && rb.velocity!=Vector3.zero) {
+		if ((col.gameObject.tag == "Enemy" || col.gameObject.tag == "Player") && rb.velocity!=Vector3.zero) {
 		
 			col.gameObject.SendMessage("Destroy");
 		}
@@ -65,7 +65,7 @@ public class Column : SoundAffected {
                 MakeSound(col.transform.position);
 
         }
-		if (col.gameObject.tag == "Enemy" && rb.velocity!=Vector3.zero) {
+		if ((col.gameObject.tag == "Enemy" || col.gameObject.tag == "Player") && rb.velocity!=Vector3.zero) {
 			col.gameObject.SendMessage("Destroy");
 		}
 

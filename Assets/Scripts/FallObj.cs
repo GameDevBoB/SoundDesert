@@ -44,7 +44,7 @@ public class FallObj : SoundAffected {
             hasFallen = true;
         }
 
-		if (col.gameObject.tag == "Enemy" && rb.velocity.magnitude > 1) {
+		if ((col.gameObject.tag == "Enemy" || col.gameObject.tag == "Player" ) && rb.velocity.magnitude > 1) {
 
 			col.gameObject.SetActive (false);
 		}
@@ -67,7 +67,7 @@ public class FallObj : SoundAffected {
             MakeSound(posSound);
             hasFallen = true;
         }
-        if (col.gameObject.tag == "Enemy" && rb.velocity.magnitude > 0.5f)
+        if ((col.gameObject.tag == "Enemy" || col.gameObject.tag == "Player") && rb.velocity.magnitude > 0.5f)
         {
 
             col.gameObject.SetActive(false);
