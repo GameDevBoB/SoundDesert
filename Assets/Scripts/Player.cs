@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     public Transform lookAt;
     public Transform spawnPointWave;
     public float maxVertical;
+    public Transform weapon;
+    //public GameObject weapon;
+    //public GameObject weaponTarget;
     [HideInInspector]
     public float xl;
     [HideInInspector]
@@ -187,11 +190,17 @@ public class Player : MonoBehaviour
         lookAt.position = new Vector3(-pos.x, pos.y, -pos.z);*/
 
         lookAt.position = new Vector3(cameraPos.position.x, Mathf.Clamp(cameraPos.position.y, (-maxVertical / 10), maxVertical), cameraPos.position.z);
-        transform.LookAt(lookAt);
+        Vector3 playerLook = new Vector3(lookAt.position.x, transform.position.y, lookAt.position.z);
+        Vector3 weaponLook = new Vector3(cameraPos.position.x, cameraPos.position.y, cameraPos.position.z);
+        transform.LookAt(playerLook);
+        //weapon.LookAt(weaponLook);
+        weapon.LookAt(weaponLook);
+        
     }
 
     public void GetDamage()
     {
         gameObject.SetActive(false);
+    
     }
 }
