@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
     private float startTimeShoot;
     private RaycastHit hit;
-    private LineRenderer myAimPreview;
+    //private LineRenderer myAimPreview;
     private bool joyPad;
 
 
@@ -36,14 +36,14 @@ public class Player : MonoBehaviour
         //lookAt.position = transform.position;
         rb = GetComponent<Rigidbody>();
         Physics.queriesHitTriggers = false;
-        myAimPreview = GetComponent<LineRenderer>();
+    //    myAimPreview = GetComponent<LineRenderer>();
     }
 
     // Use this for initialization
     void Start()
     {
-        myAimPreview.SetPosition(0, spawnPointWave.position);
-        myAimPreview.SetPosition(1, spawnPointWave.forward * waveVelocity * waveDuration);
+    //    myAimPreview.SetPosition(0, spawnPointWave.position);
+    //    myAimPreview.SetPosition(1, spawnPointWave.forward * waveVelocity * waveDuration);
     }
 
     // Update is called once per frame
@@ -105,8 +105,8 @@ public class Player : MonoBehaviour
             //transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
 
         }
-        myAimPreview.SetPosition(0, spawnPointWave.position);
-        myAimPreview.SetPosition(1, spawnPointWave.position + spawnPointWave.forward * waveVelocity * waveDuration);
+        //myAimPreview.SetPosition(0, spawnPointWave.position);
+        //myAimPreview.SetPosition(1, spawnPointWave.position + spawnPointWave.forward * waveVelocity * waveDuration);
 
     }
 

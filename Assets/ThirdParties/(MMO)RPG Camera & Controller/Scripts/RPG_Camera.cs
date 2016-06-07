@@ -31,6 +31,7 @@ public class RPG_Camera : MonoBehaviour {
     private bool camBottom;
     private bool constraint;
     private bool cursorOn;
+    private Renderer playerRenderer;
     
     private static float halfFieldOfView;
     private static float planeAspect;
@@ -41,6 +42,7 @@ public class RPG_Camera : MonoBehaviour {
 
     void Awake() {
         instance = this;
+        playerRenderer = GameObject.Find("robot").GetComponent<Renderer>();
     }
 
 
@@ -203,10 +205,10 @@ public class RPG_Camera : MonoBehaviour {
             return;
         Debug.Log("Jesoo è grande");
         if (distance < firstPersonThreshold)
-            RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().enabled = false;
-        
-	    else if (distance < characterFadeThreshold) {
-            RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().enabled = true;
+            playerRenderer.enabled = false;
+
+        else if (distance < characterFadeThreshold) {
+            playerRenderer.enabled = true;
 
             float characterAlpha = 1 - (characterFadeThreshold - distance) / (characterFadeThreshold - firstPersonThreshold);
             if (RPG_Animation_CharacterFadeOnly.instance.transform.GetChild(0).GetComponent<Renderer>().material.color.a != characterAlpha)
