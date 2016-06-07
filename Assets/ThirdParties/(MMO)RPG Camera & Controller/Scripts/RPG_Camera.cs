@@ -15,6 +15,7 @@ public class RPG_Camera : MonoBehaviour {
     public float camBottomDistance = 1f;
     public float firstPersonThreshold = 0.8f;
     public float characterFadeThreshold = 1.8f;
+    public Renderer playerRenderer;
 
     private Vector3 desiredPosition;
     private float desiredDistance;
@@ -31,7 +32,7 @@ public class RPG_Camera : MonoBehaviour {
     private bool camBottom;
     private bool constraint;
     private bool cursorOn;
-    private Renderer playerRenderer;
+    
     
     private static float halfFieldOfView;
     private static float planeAspect;
@@ -42,7 +43,7 @@ public class RPG_Camera : MonoBehaviour {
 
     void Awake() {
         instance = this;
-        playerRenderer = GameObject.Find("robot").GetComponent<Renderer>();
+        //playerRenderer = GameObject.Find("robot").GetComponent<Renderer>();
     }
 
 
@@ -330,5 +331,10 @@ public class RPG_Camera : MonoBehaviour {
     public void RotateWithCharacter() {
         float rotation = Input.GetAxis("Horizontal") * RPG_Controller.instance.turnSpeed;
         mouseX += rotation;
+    }
+
+    public void Pointer()
+    {
+
     }
 }
