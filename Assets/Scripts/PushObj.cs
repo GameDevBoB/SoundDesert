@@ -21,18 +21,18 @@ public class PushObj : SoundAffected {
 
     void OnCollisionEnter(Collision col)
 	{
-		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject!=soundObj) {
+		if (col.gameObject.tag == "SoundWave") {
             //transform.RotateAround (transform.position, transform.right, -90);
             Vector3 pushVector = new Vector3(col.transform.forward.x, 0, col.transform.forward.z);
 			rb.MovePosition(transform.position + pushVector * pushForce);
-            MakeSound(col.transform.position);
+                MakeSound(col.transform.position);
 			//hasPulled = true;
 		}
 	}
 	
 	void OnTriggerEnter(Collider col)
 	{
-		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
+		if (col.gameObject.tag == "SoundWave") {
             //Debug.Log(col.gameObject.transform.position);
             //transform.RotateAround (transform.position, transform.right, -90);
             Vector3 pushVector = new Vector3(col.transform.forward.x, 0, col.transform.forward.z);

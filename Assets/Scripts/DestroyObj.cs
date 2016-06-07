@@ -41,7 +41,8 @@ public class DestroyObj : SoundAffected {
             myMesh.enabled = false;
             myCollider.enabled = false;
             myObstacle.enabled = false;
-            MakeSound(col.transform.position);
+            if(col.gameObject.tag == "SoundWave")
+                MakeSound(col.transform.position);
             myParticle.Play();
         }
 
@@ -53,7 +54,8 @@ public class DestroyObj : SoundAffected {
 			myMesh.enabled = false;
             myCollider.enabled = false;
             myObstacle.enabled = false;
-            MakeSound(col.transform.position);
+            if (col.gameObject.tag == "SoundWave")
+                MakeSound(col.transform.position);
 			myParticle.Play();
 		}
 	}
