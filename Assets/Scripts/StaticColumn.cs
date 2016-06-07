@@ -5,21 +5,22 @@ public class StaticColumn : SoundAffected {
     
 	void OnCollisionEnter(Collision col)
 	{
-		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
+        if (col.gameObject.tag == "SoundWave")
 
-			MakeSound(col.transform.position);
-			
-		}
-	}
+        {
+            MakeSound(col.transform.position);
+
+        }
+    }
 
 	void OnTriggerEnter(Collider col)
 	{
-		if ((/*col.gameObject.tag == "Sound" ||*/ col.gameObject.tag == "SoundWave") && col.gameObject != soundObj)
-		
-		{
-				MakeSound(col.transform.position);
+        if (col.gameObject.tag == "SoundWave")
 
-		}
-	}
+        {
+            MakeSound(col.transform.position);
+
+        }
+    }
 
 }

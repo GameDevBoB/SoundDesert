@@ -61,6 +61,8 @@ public class Enemy : MonoBehaviour {
         soundTrigger.radius = disactiveSoundPerception / 2;
         isAttacking = false;
         SetEmissive(Color.black);
+        myAgent.enabled = false;
+        myAgent.stoppingDistance = myAgent.radius + 0.5f;
     }
 	
 	// Update is called once per frame
@@ -91,6 +93,7 @@ public class Enemy : MonoBehaviour {
     {
         if (Vector3.Distance(player.transform.position, transform.position) < viewRange && player.activeSelf)
         {
+            //Debug.Log(CheckIfPlayerInAttackRange());
             if (CheckIfPlayerInAttackRange())
             {
                 Debug.Log("Giocatore in vista! Attacco");
@@ -116,6 +119,8 @@ public class Enemy : MonoBehaviour {
     bool CheckIfPlayerInAttackRange()
     {
         Vector3 rayDirection = player.transform.position - transform.position;
+        //Debug.Log("Distanza " + Physics.Raycast(transform.position, rayDirection, out hit, attackRange, 1 << LayerMask.NameToLayer("Player")));
+        //Debug.Log("Angolo " + (Vector3.Angle(rayDirection, transform.forward) < attackAngle) + " " + Vector3.Angle(rayDirection, transform.forward));
         bool isPlayerInSight = (Physics.Raycast(transform.position, rayDirection, out hit, attackRange, 1 << LayerMask.NameToLayer("Player")) && (Vector3.Angle(rayDirection, transform.forward) < attackAngle)
                                 && !(Physics.Raycast(transform.position, rayDirection, out hit, attackRange, 1 << LayerMask.NameToLayer("Obstacle"))));
         return isPlayerInSight;
@@ -132,6 +137,8 @@ public class Enemy : MonoBehaviour {
         if (col.gameObject.tag == "Sound" && !isAttacking) {
             if (myState == EnemyState.Disactive)
             {
+                myAgent.enabled = true;
+                GetComponent<Rigidbody>().isKinematic = true;
                 soundTrigger.radius = activeSoundPerception / 2;
             }
             myState = EnemyState.SoundCheck;

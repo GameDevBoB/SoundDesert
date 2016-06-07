@@ -36,9 +36,9 @@ public class Column : SoundAffected {
         if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
             if (!hasFallen)
             {
-                MakeSound(col.transform.position);
                 transform.RotateAround(transform.position, transform.right, -90);
-				hasFallen = true;
+                MakeSound(col.transform.position);
+                hasFallen = true;
 
             }
             else if (col.gameObject.tag == "SoundWave")
@@ -57,9 +57,9 @@ public class Column : SoundAffected {
         {
             if (!hasFallen)
             {
-                MakeSound(col.transform.position);
                 transform.RotateAround(transform.position, transform.right, -90);
-				hasFallen = true;
+                MakeSound(col.transform.position);
+                hasFallen = true;
             }
             else if (col.gameObject.tag == "SoundWave")
                 MakeSound(col.transform.position);
