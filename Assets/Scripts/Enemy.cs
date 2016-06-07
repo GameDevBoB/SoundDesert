@@ -61,6 +61,8 @@ public class Enemy : MonoBehaviour {
         soundTrigger.radius = disactiveSoundPerception / 2;
         isAttacking = false;
         SetEmissive(Color.black);
+        myAgent.enabled = false;
+        myAgent.stoppingDistance = myAgent.radius + 0.5f;
     }
 	
 	// Update is called once per frame
@@ -132,6 +134,8 @@ public class Enemy : MonoBehaviour {
         if (col.gameObject.tag == "Sound" && !isAttacking) {
             if (myState == EnemyState.Disactive)
             {
+                myAgent.enabled = true;
+                GetComponent<Rigidbody>().isKinematic = true;
                 soundTrigger.radius = activeSoundPerception / 2;
             }
             myState = EnemyState.SoundCheck;
