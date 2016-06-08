@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour {
     // public Transform destination;
     // public float hearRange;
     private GameObject player;
+    private Rigidbody playerRB;
     private float startSoundPerceived;
     private float startAttack;
     private RaycastHit hit;
@@ -51,6 +52,7 @@ public class Enemy : MonoBehaviour {
         myAgent = GetComponent<NavMeshAgent>();
         myMaterial = GetComponent<MeshRenderer>().material;
         player = GameObject.FindWithTag("Player");
+        playerRB = player.GetComponent<Rigidbody>();
 	}
 
     void Start()
@@ -106,7 +108,7 @@ public class Enemy : MonoBehaviour {
                     StartCoroutine("Attack");
                 }
             }
-            else
+            else if(playerRB.velocity.magnitude != 0)
             {
                 myAgent.Resume();
                 myState = EnemyState.PlayerFollow;

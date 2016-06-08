@@ -1,0 +1,81 @@
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+public class GameController : MonoBehaviour {
+    [HideInInspector]
+    public static GameController instance;
+    public int levelIndex;
+    public List<GameObject> checkpoints;
+
+    private GameObject player;
+
+    void Awake()
+    {
+        Time.timeScale = 1;
+        instance = this;
+        player = GameObject.FindWithTag("Player");
+        Debug.Log("Livelli completati " + PlayerPrefs.GetInt("CompletedLevel"));
+        if (PlayerPrefs.GetInt("CheckpointLevel") == levelIndex)
+        {
+            LoadCheckpoint();
+        }
+    }
+
+
+
+	// Use this for initialization
+	void Start () {
+
+    }
+	
+	// Update is called once per frame
+	void Update () {
+	    if(Input.GetKeyDown(KeyCode.Delete))
+        {
+            DeleteSaving();
+        }
+	}
+
+    public void SaveCheckpoint(GameObject checkpoint)
+    {
+        PlayerPrefs.SetInt("CheckpointIndex", checkpoints.IndexOf(checkpoint));
+        PlayerPrefs.SetInt("CheckpointLevel", levelIndex);
+        PlayerPrefs.Save();
+        Debug.Log("Checkpoint salvato!");
+    }
+
+    public void ClearCheckpoint()
+    {
+        PlayerPrefs.DeleteKey("CheckpointIndex");
+        PlayerPrefs.DeleteKey("CheckpointLevel");
+    }
+
+    public void LoadCheckpoint()
+    {
+        int index = PlayerPrefs.GetInt("CheckpointIndex");
+        player.transform.position = checkpoints[index].transform.position;
+        for(int i = 0; i <= index; i++)
+        {
+            checkpoints[i].SetActive(false);
+        }
+    }
+
+    public void EndLevel()
+    {
+        if (PlayerPrefs.GetInt("CompletedLevel") < levelIndex)
+        {
+            PlayerPrefs.SetInt("CompletedLevel", levelIndex);
+            PlayerPrefs.Save();
+        }
+        ClearCheckpoint();
+        Debug.Log("Bravo hai finito il livello!");
+        Time.timeScale = 0;
+    }
+
+    public void DeleteSaving()
+    {
+        ClearCheckpoint();
+        PlayerPrefs.DeleteKey("CompletedLevel");
+    }
+}
