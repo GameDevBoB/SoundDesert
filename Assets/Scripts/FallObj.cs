@@ -46,8 +46,8 @@ public class FallObj : SoundAffected {
 
 		if ((col.gameObject.tag == "Enemy" || col.gameObject.tag == "Player" ) && rb.velocity.magnitude > 1) {
 
-			col.gameObject.SetActive (false);
-		}
+            col.gameObject.SendMessage("GetDamage");
+        }
 	}
 
     void OnTriggerEnter(Collider col)
@@ -70,7 +70,7 @@ public class FallObj : SoundAffected {
         if ((col.gameObject.tag == "Enemy" || col.gameObject.tag == "Player") && rb.velocity.magnitude > 0.5f)
         {
 
-            col.gameObject.SetActive(false);
+            col.gameObject.SendMessage("GetDamage");
         }
     }
 }

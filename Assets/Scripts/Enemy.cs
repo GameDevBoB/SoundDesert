@@ -176,7 +176,7 @@ public class Enemy : MonoBehaviour {
         isAttacking = false;
     }
 
-	public void Destroy(){
+	public void GetDamage(){
 		gameObject.SetActive(false);
 	}
 

@@ -73,9 +73,9 @@ public class Column : SoundAffected {
             
         }
 		if (col.gameObject.tag == "Enemy" && rb.velocity!=Vector3.zero) {
-		
-			col.gameObject.SendMessage("Destroy");
-		}
+
+            col.gameObject.SendMessage("GetDamage");
+        }
     }
 
     void OnTriggerEnter(Collider col)
@@ -109,8 +109,9 @@ public class Column : SoundAffected {
 
         }
 		if (col.gameObject.tag == "Enemy" && rb.velocity!=Vector3.zero) {
-			col.gameObject.SendMessage("Destroy");
-		}
+            col.gameObject.SendMessage("GetDamage");
+
+        }
 
     }
 

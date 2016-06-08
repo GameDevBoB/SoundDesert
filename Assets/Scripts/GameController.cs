@@ -78,4 +78,10 @@ public class GameController : MonoBehaviour {
         ClearCheckpoint();
         PlayerPrefs.DeleteKey("CompletedLevel");
     }
+
+    public void GameOver()
+    {
+        Debug.Log("Game Over!");
+        Time.timeScale = 0;
+    }
 }
