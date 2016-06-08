@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
     public int levelIndex;
     public List<GameObject> checkpoints;
 
+    private AudioSource myAudio;
     private GameObject player;
 
     void Awake()
@@ -20,6 +21,7 @@ public class GameController : MonoBehaviour {
         {
             LoadCheckpoint();
         }
+        myAudio = GetComponent<AudioSource>();
     }
 
 
@@ -83,5 +85,10 @@ public class GameController : MonoBehaviour {
     {
         Debug.Log("Game Over!");
         Time.timeScale = 0;
+    }
+
+    public void PlayAudio(AudioClip audio)
+    {
+        myAudio.PlayOneShot(audio);
     }
 }

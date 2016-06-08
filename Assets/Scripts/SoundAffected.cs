@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SoundAffected : MonoBehaviour {
 	public GameObject soundSpherePrefab;
+    //public AudioClip soundAudio;
+    
 	protected GameObject soundObj;
 
 	// Use this for initialization
@@ -19,6 +21,7 @@ public class SoundAffected : MonoBehaviour {
 	{
 		soundObj = Instantiate (soundSpherePrefab, origin, Quaternion.identity) as GameObject;
 		soundObj.transform.position = origin;
+        //GameController.instance.PlayAudio(soundAudio);
 		//soundObj.SetActive(true);
 		//soundObj.SendMessage("Expand");
 	}
