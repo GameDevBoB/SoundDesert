@@ -8,6 +8,7 @@ public enum EnemyState
     SoundCheck,
     PlayerFollow,
     Attack,
+    Repair,
     Idle
 };
 
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour {
     public float hitAngle = 30;
     public float hitRange = 10;
     public float checkTime;
+    public float repairRange;
     public Color disactiveColor;
     public Color soundCheckColor;
     public Color playerFollowColor;
@@ -40,6 +42,7 @@ public class Enemy : MonoBehaviour {
     private float startAttack;
     private RaycastHit hit;
     private bool isAttacking;
+    private GameObject soundObj;
     //private bool isActive;
 
 
@@ -74,15 +77,22 @@ public class Enemy : MonoBehaviour {
         {
             if (myAgent.remainingDistance < 0.5f && !isAttacking)
             {
+                if ((myState == EnemyState.SoundCheck && soundObj.layer == LayerMask.NameToLayer("Repairable")) || myState == EnemyState.Repair)
+                        soundObj.SendMessage("Rebuild");
                 myState = EnemyState.Idle;
                 SetEmissive(idleColor);
             }
             else
+            {
                 myAgent.Resume();
+                
+            }
             if ((Time.time - startSoundPerceived) > checkTime && !isAttacking)
             {
                 CheckIfPlayerInSight();
             }
+            if (myState == EnemyState.Idle)
+                CheckIfRepairable();
         }
     }
 
@@ -133,6 +143,17 @@ public class Enemy : MonoBehaviour {
         Vector3 rayDirection = player.transform.position - transform.position;
         bool isPlayerHit = (Physics.Raycast(transform.position, rayDirection, out hit, hitRange, 1 << LayerMask.NameToLayer("Player")) && (Vector3.Angle(rayDirection, transform.forward) < hitAngle));
         return isPlayerHit;
+    }
+
+    void CheckIfRepairable()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, repairRange);
+        if(hitColliders != null)
+        {
+            myState = EnemyState.Repair;
+            soundObj = hitColliders[0].gameObject;
+            myAgent.SetDestination(soundObj.transform.position);
+        }
     }
 
     void OnTriggerEnter(Collider col) {
