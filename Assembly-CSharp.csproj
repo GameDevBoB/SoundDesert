@@ -47,8 +47,6 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Abyss.cs" />
      <Compile Include="Assets\Scripts\ButtonObj.cs" />
-     <Compile Include="Assets\Scripts\CameraController.cs" />
-     <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\CheckpointObj.cs" />
      <Compile Include="Assets\Scripts\Column.cs" />
      <Compile Include="Assets\Scripts\DestroyObj.cs" />
@@ -57,10 +55,12 @@
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\FallObj.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
-     <Compile Include="Assets\Scripts\HideObject.cs" />
+     <Compile Include="Assets\Scripts\Old\CameraController.cs" />
+     <Compile Include="Assets\Scripts\Old\CameraFollow.cs" />
+     <Compile Include="Assets\Scripts\Old\HideObject.cs" />
+     <Compile Include="Assets\Scripts\Old\RockBehaviour.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PushObj.cs" />
-     <Compile Include="Assets\Scripts\RockBehaviour.cs" />
      <Compile Include="Assets\Scripts\SoundAffected.cs" />
      <Compile Include="Assets\Scripts\SoundSphere.cs" />
      <Compile Include="Assets\Scripts\SoundWave.cs" />

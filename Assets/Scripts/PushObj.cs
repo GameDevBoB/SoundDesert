@@ -24,7 +24,7 @@ public class PushObj : SoundAffected {
 		if (col.gameObject.tag == "SoundWave") {
             //transform.RotateAround (transform.position, transform.right, -90);
             Vector3 pushVector = new Vector3(col.transform.forward.x, 0, col.transform.forward.z);
-			rb.MovePosition(transform.position + pushVector * pushForce);
+			rb.AddForce(transform.position + pushVector * pushForce);
                 MakeSound(col.transform.position);
 			//hasPulled = true;
 		}
@@ -36,7 +36,7 @@ public class PushObj : SoundAffected {
             //Debug.Log(col.gameObject.transform.position);
             //transform.RotateAround (transform.position, transform.right, -90);
             Vector3 pushVector = new Vector3(col.transform.forward.x, 0, col.transform.forward.z);
-            rb.MovePosition(transform.position + pushVector * pushForce);
+            rb.AddForce(transform.position + pushVector * pushForce);
             MakeSound(col.transform.position);
 			//hasPulled = true;
 		}
