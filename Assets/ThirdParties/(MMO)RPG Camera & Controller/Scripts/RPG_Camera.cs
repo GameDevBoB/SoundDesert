@@ -8,7 +8,6 @@ public class RPG_Camera : MonoBehaviour {
     public Transform cameraPivot;
     public float distance = 5f;
     public float distanceMax = 30f;
-    public float mouseSpeed = 8f;
     public float mouseScroll = 15f;
     public float mouseSmoothingFactor = 0.08f;
     public float camDistanceSpeed = 0.7f;
@@ -32,8 +31,8 @@ public class RPG_Camera : MonoBehaviour {
     private bool camBottom;
     private bool constraint;
     private bool cursorOn;
-    
-    
+
+    public static float mouseSpeed = 8f;
     private static float halfFieldOfView;
     private static float planeAspect;
     private static float halfPlaneHeight;
