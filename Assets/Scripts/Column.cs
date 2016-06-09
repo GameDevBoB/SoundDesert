@@ -15,6 +15,7 @@ public class Column : SoundAffected {
 	//private Color prevColor;
     private bool hasFallen;
 	private bool isFalling;
+	private bool isRebuilding;
 	private Rigidbody rb;
 	private Vector3 initialRot;
 	private Vector3 initialPos;
@@ -31,28 +32,28 @@ public class Column : SoundAffected {
 	void Start () {
 		hasFallen = false;
 		isFalling=false;
+		isRebuilding=false;
 		initialRot=transform.GetChild (1).eulerAngles;
 		initialPos=transform.GetChild (1).position;
+	}
+	void Update(){
+
+		Debug.Log ("isRebuilding: "+ isRebuilding);
+		Debug.Log ("hasFallen: "+ hasFallen);
+		Debug.Log ("lerpTime: "+lerpTime);
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		if(isFalling==true){
-			
-			if (lerpTime < 1  )
-			{
-				lerpTime += Time.deltaTime/fallTime;//((Time.time - startLerpTime) / lerptime);
-
-				columnChild.transform.eulerAngles= Vector3.Lerp( initialRot , new Vector3(initialRot.x-90,initialRot.y,initialRot.z),(lerpTime));
-				columnChild.transform.position= Vector3.Lerp (initialPos , new Vector3( initialPos.x,initialPos.y+1f,initialPos.z),(lerpTime));
-				//Quaternion.Lerp(transform.rotation,Quaternion.Euler(-90,transform.rotation.y,transform.rotation.z),(exitTime));
-			}
-			if(lerpTime>1){
-				isFalling=false;
-				rb.useGravity=true;
-			}
+			Fall ();
 
 		}
+	/*	if(isRebuilding==true){
+
+			Rebuild();
+
+		}*/
 
 	}
 
@@ -76,6 +77,10 @@ public class Column : SoundAffected {
 
             col.gameObject.SendMessage("GetDamage");
         }
+	/*	if(col.gameObject.tag=="Player"){
+			isRebuilding=true;
+			Debug.Log ("ti ho toccato");
+		}*/
     }
 
     void OnTriggerEnter(Collider col)
@@ -85,24 +90,9 @@ public class Column : SoundAffected {
             if (!hasFallen)
             {
 				isFalling=true;
-               // transform.RotateAround(transform.position, transform.right, -90);
-
-			/*	startLerpTime = Time.time;
-				
-				while (exitTime < 1  )
-				{
-					exitTime += ((Time.time - startLerpTime) / lerptime);
-					transform.eulerAngles= Vector3.Lerp( transform.eulerAngles , new Vector3(transform.eulerAngles.x-90,transform.eulerAngles.y,transform.eulerAngles.z),(exitTime));
-					//Quaternion.Lerp(transform.rotation,Quaternion.Euler(-90,transform.rotation.y,transform.rotation.z),(exitTime));
-				}*/
-				//transform.eulerAngles= new Vector3(
-				//	Mathf.LerpAngle(transform.eulerAngles.x, transform.eulerAngles.x-90, 1*Time.deltaTime),
-				//	transform.eulerAngles.y,
-					//Mathf.LerpAngle(transform.eulerAngles.y, transform.eulerAngles.y, Time.deltaTime),
-				//	transform.eulerAngles.z);
-					//Mathf.LerpAngle(transform.eulerAngles.z, transform.eulerAngles.z, Time.deltaTime));
+			
                 MakeSound(col.transform.position);
-                hasFallen = true;
+                
             }
             else if (col.gameObject.tag == "SoundWave")
                 MakeSound(col.transform.position);
@@ -114,6 +104,56 @@ public class Column : SoundAffected {
         }
 
     }
+	void Fall(){
+
+		if(isRebuilding==false){
+
+			if (lerpTime < 1  )
+			{
+				lerpTime += Time.deltaTime/fallTime;
+				
+				columnChild.transform.eulerAngles= Vector3.Lerp( initialRot , new Vector3(initialRot.x-90,initialRot.y,initialRot.z),(lerpTime));
+				columnChild.transform.position= Vector3.Lerp (initialPos , new Vector3( initialPos.x,initialPos.y+1f,initialPos.z),(lerpTime));
+			}
+			if(lerpTime>1){
+				isFalling=false;
+				hasFallen = true;
+				rb.useGravity=true;
+				lerpTime=0;
+
+			}
+		}
+			
+
+	}
+	public void Rebuild(){
+			if(isFalling==false){
+				if(hasFallen==true){
+					Debug.Log ("sono dentro");
+					
+					
+					if (lerpTime < 1  )
+					{
+						lerpTime += Time.deltaTime/fallTime;//((Time.time - startLerpTime) / lerptime);
+						
+						columnChild.transform.eulerAngles= Vector3.Lerp( new Vector3(initialRot.x-90,initialRot.y,initialRot.z) , initialRot,(lerpTime));
+						columnChild.transform.position= Vector3.Lerp (new Vector3( initialPos.x,initialPos.y+1f,initialPos.z) ,initialPos ,(lerpTime));
+						//Quaternion.Lerp(transform.rotation,Quaternion.Euler(-90,transform.rotation.y,transform.rotation.z),(exitTime));
+					}
+					if(lerpTime>1){
+
+						isRebuilding=false;
+
+						hasFallen=false;
+
+						rb.useGravity=false;
+						lerpTime=0;
+					}
+				}
+			}
+
+
+	}
 
 
 
