@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour {
     public static GameController instance;
     public int levelIndex;
     public List<GameObject> checkpoints;
+    [HideInInspector]
+    public bool joyPad;
 
     private AudioSource myAudio;
     private GameObject player;

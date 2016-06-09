@@ -44,7 +44,7 @@ namespace SoundDesertLibrary
 
         void KeyBinding()
         {
-           if(Player.joyPad == false)
+           if(GameController.instance.joyPad == false)
             {
                 keyboardAndMouse.gameObject.SetActive(true);
             }
