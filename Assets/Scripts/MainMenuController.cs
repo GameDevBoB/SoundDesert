@@ -67,4 +67,10 @@ public class MainMenuController : MonoBehaviour {
         GUIController.ControlsPage();
 
     }
+
+    public void OptionBack()
+    {
+        
+
+    }
 }

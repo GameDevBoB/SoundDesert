@@ -18,6 +18,7 @@ namespace SoundDesertLibrary
         private static AudioSource efxSource;
         private static GameObject optionMenu;
         private static GameObject[] optionMenuPage = new GameObject[3];
+        private static GameObject mainMenu;
 
         public static void AtAwake()
         {
@@ -39,6 +40,11 @@ namespace SoundDesertLibrary
             optionMenuPage[1].SetActive(false);
             optionMenuPage[2].SetActive(false);
             optionMenu.SetActive(false);
+            if(Application.loadedLevelName == "MainMenu")
+            {
+                mainMenu = GameObject.Find("First_Menu");
+            }
+
 
         }
 
@@ -77,6 +83,10 @@ namespace SoundDesertLibrary
         public static void Options()
         {
             optionMenu.SetActive(true);
+            if (Application.loadedLevelName == "Main Menu")
+            {
+
+            }
         }
         
         public static void MousePage()
@@ -98,6 +108,12 @@ namespace SoundDesertLibrary
             optionMenuPage[0].SetActive(false);
             optionMenuPage[1].SetActive(false);
             optionMenuPage[2].SetActive(true);
+        }
+
+        public static void OptionBack()
+        {
+            optionMenu.SetActive(false);
+
         }
     }
 }

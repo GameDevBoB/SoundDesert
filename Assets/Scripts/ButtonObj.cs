@@ -10,18 +10,24 @@ public class ButtonObj : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.tag == "Player" || col.gameObject.tag == "Cube")
+        if (col.gameObject.tag == "Player" || col.gameObject.tag == "Cube" || col.gameObject.name == "PushCube")
         {
             door.SendMessage("Open");
+            if (col.gameObject.name == "PushCube")
+            {
+                col.gameObject.transform.position = new Vector3(transform.position.x, col.gameObject.transform.position.y, transform.position.z);
+            }
         }
 
     }
 
     void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == "Player" || col.gameObject.tag == "Cube")
+        if (col.gameObject.tag == "Player" || col.gameObject.tag == "Cube"  || col.gameObject.name == "PushCube")
         {
             door.SendMessage("Close");
+           
+            
         }
     }
 
