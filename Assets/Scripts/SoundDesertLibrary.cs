@@ -1,23 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Audio;
+using SoundDesertLibrary;
+
 
 namespace SoundDesertLibrary
 {
-    public class GUIController : MonoBehaviour
+    public  class GUIController : MonoBehaviour
     {
-        private UISlider mouseSpeed;
-        private UISprite keyboardAndMouse;
-        private UISprite controller;
-        private UISlider masterVolume;
-        private UISlider musicVolume;
-        private UISlider efxVolume;
-        private AudioSource musicSource;
-        private AudioSource efxSource;
+        private static UISlider mouseSpeed;
+        private static UISprite keyboardAndMouse;
+        private static UISprite controller;
+        private static UISlider masterVolume;
+        private static UISlider musicVolume;
+        private static UISlider efxVolume;
+        private static AudioSource musicSource;
+        private static AudioSource efxSource;
+        private static GameObject optionMenu;
+        private static GameObject[] optionMenuPage = new GameObject[3];
 
-        void AtAwake()
+        public static void AtAwake()
         {
-            mouseSpeed = GameObject.Find("Mouse Sensitivity").GetComponent<UISlider>();
+            /*mouseSpeed = GameObject.Find("Mouse Sensitivity").GetComponent<UISlider>();
             keyboardAndMouse = Resources.Load("Keyboard Map") as UISprite;
             controller = Resources.Load("Controller Map") as UISprite;
             keyboardAndMouse.gameObject.SetActive(false);
@@ -26,23 +30,31 @@ namespace SoundDesertLibrary
             musicVolume = GameObject.Find("Music Volume").GetComponent<UISlider>();
             efxVolume = GameObject.Find("Efx Volume").GetComponent<UISlider>();
             musicSource = GameObject.Find("Music").GetComponent<AudioSource>();
-            efxSource = GameObject.Find("Music").GetComponent<AudioSource>();
-            
+            efxSource = GameObject.Find("Music").GetComponent<AudioSource>();*/
+            optionMenu = GameObject.Find("Option Menu");
+            optionMenuPage[0] = GameObject.Find("Audio Option");
+            optionMenuPage[1] = GameObject.Find("Mouse Option");
+            optionMenuPage[2] = GameObject.Find("Controls Option");
+            optionMenuPage[0].SetActive(true);
+            optionMenuPage[1].SetActive(false);
+            optionMenuPage[2].SetActive(false);
+            optionMenu.SetActive(false);
+
         }
 
-        void Quit()
+        public static void Quit()
         {
             Application.Quit();
 
         }
 
-        void MouseSensitivity()
+        public static void MouseSensitivity()
         {
-            RPG_Camera.mouseSpeed = mouseSpeed.sliderValue;
+            RPG_Camera.mouseSpeed = mouseSpeed.value * 8f;
 
         }
 
-        void KeyBinding()
+        public static void KeyBinding()
         {
            if(GameController.instance.joyPad == false)
             {
@@ -55,12 +67,37 @@ namespace SoundDesertLibrary
 
         }
 
-        void Volume()
+        public static void Volume()
         {
             musicSource.volume = musicVolume.value * masterVolume.value;
             efxSource.volume = efxVolume.value * masterVolume.value;
 
         }
+
+        public static void Options()
+        {
+            optionMenu.SetActive(true);
+        }
         
+        public static void MousePage()
+        {
+            optionMenuPage[0].SetActive(false);
+            optionMenuPage[1].SetActive(true);
+            optionMenuPage[2].SetActive(false);
+        }
+
+        public static void AudioPage()
+        {
+            optionMenuPage[0].SetActive(true);
+            optionMenuPage[1].SetActive(false);
+            optionMenuPage[2].SetActive(false);
+        }
+
+        public static void ControlsPage()
+        {
+            optionMenuPage[0].SetActive(false);
+            optionMenuPage[1].SetActive(false);
+            optionMenuPage[2].SetActive(true);
+        }
     }
 }
