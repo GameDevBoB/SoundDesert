@@ -7,6 +7,7 @@ public class Column : SoundAffected {
     public GameObject mymesh;
 	public GameObject columnChild;
 	public float fallTime=2;
+	public bool isBridge;
 
     //private Material elementMat;
     private float hiddenColumn = 0.2f;
@@ -111,9 +112,12 @@ public class Column : SoundAffected {
 			if (lerpTime < 1  )
 			{
 				lerpTime += Time.deltaTime/fallTime;
-				
+
 				columnChild.transform.eulerAngles= Vector3.Lerp( initialRot , new Vector3(initialRot.x-90,initialRot.y,initialRot.z),(lerpTime));
+				columnChild.transform.position= Vector3.Lerp (initialPos , new Vector3( initialPos.x,initialPos.y,initialPos.z-1),(lerpTime));
+				if(!isBridge){
 				columnChild.transform.position= Vector3.Lerp (initialPos , new Vector3( initialPos.x,initialPos.y+1f,initialPos.z),(lerpTime));
+				}
 			}
 			if(lerpTime>1){
 				isFalling=false;
@@ -137,6 +141,7 @@ public class Column : SoundAffected {
 						lerpTime += Time.deltaTime/fallTime;//((Time.time - startLerpTime) / lerptime);
 						
 						columnChild.transform.eulerAngles= Vector3.Lerp( new Vector3(initialRot.x-90,initialRot.y,initialRot.z) , initialRot,(lerpTime));
+					columnChild.transform.position= Vector3.Lerp (new Vector3( initialPos.x,initialPos.y,initialPos.z-1) ,initialPos ,(lerpTime));
 						columnChild.transform.position= Vector3.Lerp (new Vector3( initialPos.x,initialPos.y+1f,initialPos.z) ,initialPos ,(lerpTime));
 						//Quaternion.Lerp(transform.rotation,Quaternion.Euler(-90,transform.rotation.y,transform.rotation.z),(exitTime));
 					}
