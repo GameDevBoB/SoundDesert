@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour {
     public Color playerFollowColor;
     public Color attackColor;
     public Color idleColor;
+    public Color repairColor;
 
     private NavMeshAgent myAgent;
     private SphereCollider soundTrigger;
@@ -75,19 +76,22 @@ public class Enemy : MonoBehaviour {
     {
         if (myState != EnemyState.Disactive)
         {
-            if (myAgent.remainingDistance < 0.5f && !isAttacking)
+            if ((myAgent.remainingDistance <= myAgent.stoppingDistance && myAgent.pathStatus == NavMeshPathStatus.PathComplete) && myState != EnemyState.Attack)
             {
-                if ((myState == EnemyState.SoundCheck && soundObj.layer == LayerMask.NameToLayer("Repairable")) || myState == EnemyState.Repair)
-                        soundObj.SendMessage("Rebuild");
+                Debug.Log(myState);
+                if (myState == EnemyState.Repair)
+                {
+                    Debug.Log(soundObj.name);
+                    soundObj.SendMessage("Repair");
+                }
                 myState = EnemyState.Idle;
                 SetEmissive(idleColor);
             }
             else
             {
                 myAgent.Resume();
-                
             }
-            if ((Time.time - startSoundPerceived) > checkTime && !isAttacking)
+            if ((Time.time - startSoundPerceived) > checkTime && myState != EnemyState.Attack)
             {
                 CheckIfPlayerInSight();
             }
@@ -103,7 +107,7 @@ public class Enemy : MonoBehaviour {
 
     void CheckIfPlayerInSight()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) < viewRange && player.activeSelf)
+        if (Vector3.Distance(player.transform.position, transform.position) < viewRange)
         {
             //Debug.Log(CheckIfPlayerInAttackRange());
             if (CheckIfPlayerInAttackRange())
@@ -147,11 +151,14 @@ public class Enemy : MonoBehaviour {
 
     void CheckIfRepairable()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, repairRange);
-        if(hitColliders != null)
+        Debug.Log("Controllo se posso riparare qualcosa");
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, repairRange, 1 << LayerMask.NameToLayer("Repairable"));
+        if(hitColliders.Length > 0)
         {
             myState = EnemyState.Repair;
-            soundObj = hitColliders[0].gameObject;
+            SetEmissive(repairColor);
+            soundObj = hitColliders[0].transform.parent.gameObject;
+            myAgent.Resume();
             myAgent.SetDestination(soundObj.transform.position);
         }
     }
@@ -194,6 +201,8 @@ public class Enemy : MonoBehaviour {
             //Debug.Log("Sto attaccando!" + attackTimer);
             yield return new WaitForSeconds(0.01f);
         }
+        myState = EnemyState.Idle;
+        SetEmissive(idleColor);
         isAttacking = false;
     }
 

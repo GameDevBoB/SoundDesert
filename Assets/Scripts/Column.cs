@@ -7,15 +7,15 @@ public class Column : SoundAffected {
     public GameObject mymesh;
 	public GameObject columnChild;
 	public float fallTime=2;
-	public float fallDistance=1;
+	public float fallDistance;
 	public bool isBridge;
+    public bool hasFallen;
 
     //private Material elementMat;
     private float hiddenColumn = 0.2f;
     private float visibleColumn = 1f;
 	private float lerpTime;
 	//private Color prevColor;
-    private bool hasFallen;
 	private bool isFalling;
 	private bool isRebuilding;
 	private Rigidbody rb;
@@ -32,11 +32,20 @@ public class Column : SoundAffected {
 
 	// Use this for initialization
 	void Start () {
-		hasFallen = false;
+		//hasFallen = false;
 		isFalling=false;
 		isRebuilding=false;
-		initialRot=transform.GetChild (1).eulerAngles;
-		initialPos=transform.GetChild (1).position;
+		initialRot=transform.GetChild (1).localEulerAngles;
+		initialPos=transform.GetChild (1).localPosition;
+        if (hasFallen)
+        {
+            columnChild.transform.localEulerAngles = initialRot - Vector3.right * 90;
+            columnChild.transform.localPosition = initialPos - Vector3.forward * fallDistance * 1 / transform.localScale.x - Vector3.up / 2 * 1 / transform.localScale.y;
+            if (!isBridge)
+            {
+                columnChild.transform.localPosition = initialPos - Vector3.forward * fallDistance * 1 / transform.localScale.x + Vector3.up / 2 * 1 / transform.localScale.y;
+            }
+        }
 	}
 	void Update(){
 
@@ -52,11 +61,13 @@ public class Column : SoundAffected {
 			Fall ();
 
 		}
-	/*	if(isRebuilding==true){
+        if (Input.GetKeyDown(KeyCode.R))
+            isRebuilding = true;
+		if(isRebuilding==true){
 
 			Rebuild();
 
-		}*/
+		}
 
 	}
 
@@ -114,17 +125,18 @@ public class Column : SoundAffected {
 			if (lerpTime < 1  )
 			{
 				lerpTime += Time.deltaTime/fallTime;
-
-				columnChild.transform.eulerAngles= Vector3.Lerp( initialRot , new Vector3(initialRot.x-90,initialRot.y,initialRot.z),(lerpTime));
-				columnChild.transform.position= Vector3.Lerp (initialPos , new Vector3( initialPos.x+fallDistance,initialPos.y,initialPos.z),(lerpTime));
+                //Debug.Log("Sto cadendo " + fallDistance);
+				columnChild.transform.localEulerAngles= Vector3.Lerp( initialRot , initialRot-Vector3.right * 90,(lerpTime));
+				columnChild.transform.localPosition= Vector3.Lerp (initialPos , initialPos - Vector3.forward *fallDistance * 1/transform.localScale.x - Vector3.up/2 * 1 / transform.localScale.y, (lerpTime));
 				if(!isBridge){
-				columnChild.transform.position= Vector3.Lerp (initialPos , new Vector3( initialPos.x+fallDistance,initialPos.y+1,initialPos.z),(lerpTime));
+				columnChild.transform.localPosition= Vector3.Lerp (initialPos , initialPos - Vector3.forward * fallDistance *1/transform.localScale.x + Vector3.up/2 * 1 / transform.localScale.y, (lerpTime));
 				}
 			}
 			if(lerpTime>1){
 				isFalling=false;
 				hasFallen = true;
 				rb.useGravity=true;
+                columnChild.layer = LayerMask.NameToLayer("Repairable");
 				lerpTime=0;
 
 			}
@@ -132,19 +144,27 @@ public class Column : SoundAffected {
 			
 
 	}
-	public void Rebuild(){
+
+    public void Repair()
+    {
+        columnChild.layer = LayerMask.NameToLayer("Default");
+        isRebuilding = true;
+    }
+
+    public void Rebuild(){
 			if(isFalling==false){
 				if(hasFallen==true){
-					Debug.Log ("sono dentro");
-					
-					
-					if (lerpTime < 1  )
+					//Debug.Log ("sono dentro");
+                
+
+                if (lerpTime < 1  )
 					{
 						lerpTime += Time.deltaTime/fallTime;//((Time.time - startLerpTime) / lerptime);
 						
-						columnChild.transform.eulerAngles= Vector3.Lerp( new Vector3(initialRot.x-90,initialRot.y,initialRot.z) , initialRot,(lerpTime));
-					columnChild.transform.position= Vector3.Lerp (new Vector3( initialPos.x+fallDistance,initialPos.y,initialPos.z) ,initialPos ,(lerpTime));
-						columnChild.transform.position= Vector3.Lerp (new Vector3( initialPos.x+fallDistance,initialPos.y+1f,initialPos.z) ,initialPos ,(lerpTime));
+						columnChild.transform.localEulerAngles= Vector3.Lerp(initialRot - Vector3.right * 90, initialRot,(lerpTime));
+					columnChild.transform.localPosition= Vector3.Lerp (initialPos - Vector3.forward * fallDistance * 1 / transform.localScale.x - Vector3.up / 2 * 1 / transform.localScale.y, initialPos ,(lerpTime));
+                    if (!isBridge)
+                        columnChild.transform.localPosition= Vector3.Lerp (initialPos - Vector3.forward * fallDistance * 1 / transform.localScale.x + Vector3.up / 2 * 1 / transform.localScale.y, initialPos ,(lerpTime));
 						//Quaternion.Lerp(transform.rotation,Quaternion.Euler(-90,transform.rotation.y,transform.rotation.z),(exitTime));
 					}
 					if(lerpTime>1){
@@ -154,7 +174,8 @@ public class Column : SoundAffected {
 						hasFallen=false;
 
 						rb.useGravity=false;
-						lerpTime=0;
+                    
+                    lerpTime =0;
 					}
 				}
 			}
