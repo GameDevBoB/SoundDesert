@@ -123,19 +123,46 @@ public class RPG_Camera : MonoBehaviour {
 
         bool constrainMouseY = camBottom && transform.position.y - cameraPivot.transform.position.y <= 0;
 
-       // if (Input.GetMouseButton(0) || Input.GetMouseButton(1)) {
-         //   Cursor.visible = false; // if you want the cursor behavior of the version 1.0, change this line to "Screen.lockCursor = true;"
-
+        // if (Input.GetMouseButton(0) || Input.GetMouseButton(1)) {
+        //   Cursor.visible = false; // if you want the cursor behavior of the version 1.0, change this line to "Screen.lockCursor = true;"
+        if (GameController.instance.joyPad == false)
+        {
             mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
 
-            if (constrainMouseY) {
+            if (constrainMouseY)
+            {
                 if (Input.GetAxis("Mouse Y") < 0)
                     mouseY -= Input.GetAxis("Mouse Y") * mouseSpeed;
-            } else
+            }
+            else
                 mouseY -= Input.GetAxis("Mouse Y") * mouseSpeed;
+        }
        // } else
             //Cursor.visible = true; // if you want the cursor behavior of the version 1.0, change this line to "Screen.lockCursor = false;"
         
+        if(GameController.instance.joyPad == true)
+        {
+            if (Input.GetAxis("RightAnalX") > 0.1 || Input.GetAxis("RightAnalX") < -0.1)
+            {
+                mouseX += Input.GetAxis("RightAnalX") * mouseSpeed;
+            }
+            if (constrainMouseY)
+            {
+                if (Input.GetAxis("RightAnalY") > 0.1 || Input.GetAxis("RightAnalY") < -0.1)
+                {
+                    if (Input.GetAxis("RightAnalY") < 0)
+                        mouseY -= Input.GetAxis("RightAnalY") * mouseSpeed;
+                }
+            }
+            else
+            {
+                if (Input.GetAxis("RightAnalY") > 0.1 || Input.GetAxis("RightAnalY") < -0.1)
+                {
+                    mouseY -= Input.GetAxis("RightAnalY") * mouseSpeed;
+                }
+            }
+        }
+
         mouseY = ClampAngle(mouseY, -89.5f, 89.5f);
         mouseXSmooth = Mathf.SmoothDamp(mouseXSmooth, mouseX, ref mouseXVel, mouseSmoothingFactor);
         mouseYSmooth = Mathf.SmoothDamp(mouseYSmooth, mouseY, ref mouseYVel, mouseSmoothingFactor);
