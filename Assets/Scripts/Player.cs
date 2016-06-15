@@ -60,17 +60,18 @@ public class Player : MonoBehaviour
             x = Input.GetAxis("LeftAnalX");
             y = Input.GetAxis("LeftAnalY");
             MoveJoyPad();
+            if (Input.GetButtonDown("MakeSound"))
+            {
+                if ((Time.time - startTimeShoot) > coolDown || startTimeShoot == 0)
+                {
+                    ShootSoundWave();
+                    startTimeShoot = Time.time;
+                }
+            }
         }
         //RotateJoyPad();
         CameraRotate();
-        if (Input.GetButton("MakeSound"))
-        {
-            if ((Time.time - startTimeShoot) > coolDown || startTimeShoot == 0)
-            {
-                ShootSoundWave();
-                startTimeShoot = Time.time;
-            }
-        }
+       
 
         if (Input.GetKeyDown(KeyCode.J))
             GameController.instance.joyPad = true;
@@ -118,7 +119,7 @@ public class Player : MonoBehaviour
 
     void Move(Vector3 direction)
     {
-        rb.MovePosition(transform.position + direction * speed);
+        rb.MovePosition(transform.position + direction * (speed / 100));
     }
 
     void ShootSoundWave()
@@ -135,26 +136,28 @@ public class Player : MonoBehaviour
 
     void MoveJoyPad()
     {
-
+        Debug.Log(rb.position);
         if (x > 0.1)
         {
             Vector3 s = transform.right * speed * x * Time.deltaTime;
-            rb.MovePosition(s);
+            rb.MovePosition(rb.position + s);
         }
         if (x < -0.1)
         {
-            Vector3 s = transform.right * -speed * x * Time.deltaTime;
-            rb.MovePosition(s);
+            Vector3 s = transform.right * speed * x * Time.deltaTime;
+            rb.MovePosition(rb.position + s);
         }
         if (y > 0.1)
         {
-            Vector3 s = transform.forward * speed * x * Time.deltaTime; 
-            rb.MovePosition(s);
+            Vector3 s = -transform.forward * speed * y * Time.deltaTime;
+            //Vector3 s = new Vector3(transform.forward.x * speed * y, transform.forward.y, transform.forward.z * speed * y);
+            rb.MovePosition(rb.position + s);
         }
         if (y < -0.1)
         {
-            Vector3 s = transform.forward * -speed * x * Time.deltaTime;
-            rb.MovePosition(s);
+            Vector3 s = -transform.forward * speed * y * Time.deltaTime;
+            //Vector3 s = new Vector3(transform.forward.x * speed * y, transform.forward.y, transform.forward.z * speed * y);
+            rb.MovePosition(rb.position + s);
         }
     }
 
