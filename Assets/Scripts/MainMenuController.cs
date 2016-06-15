@@ -11,17 +11,14 @@ public class MainMenuController : MonoBehaviour {
     {
         GUIController.AtAwake();
 
-        //public delegate soundlibdele
-        //GUIController.AtAwake();
     }
-	// Use this for initialization
+
 	void Start () {
-	}
-	
-	
-	// Update is called once per frame
+
+    }
+
 	void Update () {
-        Volume();
+        //Volume();
 	}
 
     public void Quit()
@@ -70,7 +67,7 @@ public class MainMenuController : MonoBehaviour {
 
     public void OptionBack()
     {
-        
+        GUIController.OptionBack();
 
     }
 }

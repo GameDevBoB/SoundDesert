@@ -22,16 +22,21 @@ namespace SoundDesertLibrary
 
         public static void AtAwake()
         {
-            /*mouseSpeed = GameObject.Find("Mouse Sensitivity").GetComponent<UISlider>();
-            keyboardAndMouse = Resources.Load("Keyboard Map") as UISprite;
-            controller = Resources.Load("Controller Map") as UISprite;
-            keyboardAndMouse.gameObject.SetActive(false);
-            controller.gameObject.SetActive(false);
+            if (Application.loadedLevelName == "MainMenu")
+            {
+                Debug.Log("Jeppetto");
+                mainMenu = GameObject.Find("First Menu");
+            }
+            mouseSpeed = GameObject.Find("Mouse Sensitivity").GetComponent<UISlider>();
+            /*keyboardAndMouse = Resources.Load("Keyboard Map") as UISprite;
+            controller = Resources.Load("Controller Map") as UISprite;*/
+            //keyboardAndMouse.gameObject.SetActive(false);
+            //controller.gameObject.SetActive(false);
             masterVolume = GameObject.Find("Master Volume").GetComponent<UISlider>();
             musicVolume = GameObject.Find("Music Volume").GetComponent<UISlider>();
             efxVolume = GameObject.Find("Efx Volume").GetComponent<UISlider>();
-            musicSource = GameObject.Find("Music").GetComponent<AudioSource>();
-            efxSource = GameObject.Find("Music").GetComponent<AudioSource>();*/
+            //musicSource = GameObject.Find("Music").GetComponent<AudioSource>();
+            //efxSource = GameObject.Find("Music").GetComponent<AudioSource>();
             optionMenu = GameObject.Find("Option Menu");
             optionMenuPage[0] = GameObject.Find("Audio Option");
             optionMenuPage[1] = GameObject.Find("Mouse Option");
@@ -40,10 +45,7 @@ namespace SoundDesertLibrary
             optionMenuPage[1].SetActive(false);
             optionMenuPage[2].SetActive(false);
             optionMenu.SetActive(false);
-            if(Application.loadedLevelName == "MainMenu")
-            {
-                mainMenu = GameObject.Find("First_Menu");
-            }
+            
 
 
         }
@@ -83,10 +85,15 @@ namespace SoundDesertLibrary
         public static void Options()
         {
             optionMenu.SetActive(true);
-            if (Application.loadedLevelName == "Main Menu")
+            if (mainMenu != null)
             {
-
+                mainMenu.SetActive(false);
             }
+            else
+            {
+                Time.timeScale = 0;
+            }
+
         }
         
         public static void MousePage()
@@ -94,6 +101,7 @@ namespace SoundDesertLibrary
             optionMenuPage[0].SetActive(false);
             optionMenuPage[1].SetActive(true);
             optionMenuPage[2].SetActive(false);
+
         }
 
         public static void AudioPage()
@@ -101,6 +109,7 @@ namespace SoundDesertLibrary
             optionMenuPage[0].SetActive(true);
             optionMenuPage[1].SetActive(false);
             optionMenuPage[2].SetActive(false);
+
         }
 
         public static void ControlsPage()
@@ -108,11 +117,20 @@ namespace SoundDesertLibrary
             optionMenuPage[0].SetActive(false);
             optionMenuPage[1].SetActive(false);
             optionMenuPage[2].SetActive(true);
+
         }
 
         public static void OptionBack()
         {
             optionMenu.SetActive(false);
+            if (mainMenu != null)
+            {
+                mainMenu.SetActive(true);
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
 
         }
     }

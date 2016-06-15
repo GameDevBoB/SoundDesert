@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     private float startTimeShoot;
     private RaycastHit hit;
     //private LineRenderer myAimPreview;
-    private bool joyPad;
+    //private bool joyPad;
 
 
     void Awake()
@@ -53,28 +53,32 @@ public class Player : MonoBehaviour
     void Update()
     {
         // cameraPos.position = camera.position;
-        xl = Input.GetAxis("RightAnalX");
-        yl = Input.GetAxis("RightAnalY");
-        x = Input.GetAxis("LeftAnalX");
-        y = Input.GetAxis("LeftAnalY");
-        MoveJoyPad();
-        //RotateJoyPad();
-        CameraRotate();
-        if (Input.GetButton("MakeSound"))
+        if (GameController.instance.joyPad == true)
         {
-            if ((Time.time - startTimeShoot) > coolDown || startTimeShoot == 0)
+            xl = Input.GetAxis("RightAnalX");
+            yl = Input.GetAxis("RightAnalY");
+            x = Input.GetAxis("LeftAnalX");
+            y = Input.GetAxis("LeftAnalY");
+            MoveJoyPad();
+            if (Input.GetButtonDown("MakeSound"))
             {
-                ShootSoundWave();
-                startTimeShoot = Time.time;
+                if ((Time.time - startTimeShoot) > coolDown || startTimeShoot == 0)
+                {
+                    ShootSoundWave();
+                    startTimeShoot = Time.time;
+                }
             }
         }
+        //RotateJoyPad();
+        CameraRotate();
+       
 
         if (Input.GetKeyDown(KeyCode.J))
-            joyPad = true;
+            GameController.instance.joyPad = true;
 
         if (Input.GetKeyDown(KeyCode.N))
-            joyPad = false;
-        if (joyPad == false)
+            GameController.instance.joyPad = false;
+        if (GameController.instance.joyPad == false)
         {
             if (Input.GetKey(KeyCode.W))
                 Move(transform.forward);
@@ -115,7 +119,7 @@ public class Player : MonoBehaviour
 
     void Move(Vector3 direction)
     {
-        rb.MovePosition(transform.position + direction * speed);
+        rb.MovePosition(transform.position + direction * (speed / 100));
     }
 
     void ShootSoundWave()
@@ -132,55 +136,31 @@ public class Player : MonoBehaviour
 
     void MoveJoyPad()
     {
-
+        Debug.Log(rb.position);
         if (x > 0.1)
         {
-            Vector3 s = new Vector3(transform.position.x + (x * (speed + 0.3f)), transform.position.y, transform.position.z - (y * (speed + 0.3f)));
-            rb.MovePosition(s);
+            Vector3 s = transform.right * speed * x * Time.deltaTime;
+            rb.MovePosition(rb.position + s);
         }
         if (x < -0.1)
         {
-            Vector3 s = new Vector3(transform.position.x + (x * (speed + 0.3f)), transform.position.y, transform.position.z - (y * (speed + 0.3f)));
-            rb.MovePosition(s);
+            Vector3 s = transform.right * speed * x * Time.deltaTime;
+            rb.MovePosition(rb.position + s);
         }
         if (y > 0.1)
         {
-            Vector3 s = new Vector3(transform.position.x + (x * (speed + 0.3f)), transform.position.y, transform.position.z - (y * (speed + 0.3f)));
-            rb.MovePosition(s);
+            Vector3 s = -transform.forward * speed * y * Time.deltaTime;
+            //Vector3 s = new Vector3(transform.forward.x * speed * y, transform.forward.y, transform.forward.z * speed * y);
+            rb.MovePosition(rb.position + s);
         }
         if (y < -0.1)
         {
-            Vector3 s = new Vector3(transform.position.x + (x * (speed + 0.3f)), transform.position.y, transform.position.z - (y * (speed + 0.3f)));
-
-            rb.MovePosition(s);
+            Vector3 s = -transform.forward * speed * y * Time.deltaTime;
+            //Vector3 s = new Vector3(transform.forward.x * speed * y, transform.forward.y, transform.forward.z * speed * y);
+            rb.MovePosition(rb.position + s);
         }
     }
 
-
-    /* void RotateJoyPad()
-     {
-
-         if (xl > 0.1)
-         {
-             lookAt.position = new Vector3(transform.position.x + yl, transform.position.y, transform.position.z - yl);
-             transform.LookAt(lookAt);
-         }
-         if (xl < -0.1)
-         {
-             lookAt.position = new Vector3(transform.position.x + xl, transform.position.y, transform.position.z - yl);
-             transform.LookAt(lookAt);
-         }
-         if (yl > 0.1)
-         {
-             lookAt.position = new Vector3(transform.position.x + xl, transform.position.y, transform.position.z - yl);
-             transform.LookAt(lookAt);
-         }
-         if (yl < -0.1)
-         {
-             lookAt.position = new Vector3(transform.position.x + xl, transform.position.y, transform.position.z - yl);
-             transform.LookAt(lookAt);
-         }
-     }*/
 
     void CameraRotate()
     {
