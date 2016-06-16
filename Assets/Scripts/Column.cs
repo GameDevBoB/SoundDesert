@@ -10,6 +10,7 @@ public class Column : SoundAffected {
 	public float fallDistance;
 	public bool isBridge;
     public bool hasFallen;
+    public GameObject[] bridgeObstacles;
 
     //private Material elementMat;
     private float hiddenColumn = 0.2f;
@@ -138,6 +139,8 @@ public class Column : SoundAffected {
 				rb.useGravity=true;
                 columnChild.layer = LayerMask.NameToLayer("Repairable");
                 gameObject.layer = LayerMask.NameToLayer("Repairable");
+                foreach (GameObject bridgeObstacle in bridgeObstacles)
+                    bridgeObstacle.SetActive(false);
                 lerpTime =0;
 
 			}
@@ -177,6 +180,10 @@ public class Column : SoundAffected {
 
                     columnChild.layer = LayerMask.NameToLayer("Default");
                     gameObject.layer = LayerMask.NameToLayer("Default");
+
+                    foreach (GameObject bridgeObstacle in bridgeObstacles)
+                        bridgeObstacle.SetActive(true);
+
                     lerpTime =0;
 					}
 				}
