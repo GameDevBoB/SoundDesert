@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     public Transform spawnPointWave;
     public float maxVertical;
     public Transform weapon;
+    [HideInInspector]
+    public bool isMoving;
     //public GameObject weapon;
     //public GameObject weaponTarget;
     [HideInInspector]
@@ -52,6 +54,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isMoving = false;
         // cameraPos.position = camera.position;
         if (GameController.instance.joyPad == true)
         {
@@ -88,6 +91,7 @@ public class Player : MonoBehaviour
                 Move(transform.right);
             if (Input.GetKey(KeyCode.A))
                 Move(-transform.right);
+
             if (Input.GetMouseButtonDown(0))
             {
                 if ((Time.time - startTimeShoot) > coolDown || startTimeShoot == 0)
@@ -120,6 +124,7 @@ public class Player : MonoBehaviour
     void Move(Vector3 direction)
     {
         rb.MovePosition(transform.position + direction * (speed / 100));
+        isMoving = true;
     }
 
     void ShootSoundWave()
@@ -141,23 +146,27 @@ public class Player : MonoBehaviour
         {
             Vector3 s = transform.right * speed * x * Time.deltaTime;
             rb.MovePosition(rb.position + s);
+            isMoving = true;
         }
         if (x < -0.1)
         {
             Vector3 s = transform.right * speed * x * Time.deltaTime;
             rb.MovePosition(rb.position + s);
+            isMoving = true;
         }
         if (y > 0.1)
         {
             Vector3 s = -transform.forward * speed * y * Time.deltaTime;
             //Vector3 s = new Vector3(transform.forward.x * speed * y, transform.forward.y, transform.forward.z * speed * y);
             rb.MovePosition(rb.position + s);
+            isMoving = true;
         }
         if (y < -0.1)
         {
             Vector3 s = -transform.forward * speed * y * Time.deltaTime;
             //Vector3 s = new Vector3(transform.forward.x * speed * y, transform.forward.y, transform.forward.z * speed * y);
             rb.MovePosition(rb.position + s);
+            isMoving = true;
         }
     }
 
