@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        
+        levelIndex = Application.loadedLevel;
     }
 	
 	// Update is called once per frame
@@ -75,10 +75,12 @@ public class GameController : MonoBehaviour {
         ClearCheckpoint();
         Debug.Log("Bravo hai finito il livello!");
         Time.timeScale = 0;
+        Application.LoadLevel(levelIndex + 1);
     }
 
     public void DeleteSaving()
     {
+        Debug.Log("Salvataggi cancellati");
         ClearCheckpoint();
         PlayerPrefs.DeleteKey("CompletedLevel");
     }
