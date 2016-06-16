@@ -137,7 +137,8 @@ public class Column : SoundAffected {
 				hasFallen = true;
 				rb.useGravity=true;
                 columnChild.layer = LayerMask.NameToLayer("Repairable");
-				lerpTime=0;
+                gameObject.layer = LayerMask.NameToLayer("Repairable");
+                lerpTime =0;
 
 			}
 		}
@@ -147,7 +148,6 @@ public class Column : SoundAffected {
 
     public void Repair()
     {
-        columnChild.layer = LayerMask.NameToLayer("Default");
         isRebuilding = true;
     }
 
@@ -174,7 +174,9 @@ public class Column : SoundAffected {
 						hasFallen=false;
 
 						rb.useGravity=false;
-                    
+
+                    columnChild.layer = LayerMask.NameToLayer("Default");
+                    gameObject.layer = LayerMask.NameToLayer("Default");
                     lerpTime =0;
 					}
 				}
