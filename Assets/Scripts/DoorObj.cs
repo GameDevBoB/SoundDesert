@@ -11,24 +11,31 @@ public class DoorObj : MonoBehaviour
     private float startLerpTime;
     private Vector3 initialPos;
     private float exitTime;
-
+    private int requiredButtonNumber;
+    private int pressedButtonsNumber;
 
 
     void Awake()
     {
-
+        requiredButtonNumber = 0;
         //lerptime = 1.5f;
         isOpen = false;
         initialPos = transform.position;
 
     }
 
+    void Start()
+    {
+        pressedButtonsNumber = 0;
+    }
+
     
 
     public void Open()
     {
-
-        if (!isOpen)
+        pressedButtonsNumber++;
+        Debug.Log(pressedButtonsNumber);
+        if (!isOpen && (pressedButtonsNumber == requiredButtonNumber) )
         {
             startLerpTime = Time.time;
             StopAllCoroutines();
@@ -68,5 +75,11 @@ public class DoorObj : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         
+    }
+
+    public void AddRequiredButton()
+    {
+        requiredButtonNumber++;
+        Debug.Log(requiredButtonNumber);
     }
 }

@@ -7,6 +7,7 @@ public class PushObj : SoundAffected {
 
     //private bool hasPulled;
 	private Rigidbody rb;
+    private bool isBlocked;
 	
 	// Use this for initialization
 	void Awake () {
@@ -14,6 +15,11 @@ public class PushObj : SoundAffected {
 		rb = GetComponent<Rigidbody> (); 
 	}
 	
+    void Start()
+    {
+        isBlocked = false;
+    }
+
 	// Update is called once per frame
 	void Update () {
 		
@@ -21,7 +27,7 @@ public class PushObj : SoundAffected {
 
     void OnCollisionEnter(Collision col)
 	{
-		if (col.gameObject.tag == "SoundWave") {
+		if (col.gameObject.tag == "SoundWave" && !isBlocked) {
             //transform.RotateAround (transform.position, transform.right, -90);
             Vector3 pushVector = new Vector3(col.transform.forward.x, 0, col.transform.forward.z);
 			rb.AddForce(transform.position + pushVector * pushForce);
@@ -32,7 +38,7 @@ public class PushObj : SoundAffected {
 	
 	void OnTriggerEnter(Collider col)
 	{
-		if (col.gameObject.tag == "SoundWave") {
+		if (col.gameObject.tag == "SoundWave" && !isBlocked) {
             //Debug.Log(col.gameObject.transform.position);
             //transform.RotateAround (transform.position, transform.right, -90);
             Vector3 pushVector = new Vector3(col.transform.forward.x, 0, col.transform.forward.z);
@@ -41,4 +47,10 @@ public class PushObj : SoundAffected {
 			//hasPulled = true;
 		}
 	}
+
+    public void Block()
+    {
+        isBlocked = true;
+        rb.velocity = Vector3.zero;
+    }
 }

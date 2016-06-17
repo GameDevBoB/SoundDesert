@@ -73,10 +73,7 @@
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\FallObj.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
-    <Compile Include="Assets\Scripts\Old\CameraController.cs" />
-    <Compile Include="Assets\Scripts\Old\CameraFollow.cs" />
-    <Compile Include="Assets\Scripts\Old\HideObject.cs" />
-    <Compile Include="Assets\Scripts\Old\RockBehaviour.cs" />
+    <Compile Include="Assets\Scripts\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PushObj.cs" />
     <Compile Include="Assets\Scripts\SoundAffected.cs" />
@@ -84,6 +81,10 @@
     <Compile Include="Assets\Scripts\SoundSphere.cs" />
     <Compile Include="Assets\Scripts\SoundWave.cs" />
     <Compile Include="Assets\Scripts\StaticColumn.cs" />
+    <Compile Include="Assets\Scripts\_Old\CameraController.cs" />
+    <Compile Include="Assets\Scripts\_Old\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\_Old\HideObject.cs" />
+    <Compile Include="Assets\Scripts\_Old\RockBehaviour.cs" />
     <Compile Include="Assets\ThirdParties\(MMO)RPG Camera &amp; Controller\Scripts\RPG_Animation.cs" />
     <Compile Include="Assets\ThirdParties\(MMO)RPG Camera &amp; Controller\Scripts\RPG_Animation_CharacterFadeOnly.cs" />
     <Compile Include="Assets\ThirdParties\(MMO)RPG Camera &amp; Controller\Scripts\RPG_Camera.cs" />
@@ -230,6 +231,8 @@
     <None Include="Assets\Shaders\colonna_enorme.shader" />
     <None Include="Assets\Shaders\enemy.shader" />
     <None Include="Assets\Textures\shader_colonna.shader" />
+    <None Include="Assets\Textures\shader_column.shader" />
+    <None Include="Assets\Textures\shader_enemy 1.shader" />
     <None Include="Assets\Textures\shader_enemy.shader" />
     <None Include="Assets\ThirdParties\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
     <None Include="Assets\ThirdParties\NGUI\Examples\Atlases\Refractive\Refractive Font - Header.txt" />
