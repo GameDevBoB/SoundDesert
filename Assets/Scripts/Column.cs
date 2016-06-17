@@ -11,6 +11,7 @@ public class Column : SoundAffected {
 	public bool isBridge;
     public bool hasFallen;
     public GameObject[] bridgeObstacles;
+    public GameObject bridgeCollider;
 
     //private Material elementMat;
     private float hiddenColumn = 0.2f;
@@ -47,7 +48,8 @@ public class Column : SoundAffected {
                 columnChild.transform.localPosition = initialPos - Vector3.forward * fallDistance * 1 / transform.localScale.x + Vector3.up / 2 * 1 / transform.localScale.y;
             }
         }
-	}
+        bridgeCollider.SetActive(false);
+    }
 	void Update(){
 
 	/*	Debug.Log ("isRebuilding: "+ isRebuilding);

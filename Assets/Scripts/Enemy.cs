@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour {
     {
         if (myState != EnemyState.Disactive)
         {
-            if ((myAgent.remainingDistance <= myAgent.stoppingDistance && myAgent.pathStatus == NavMeshPathStatus.PathComplete) && myState != EnemyState.Attack)
+            if ((myAgent.remainingDistance <= (myAgent.stoppingDistance+1f) && myAgent.pathStatus == NavMeshPathStatus.PathComplete) && myState != EnemyState.Attack)
             {
                 
                 if ( soundObj != null && soundObj.layer == LayerMask.NameToLayer("Repairable"))
@@ -144,7 +144,7 @@ public class Enemy : MonoBehaviour {
                     StartCoroutine("Attack");
                 }
             }
-            else if(playerScript.isMoving)
+            else if (playerScript.isMoving)
             {
                 myAgent.Resume();
                 myState = EnemyState.PlayerFollow;
@@ -152,6 +152,8 @@ public class Enemy : MonoBehaviour {
                 myAgent.SetDestination(player.transform.position);
             }
         }
+        else
+            myState = EnemyState.Idle;
     }
 
     bool CheckIfPlayerInAttackRange()
