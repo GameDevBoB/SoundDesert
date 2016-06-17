@@ -56,10 +56,6 @@
      <Compile Include="Assets\Scripts\FallObj.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\MainMenuController.cs" />
-     <Compile Include="Assets\Scripts\Old\CameraController.cs" />
-     <Compile Include="Assets\Scripts\Old\CameraFollow.cs" />
-     <Compile Include="Assets\Scripts\Old\HideObject.cs" />
-     <Compile Include="Assets\Scripts\Old\RockBehaviour.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PushObj.cs" />
      <Compile Include="Assets\Scripts\SoundAffected.cs" />
@@ -67,6 +63,10 @@
      <Compile Include="Assets\Scripts\SoundSphere.cs" />
      <Compile Include="Assets\Scripts\SoundWave.cs" />
      <Compile Include="Assets\Scripts\StaticColumn.cs" />
+     <Compile Include="Assets\Scripts\_Old\CameraController.cs" />
+     <Compile Include="Assets\Scripts\_Old\CameraFollow.cs" />
+     <Compile Include="Assets\Scripts\_Old\HideObject.cs" />
+     <Compile Include="Assets\Scripts\_Old\RockBehaviour.cs" />
      <Compile Include="Assets\ThirdParties\(MMO)RPG Camera &amp; Controller\Scripts\RPG_Animation.cs" />
      <Compile Include="Assets\ThirdParties\(MMO)RPG Camera &amp; Controller\Scripts\RPG_Animation_CharacterFadeOnly.cs" />
      <Compile Include="Assets\ThirdParties\(MMO)RPG Camera &amp; Controller\Scripts\RPG_Camera.cs" />
@@ -275,17 +275,11 @@
      <None Include="Assets\ThirdParties\NGUI\Examples\Resources\Localization.txt" />
      <None Include="Assets\Textures\shader_column.shader" />
      <None Include="Assets\ThirdParties\ShaderForge\Editor\InternalResources\Shader Presets\PresetSky.shader" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
