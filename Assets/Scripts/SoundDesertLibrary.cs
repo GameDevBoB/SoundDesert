@@ -19,6 +19,7 @@ namespace SoundDesertLibrary
         private static GameObject optionMenu;
         private static GameObject[] optionMenuPage = new GameObject[3];
         private static GameObject mainMenu;
+        private static GameObject menu;
 
         public static void AtAwake()
         {
@@ -26,6 +27,11 @@ namespace SoundDesertLibrary
             {
                 Debug.Log("Jeppetto");
                 mainMenu = GameObject.Find("First Menu");
+            }
+            else
+            {
+                menu = GameObject.Find("Option Menu");
+                
             }
             mouseSpeed = GameObject.Find("Mouse Sensitivity").GetComponent<UISlider>();
             /*keyboardAndMouse = Resources.Load("Keyboard Map") as UISprite;
@@ -92,6 +98,7 @@ namespace SoundDesertLibrary
             else
             {
                 Time.timeScale = 0;
+                menu.SetActive(false);
             }
 
         }
@@ -132,6 +139,17 @@ namespace SoundDesertLibrary
                 Time.timeScale = 1;
             }
 
+        }
+
+        public static void OpenMenu()
+        {
+            Time.timeScale = 0;
+            menu.SetActive(true);
+        }
+        public static void CloseMenu()
+        {
+            Time.timeScale = 1;
+            menu.SetActive(false);
         }
     }
 }
