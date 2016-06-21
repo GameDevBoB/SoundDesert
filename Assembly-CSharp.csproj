@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Abyss.cs" />
+     <Compile Include="Assets\Scripts\BreakableBridgeObj.cs" />
      <Compile Include="Assets\Scripts\ButtonObj.cs" />
      <Compile Include="Assets\Scripts\CheckpointObj.cs" />
      <Compile Include="Assets\Scripts\Column.cs" />

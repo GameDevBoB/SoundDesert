@@ -245,6 +245,11 @@ public class Enemy : MonoBehaviour {
 		gameObject.SetActive(false);
 	}
 
+    public void Fall()
+    {
+        myAgent.enabled = false;
+    }
+
     private void SetEmissive(Color newColor)
     {
         myMaterial.SetColor("_node_217", newColor);
