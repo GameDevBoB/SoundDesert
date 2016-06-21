@@ -36,15 +36,17 @@ public class SoundWave : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col)
 	{
+        //Debug.Log(col.gameObject.tag);
 		//Debug.Log (col.gameObject.name);
-		if(col.gameObject.tag == "SoundAffected")
+		if(col.gameObject.tag == "SoundAffected" || col.gameObject.tag == "Cube")
 			Destroy(this.gameObject);
 	}
 
 	void OnTriggerEnter(Collider col)
 	{
-		//Debug.Log (col.gameObject.name);
-		if(col.gameObject.tag == "SoundAffected")
+        //Debug.Log(col.gameObject.tag);
+        //Debug.Log (col.gameObject.name);
+        if (col.gameObject.tag == "SoundAffected" || col.gameObject.tag == "Cube")
 			Destroy(this.gameObject);
 	}
 }

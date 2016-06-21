@@ -12,6 +12,7 @@ public class Column : SoundAffected {
     public bool hasFallen;
     public GameObject[] bridgeObstacles;
     public GameObject bridgeCollider;
+    public ParticleSystem myParticle;
 
     //private Material elementMat;
     private float hiddenColumn = 0.2f;
@@ -124,7 +125,7 @@ public class Column : SoundAffected {
 	void Fall(){
 
 		if(isRebuilding==false){
-
+            myParticle.Stop();
 			if (lerpTime < 1  )
 			{
 				lerpTime += Time.deltaTime/fallTime;
@@ -179,6 +180,8 @@ public class Column : SoundAffected {
 						hasFallen=false;
 
 						rb.useGravity=false;
+
+                    myParticle.Play();
 
                     columnChild.layer = LayerMask.NameToLayer("Default");
                     gameObject.layer = LayerMask.NameToLayer("Default");

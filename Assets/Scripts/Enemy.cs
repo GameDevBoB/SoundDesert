@@ -30,6 +30,8 @@ public class Enemy : MonoBehaviour {
     public Color attackColor;
     public Color idleColor;
     public Color repairColor;
+    public ParticleSystem myAttackParticle;
+    public ParticleSystem myRepairParticle;
 
     private NavMeshAgent myAgent;
     private SphereCollider soundTrigger;
@@ -89,6 +91,7 @@ public class Enemy : MonoBehaviour {
                         myState = EnemyState.Repair;
                         SetEmissive(repairColor);
                         soundObj.SendMessage("Repair");
+                        myRepairParticle.Play();
                         //Debug.Log(myState);
                         isRepairing = true;
                         myAgent.Stop();
@@ -96,6 +99,7 @@ public class Enemy : MonoBehaviour {
                     //transform.LookAt(new Vector3(soundObj.transform.position.x, transform.position.y, soundObj.transform.position.z));
                     if (soundObj.layer != LayerMask.NameToLayer("Repairable"))
                     {
+                        myRepairParticle.Stop();
                         myAgent.Resume();
                         myState = EnemyState.Idle;
                         SetEmissive(idleColor);
@@ -221,6 +225,7 @@ public class Enemy : MonoBehaviour {
                 if (CheckIfPlayerHit())
                 {
                     player.SendMessage("GetDamage");
+                    myAttackParticle.Play();
                     myState = EnemyState.Idle;
                     SetEmissive(idleColor);
                     //Debug.Log("Giocatore colpito!");

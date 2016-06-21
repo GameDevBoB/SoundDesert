@@ -3,16 +3,17 @@ using System.Collections;
 
 public class DestroyObj : SoundAffected {
 
+    public ParticleSystem myParticle;
+
     private MeshRenderer myMesh;
-	private ParticleSystem myParticle;
     private Collider myCollider;
     private NavMeshObstacle myObstacle;
 	
 	void Awake()
 	{
 		myMesh = GetComponent<MeshRenderer> ();
-		myParticle = GetComponent<ParticleSystem> ();
-        myCollider = GetComponent<BoxCollider>();
+		//myParticle = GetComponent<ParticleSystem> ();
+        myCollider = GetComponent<Collider>();
         myObstacle = GetComponent<NavMeshObstacle>();
 
 

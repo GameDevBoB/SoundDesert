@@ -18,12 +18,13 @@ public class GameController : MonoBehaviour {
         Time.timeScale = 1;
         instance = this;
         player = GameObject.FindWithTag("Player");
-        Debug.Log("Livelli completati " + PlayerPrefs.GetInt("CompletedLevel"));
+        //Debug.Log("Livelli completati " + PlayerPrefs.GetInt("CompletedLevel"));
         if (PlayerPrefs.GetInt("CheckpointLevel") == levelIndex && checkpoints.Count != 0)
         {
             LoadCheckpoint();
         }
         myAudio = GetComponent<AudioSource>();
+        SoundDesertLibrary.GUIController.AtAwake();
     }
 
 
