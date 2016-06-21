@@ -50,6 +50,7 @@ public class Column : SoundAffected {
             }
         }
         bridgeCollider.SetActive(false);
+        //myParticle.Play();
     }
 	void Update(){
 
@@ -125,7 +126,7 @@ public class Column : SoundAffected {
 	void Fall(){
 
 		if(isRebuilding==false){
-            myParticle.Stop();
+            //myParticle.Stop();
 			if (lerpTime < 1  )
 			{
 				lerpTime += Time.deltaTime/fallTime;
@@ -140,6 +141,7 @@ public class Column : SoundAffected {
 				isFalling=false;
 				hasFallen = true;
 				rb.useGravity=true;
+                myParticle.Play();
                 columnChild.layer = LayerMask.NameToLayer("Repairable");
                 gameObject.layer = LayerMask.NameToLayer("Repairable");
                 foreach (GameObject bridgeObstacle in bridgeObstacles)
@@ -181,7 +183,7 @@ public class Column : SoundAffected {
 
 						rb.useGravity=false;
 
-                    myParticle.Play();
+                    //myParticle.Play();
 
                     columnChild.layer = LayerMask.NameToLayer("Default");
                     gameObject.layer = LayerMask.NameToLayer("Default");

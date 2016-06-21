@@ -84,7 +84,7 @@ public class RPG_Camera : MonoBehaviour {
     
     void Update()
     {
-        mouseSpeed = mouseCane;
+        //mouseSpeed = mouseCane;
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if(cursorOn == true)

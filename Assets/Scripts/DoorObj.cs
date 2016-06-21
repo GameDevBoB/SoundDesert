@@ -27,7 +27,7 @@ public class DoorObj : MonoBehaviour
 
     void Start()
     {
-        myParticle.Stop();
+        //myParticle.Stop();
         pressedButtonsNumber = 0;
     }
 
@@ -36,7 +36,7 @@ public class DoorObj : MonoBehaviour
     public void Open()
     {
         pressedButtonsNumber++;
-        Debug.Log(pressedButtonsNumber);
+        //Debug.Log(pressedButtonsNumber);
         if (!isOpen && (pressedButtonsNumber == requiredButtonNumber) )
         {
             startLerpTime = Time.time;
@@ -87,7 +87,7 @@ public class DoorObj : MonoBehaviour
     public void AddRequiredButton()
     {
         requiredButtonNumber++;
-        Debug.Log(requiredButtonNumber);
+        //Debug.Log(requiredButtonNumber);
     }
 
 

@@ -100,6 +100,7 @@ public class Enemy : MonoBehaviour {
                     if (soundObj.layer != LayerMask.NameToLayer("Repairable"))
                     {
                         myRepairParticle.Stop();
+                        //Debug.Log("spengo il particellare");
                         myAgent.Resume();
                         myState = EnemyState.Idle;
                         SetEmissive(idleColor);
@@ -109,6 +110,7 @@ public class Enemy : MonoBehaviour {
                 }
                 else
                 {
+                    myRepairParticle.Stop();
                     myState = EnemyState.Idle;
                     SetEmissive(idleColor);
                 }
