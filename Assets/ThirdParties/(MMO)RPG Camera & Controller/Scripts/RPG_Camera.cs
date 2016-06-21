@@ -15,7 +15,7 @@ public class RPG_Camera : MonoBehaviour {
     public float firstPersonThreshold = 0.8f;
     public float characterFadeThreshold = 1.8f;
     public Renderer playerRenderer;
-    public float mouseCane;
+    public float mouseVelocity;
 
     private Vector3 desiredPosition;
     private float desiredDistance;
