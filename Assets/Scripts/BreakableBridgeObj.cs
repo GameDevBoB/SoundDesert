@@ -16,15 +16,17 @@ public class BreakableBridgeObj : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
-        enemiesOnMe.Add(col.gameObject);
+        if(col.gameObject.tag == "Enemy")
+            enemiesOnMe.Add(col.gameObject);
     }
 
     void OnCollisionExit(Collision col)
     {
-        enemiesOnMe.Remove(col.gameObject);
+        if (col.gameObject.tag == "Enemy")
+            enemiesOnMe.Remove(col.gameObject);
     }
 
-    public void DestroyEnemy()
+    public void FallEnemy()
     {
         foreach (GameObject enemy in enemiesOnMe)
             enemy.SendMessage("Fall");

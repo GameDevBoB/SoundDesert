@@ -19,12 +19,6 @@ public class DestroyObj : SoundAffected {
 
 	}
 
-    void MakeSound()
-    {
-        soundObj.SetActive(true);
-        soundObj.SendMessage("Expand");
-    }
-
     // Use this for initialization
     void Start () {
 	
@@ -40,6 +34,8 @@ public class DestroyObj : SoundAffected {
 	{
 		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
             myMesh.enabled = false;
+            if (gameObject.tag == "Bridge")
+                gameObject.SendMessage("FallEnemy");
             myCollider.enabled = false;
             myObstacle.enabled = false;
             if(col.gameObject.tag == "SoundWave")
@@ -52,6 +48,8 @@ public class DestroyObj : SoundAffected {
 	void OnTriggerEnter(Collider col)
 	{
 		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
+            if (gameObject.tag == "Bridge")
+                gameObject.SendMessage("FallEnemy");
 			myMesh.enabled = false;
             myCollider.enabled = false;
             myObstacle.enabled = false;
