@@ -37,7 +37,8 @@ public class DestroyObj : SoundAffected {
             if (gameObject.tag == "Bridge")
                 gameObject.SendMessage("FallEnemy");
             myCollider.enabled = false;
-            myObstacle.enabled = false;
+            if (gameObject.tag != "Bridge")
+                myObstacle.enabled = false;
             if(col.gameObject.tag == "SoundWave")
                 MakeSound(col.transform.position);
             myParticle.Play();
@@ -52,6 +53,7 @@ public class DestroyObj : SoundAffected {
                 gameObject.SendMessage("FallEnemy");
 			myMesh.enabled = false;
             myCollider.enabled = false;
+            if(gameObject.tag != "Bridge")
             myObstacle.enabled = false;
             if (col.gameObject.tag == "SoundWave")
                 MakeSound(col.transform.position);

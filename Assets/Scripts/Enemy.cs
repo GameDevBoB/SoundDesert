@@ -202,7 +202,7 @@ public class Enemy : MonoBehaviour {
             if (myState == EnemyState.Disactive)
             {
                 myAgent.enabled = true;
-                GetComponent<Rigidbody>().isKinematic = true;
+                //GetComponent<Rigidbody>().isKinematic = true;
                 soundTrigger.radius = activeSoundPerception / 2;
             }
             myState = EnemyState.SoundCheck;
