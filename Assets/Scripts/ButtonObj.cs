@@ -34,8 +34,6 @@ public class ButtonObj : MonoBehaviour
         if (col.gameObject.tag == "Player" || col.gameObject.tag == "Cube"  || col.gameObject.name == "PushCube")
         {
             door.SendMessage("Close");
-           
-            
         }
     }
 

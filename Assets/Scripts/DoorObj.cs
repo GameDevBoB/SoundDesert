@@ -6,6 +6,7 @@ public class DoorObj : MonoBehaviour
 {
     public float lerptime;
     public float doorTranslation;
+    public ParticleSystem myParticle;
 
     private bool isOpen;
     private float startLerpTime;
@@ -26,6 +27,7 @@ public class DoorObj : MonoBehaviour
 
     void Start()
     {
+        myParticle.Stop();
         pressedButtonsNumber = 0;
     }
 
@@ -54,27 +56,32 @@ public class DoorObj : MonoBehaviour
             StartCoroutine("CloseDoor");
             isOpen = !isOpen;
         }
+        pressedButtonsNumber--;
     }
 
     IEnumerator OpenDoor()
     {
+        myParticle.Play();
         while (exitTime < 1  )
         {
-            exitTime += ((Time.time - startLerpTime) / lerptime);
+           exitTime += ((Time.time - startLerpTime) / lerptime);
             transform.position = Vector3.Lerp(initialPos, initialPos + Vector3.up * doorTranslation, (exitTime));
             yield return new WaitForEndOfFrame();
         }
+        myParticle.Stop();
+       
     }
 
     IEnumerator CloseDoor()
     {
+        myParticle.Play();
         while (exitTime > 0)
         {
             exitTime -= ((Time.time - startLerpTime) / lerptime);
             transform.position = Vector3.Lerp(initialPos, initialPos + Vector3.up * doorTranslation, (exitTime ));
             yield return new WaitForEndOfFrame();
         }
-        
+        myParticle.Stop();
     }
 
     public void AddRequiredButton()
@@ -82,4 +89,6 @@ public class DoorObj : MonoBehaviour
         requiredButtonNumber++;
         Debug.Log(requiredButtonNumber);
     }
+
+
 }
