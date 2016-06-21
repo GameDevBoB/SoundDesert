@@ -15,6 +15,7 @@ public class RPG_Camera : MonoBehaviour {
     public float firstPersonThreshold = 0.8f;
     public float characterFadeThreshold = 1.8f;
     public Renderer playerRenderer;
+    public float mouseCane;
 
     private Vector3 desiredPosition;
     private float desiredDistance;
@@ -83,6 +84,7 @@ public class RPG_Camera : MonoBehaviour {
     
     void Update()
     {
+        mouseSpeed = mouseCane;
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if(cursorOn == true)
@@ -99,18 +101,22 @@ public class RPG_Camera : MonoBehaviour {
     }
     
     void LateUpdate() {
-        if (cameraPivot == null) {
-            Debug.Log("Error: No cameraPivot found! Please read the manual for further instructions.");
-            return;
+        if (Time.timeScale > 0.1f)
+        {
+            if (cameraPivot == null)
+            {
+                Debug.Log("Error: No cameraPivot found! Please read the manual for further instructions.");
+                return;
+            }
+
+            GetInput();
+
+            GetDesiredPosition();
+
+            PositionUpdate();
+
+            CharacterFade();
         }
-
-        GetInput();
-
-        GetDesiredPosition();
-
-        PositionUpdate();
-
-        CharacterFade();
 	}
 
 
