@@ -4,7 +4,8 @@ using System.Collections;
 
 public class DoorObj : MonoBehaviour
 {
-    public float lerptime;
+    public float lerptimeOpen;
+    public float lerptimeClose;
     public float doorTranslation;
     public ParticleSystem myParticle;
 
@@ -64,7 +65,7 @@ public class DoorObj : MonoBehaviour
         myParticle.Play();
         while (exitTime < 1  )
         {
-           exitTime += ((Time.time - startLerpTime) / lerptime);
+           exitTime += ((Time.time - startLerpTime) / lerptimeOpen);
             transform.position = Vector3.Lerp(initialPos, initialPos + Vector3.up * doorTranslation, (exitTime));
             yield return new WaitForEndOfFrame();
         }
@@ -77,7 +78,7 @@ public class DoorObj : MonoBehaviour
         myParticle.Play();
         while (exitTime > 0)
         {
-            exitTime -= ((Time.time - startLerpTime) / lerptime);
+            exitTime -= ((Time.time - startLerpTime) / lerptimeClose);
             transform.position = Vector3.Lerp(initialPos, initialPos + Vector3.up * doorTranslation, (exitTime ));
             yield return new WaitForEndOfFrame();
         }
