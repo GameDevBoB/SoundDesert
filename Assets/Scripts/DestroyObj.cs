@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class DestroyObj : SoundAffected {
 
@@ -8,6 +9,9 @@ public class DestroyObj : SoundAffected {
     private MeshRenderer myMesh;
     private Collider myCollider;
     private NavMeshObstacle myObstacle;
+
+    private List<Collider> myChildrenColliders = new List<Collider>();
+    private List<MeshRenderer> myChildrenMeshes = new List<MeshRenderer>();
 	
 	void Awake()
 	{
@@ -16,8 +20,15 @@ public class DestroyObj : SoundAffected {
         myCollider = GetComponent<Collider>();
         myObstacle = GetComponent<NavMeshObstacle>();
 
-
-	}
+        if (gameObject.tag == "Bridge")
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                myChildrenMeshes.Add(transform.GetChild(i).gameObject.GetComponent<MeshRenderer>());
+                myChildrenColliders.Add(transform.GetChild(i).gameObject.GetComponent<Collider>());
+            }
+        }
+    }
 
     // Use this for initialization
     void Start () {
@@ -26,17 +37,27 @@ public class DestroyObj : SoundAffected {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!myMesh.enabled && !myParticle.isPlaying)
+		if (gameObject.tag != "Bridge" && !myMesh.enabled && !myParticle.isPlaying)
 			gameObject.SetActive (false);
 	}
 
 	void OnCollisionEnter(Collision col)
 	{
 		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
-            myMesh.enabled = false;
+            if (gameObject.tag == "Bridge")
+            {
+                foreach (MeshRenderer child in myChildrenMeshes)
+                    child.enabled = false;
+                foreach (Collider child in myChildrenColliders)
+                    child.enabled = false;
+            }
+            else
+            {
+                myMesh.enabled = false;
+                myCollider.enabled = false;
+            }
             if (gameObject.tag == "Bridge")
                 gameObject.SendMessage("FallEnemy");
-            myCollider.enabled = false;
             if (gameObject.tag != "Bridge")
                 myObstacle.enabled = false;
             if(col.gameObject.tag == "SoundWave")
@@ -51,8 +72,18 @@ public class DestroyObj : SoundAffected {
 		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
             if (gameObject.tag == "Bridge")
                 gameObject.SendMessage("FallEnemy");
-			myMesh.enabled = false;
-            myCollider.enabled = false;
+            if (gameObject.tag == "Bridge")
+            {
+                foreach (MeshRenderer child in myChildrenMeshes)
+                    child.enabled = false;
+                foreach (Collider child in myChildrenColliders)
+                    child.enabled = false;
+            }
+            else
+            {
+                myMesh.enabled = false;
+                myCollider.enabled = false;
+            }
             if(gameObject.tag != "Bridge")
             myObstacle.enabled = false;
             if (col.gameObject.tag == "SoundWave")

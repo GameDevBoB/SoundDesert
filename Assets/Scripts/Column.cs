@@ -48,6 +48,7 @@ public class Column : SoundAffected {
             {
                 columnChild.transform.localPosition = initialPos - Vector3.forward * fallDistance * 1 / transform.localScale.x + Vector3.up / 2 * 1 / transform.localScale.y;
             }
+            columnChild.layer = LayerMask.NameToLayer("Repairable");
         }
         bridgeCollider.SetActive(false);
         //myParticle.Play();
