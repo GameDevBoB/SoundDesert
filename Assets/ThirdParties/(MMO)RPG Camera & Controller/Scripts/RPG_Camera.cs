@@ -236,7 +236,7 @@ public class RPG_Camera : MonoBehaviour {
     void CharacterFade() {
         if (RPG_Animation_CharacterFadeOnly.instance == null)
             return;
-        Debug.Log("Jesoo è grande");
+        //Debug.Log("Jesoo è grande");
         if (distance < firstPersonThreshold)
             playerRenderer.enabled = false;
 
@@ -248,7 +248,7 @@ public class RPG_Camera : MonoBehaviour {
             {
                 // DA RIVEDERE COI NUOVI MATERIALI
                 //RPG_Animation_CharacterFadeOnly.instance.transform.GetChild(0).GetComponent<Renderer>().material.color = new Color(RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.r, RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.g, RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.b, characterAlpha);
-                Debug.Log("Il grande Jesoo è entrato ed ha alphizzato tutto ");
+                //Debug.Log("Il grande Jesoo è entrato ed ha alphizzato tutto ");
             }
 	    } else {
 
