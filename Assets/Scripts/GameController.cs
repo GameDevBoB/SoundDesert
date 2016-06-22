@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour {
     void Awake()
     {
         Time.timeScale = 1;
+        //Cursor.lockState = CursorLockMode.Locked;
         instance = this;
         player = GameObject.FindWithTag("Player");
         //Debug.Log("Livelli completati " + PlayerPrefs.GetInt("CompletedLevel"));

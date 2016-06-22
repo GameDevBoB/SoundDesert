@@ -189,7 +189,7 @@ public class Player : MonoBehaviour
 
     public void GetDamage()
     {
-        GameController.instance.GameOver();
-        gameObject.SetActive(false);
+        //GameController.instance.GameOver();
+        //gameObject.SetActive(false);
     }
 }

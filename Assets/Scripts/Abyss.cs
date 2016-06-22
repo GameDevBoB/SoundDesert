@@ -15,7 +15,7 @@ public class Abyss : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.tag == "Enemy" || col.gameObject.tag == "Player")
+        if(col.gameObject.tag == "Player")
         {
             col.gameObject.SendMessage("GetDamage");
         }
