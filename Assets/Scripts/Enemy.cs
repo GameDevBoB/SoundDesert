@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour {
     public Color idleColor;
     public Color repairColor;
     public ParticleSystem myAttackParticle;
-    public ParticleSystem myRepairParticle;
+    public GameObject myRepairParticle;
 
     private NavMeshAgent myAgent;
     private SphereCollider soundTrigger;
@@ -97,7 +97,7 @@ public class Enemy : MonoBehaviour {
                             myState = EnemyState.Repair;
                             SetEmissive(repairColor);
                             soundObj.SendMessage("Repair");
-                            myRepairParticle.Play();
+                            myRepairParticle.SetActive(true);
                             //Debug.Log(myState);
                             isRepairing = true;
                             myAgent.Stop();
@@ -105,7 +105,7 @@ public class Enemy : MonoBehaviour {
                         //transform.LookAt(new Vector3(soundObj.transform.position.x, transform.position.y, soundObj.transform.position.z));
                         if (soundObj.layer != LayerMask.NameToLayer("Repairable"))
                         {
-                            myRepairParticle.Stop();
+                            myRepairParticle.SetActive(false);
                             //Debug.Log("spengo il particellare");
                             myAgent.Resume();
                             myState = EnemyState.Idle;
@@ -116,7 +116,7 @@ public class Enemy : MonoBehaviour {
                     }
                     else
                     {
-                        myRepairParticle.Stop();
+                        myRepairParticle.SetActive(false);
                         myState = EnemyState.Idle;
                         SetEmissive(idleColor);
                     }

@@ -63,26 +63,28 @@ public class DoorObj : MonoBehaviour
     IEnumerator OpenDoor()
     {
         myParticle.Play();
+        myParticle.loop = true;
         while (exitTime < 1  )
         {
            exitTime += ((Time.time - startLerpTime) / lerptimeOpen);
             transform.position = Vector3.Lerp(initialPos, initialPos + Vector3.up * doorTranslation, (exitTime));
             yield return new WaitForEndOfFrame();
         }
-        myParticle.Stop();
+        myParticle.loop = false;
        
     }
 
     IEnumerator CloseDoor()
     {
         myParticle.Play();
+        myParticle.loop = true;
         while (exitTime > 0)
         {
             exitTime -= ((Time.time - startLerpTime) / lerptimeClose);
             transform.position = Vector3.Lerp(initialPos, initialPos + Vector3.up * doorTranslation, (exitTime ));
             yield return new WaitForEndOfFrame();
         }
-        myParticle.Stop();
+        myParticle.loop = false;
     }
 
     public void AddRequiredButton()
