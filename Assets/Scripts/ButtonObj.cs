@@ -7,11 +7,13 @@ public class ButtonObj : MonoBehaviour
     public GameObject door;
 
     private bool isPressed;
+    private bool isBlocked;
    
     void Start()
     {
         door.SendMessage("AddRequiredButton");
         isPressed = false;
+        isBlocked = false;
     }
 
     void OnTriggerEnter(Collider col)
@@ -23,6 +25,7 @@ public class ButtonObj : MonoBehaviour
             {
                 col.gameObject.transform.position = new Vector3(transform.position.x, col.gameObject.transform.position.y, transform.position.z);
                 col.SendMessage("Block");
+                isBlocked = true;
             }
             isPressed = true;
         }
@@ -31,9 +34,12 @@ public class ButtonObj : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == "Player" || col.gameObject.tag == "Cube"  || col.gameObject.name == "PushCube")
+        if (!isBlocked)
         {
-            door.SendMessage("Close");
+            if (col.gameObject.tag == "Player" || col.gameObject.tag == "Cube" || col.gameObject.name == "PushCube")
+            {
+                door.SendMessage("Close");
+            }
         }
     }
 
