@@ -34,6 +34,8 @@ public class ButtonObj : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
+        if (col.gameObject.tag == "Cube")
+            isBlocked = !isBlocked;
         if (!isBlocked)
         {
             if (col.gameObject.tag == "Player" || col.gameObject.tag == "Cube" || col.gameObject.name == "PushCube")
