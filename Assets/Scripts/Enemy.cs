@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour {
     public Color idleColor;
     public Color repairColor;
     public ParticleSystem myAttackParticle;
-    public ParticleSystem myRepairParticle;
+    public GameObject myRepairParticle;
 
     private NavMeshAgent myAgent;
     private SphereCollider soundTrigger;
@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour {
     private bool isAttacking;
     private bool isRepairing;
     private GameObject soundObj;
+
     //private bool isActive;
 
 
@@ -62,6 +63,7 @@ public class Enemy : MonoBehaviour {
         player = GameObject.FindWithTag("Player");
         playerRB = player.GetComponent<Rigidbody>();
         playerScript = player.GetComponent<Player>();
+        Physics.queriesHitTriggers = true;
 	}
 
     void Start()
@@ -79,50 +81,57 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (myState != EnemyState.Disactive)
+        //Debug.DrawRay(transform.position, -transform.up, Color.red, 100);
+        //Debug.Log(Physics.Raycast(transform.position + transform.up * 3, Vector3.down, out hit, 1000, 1 << LayerMask.NameToLayer("Bridge")));
+        if (myAgent.enabled)
         {
-            if ((myAgent.remainingDistance <= (myAgent.stoppingDistance+1f) && myAgent.pathStatus == NavMeshPathStatus.PathComplete) && myState != EnemyState.Attack)
+            if (myState != EnemyState.Disactive)
             {
-                
-                if ( soundObj != null && soundObj.layer == LayerMask.NameToLayer("Repairable"))
+                if ((myAgent.remainingDistance <= (myAgent.stoppingDistance + 1f) && myAgent.pathStatus == NavMeshPathStatus.PathComplete) && myState != EnemyState.Attack)
                 {
-                    if (!isRepairing)
+
+                    if (soundObj != null && soundObj.layer == LayerMask.NameToLayer("Repairable"))
                     {
-                        myState = EnemyState.Repair;
-                        SetEmissive(repairColor);
-                        soundObj.SendMessage("Repair");
-                        myRepairParticle.Play();
-                        //Debug.Log(myState);
-                        isRepairing = true;
-                        myAgent.Stop();
+                        if (!isRepairing)
+                        {
+                            myState = EnemyState.Repair;
+                            SetEmissive(repairColor);
+                            soundObj.SendMessage("Repair");
+                            myRepairParticle.SetActive(true);
+                            //Debug.Log(myState);
+                            isRepairing = true;
+                            myAgent.Stop();
+                        }
+                        //transform.LookAt(new Vector3(soundObj.transform.position.x, transform.position.y, soundObj.transform.position.z));
+                        if (soundObj.layer != LayerMask.NameToLayer("Repairable"))
+                        {
+                            myRepairParticle.SetActive(false);
+                            //Debug.Log("spengo il particellare");
+                            myAgent.Resume();
+                            myState = EnemyState.Idle;
+                            SetEmissive(idleColor);
+                            isRepairing = false;
+                            soundObj = null;
+                        }
                     }
-                    //transform.LookAt(new Vector3(soundObj.transform.position.x, transform.position.y, soundObj.transform.position.z));
-                    if (soundObj.layer != LayerMask.NameToLayer("Repairable"))
+                    else
                     {
-                        myRepairParticle.Stop();
-                        myAgent.Resume();
+                        myRepairParticle.SetActive(false);
                         myState = EnemyState.Idle;
                         SetEmissive(idleColor);
-                        isRepairing = false;
-                        soundObj = null;
                     }
                 }
                 else
                 {
-                    myState = EnemyState.Idle;
-                    SetEmissive(idleColor);
+                    myAgent.Resume();
                 }
+                if ((Time.time - startSoundPerceived) > checkTime && myState != EnemyState.Attack)
+                {
+                    CheckIfPlayerInSight();
+                }
+                if (myState == EnemyState.Idle)
+                    CheckIfRepairable();
             }
-            else
-            {
-                myAgent.Resume();
-            }
-            if ((Time.time - startSoundPerceived) > checkTime && myState != EnemyState.Attack)
-            {
-                CheckIfPlayerInSight();
-            }
-            if (myState == EnemyState.Idle)
-                CheckIfRepairable();
         }
     }
 
@@ -190,24 +199,28 @@ public class Enemy : MonoBehaviour {
             else if (hitColliders[0].gameObject.tag == "Capital")
                 soundObj = hitColliders[0].gameObject;
             myAgent.Resume();
-            Debug.Log("posizione soundobj " + soundObj.transform.position + " nome " + soundObj.name);
+            //Debug.Log("posizione soundobj " + soundObj.transform.position + " nome " + soundObj.name);
             myAgent.SetDestination(soundObj.transform.position);
         }
     }
 
     void OnTriggerEnter(Collider col) {
-        if (col.gameObject.tag == "Sound" && !isAttacking) {
+        if (col.gameObject.tag == "Sound" && !isAttacking)
+        {
             if (myState == EnemyState.Disactive)
             {
                 myAgent.enabled = true;
-                GetComponent<Rigidbody>().isKinematic = true;
+                //GetComponent<Rigidbody>().isKinematic = true;
                 soundTrigger.radius = activeSoundPerception / 2;
             }
-            myState = EnemyState.SoundCheck;
-            SetEmissive(soundCheckColor);
-            startSoundPerceived = Time.time;
-            myAgent.Resume();
-            myAgent.SetDestination(col.gameObject.transform.position);
+            if (myAgent.enabled)
+            {
+                myState = EnemyState.SoundCheck;
+                SetEmissive(soundCheckColor);
+                startSoundPerceived = Time.time;
+                myAgent.Resume();
+                myAgent.SetDestination(col.gameObject.transform.position);
+            }
             //myAgent.destination = col.gameObject.transform.position;
         }
     }
@@ -242,6 +255,19 @@ public class Enemy : MonoBehaviour {
 	public void GetDamage(){
 		gameObject.SetActive(false);
 	}
+
+    public void Fall()
+    {
+        
+        if (Physics.Raycast(transform.position + transform.up * 3, Vector3.down, out hit, 1000, 1 << LayerMask.NameToLayer("Bridge")))
+        {
+            
+            //Debug.Log("Sto cadendo " + hit.transform.gameObject.name);
+            myAgent.enabled = false;
+
+            Invoke("GetDamage", 5);
+        }
+    }
 
     private void SetEmissive(Color newColor)
     {

@@ -38,7 +38,7 @@ public class SoundWave : MonoBehaviour {
 	{
         //Debug.Log(col.gameObject.tag);
 		//Debug.Log (col.gameObject.name);
-		if(col.gameObject.tag == "SoundAffected" || col.gameObject.tag == "Cube")
+		if(col.gameObject.tag == "SoundAffected" || col.gameObject.tag == "Cube" || col.gameObject.tag == "Bridge" || col.gameObject.tag == "Desert" || col.gameObject.tag == "Column")
 			Destroy(this.gameObject);
 	}
 
@@ -46,7 +46,7 @@ public class SoundWave : MonoBehaviour {
 	{
         //Debug.Log(col.gameObject.tag);
         //Debug.Log (col.gameObject.name);
-        if (col.gameObject.tag == "SoundAffected" || col.gameObject.tag == "Cube")
+        if (col.gameObject.tag == "SoundAffected" || col.gameObject.tag == "Cube" || col.gameObject.tag == "Bridge" || col.gameObject.tag == "Desert" || col.gameObject.tag == "Column")
 			Destroy(this.gameObject);
 	}
 }

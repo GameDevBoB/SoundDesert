@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour {
     void Awake()
     {
         Time.timeScale = 1;
+        //Cursor.lockState = CursorLockMode.Locked;
         instance = this;
         player = GameObject.FindWithTag("Player");
         //Debug.Log("Livelli completati " + PlayerPrefs.GetInt("CompletedLevel"));
@@ -73,10 +74,11 @@ public class GameController : MonoBehaviour {
             PlayerPrefs.SetInt("CompletedLevel", levelIndex);
             PlayerPrefs.Save();
         }
+        PlayerPrefs.SetInt("ExitLevel", levelIndex);
         ClearCheckpoint();
         Debug.Log("Bravo hai finito il livello!");
         Time.timeScale = 0;
-        Application.LoadLevel(levelIndex + 1);
+        Application.LoadLevel(1);
     }
 
     public void DeleteSaving()

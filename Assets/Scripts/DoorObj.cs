@@ -4,7 +4,8 @@ using System.Collections;
 
 public class DoorObj : MonoBehaviour
 {
-    public float lerptime;
+    public float lerptimeOpen;
+    public float lerptimeClose;
     public float doorTranslation;
     public ParticleSystem myParticle;
 
@@ -27,7 +28,7 @@ public class DoorObj : MonoBehaviour
 
     void Start()
     {
-        myParticle.Stop();
+        //myParticle.Stop();
         pressedButtonsNumber = 0;
     }
 
@@ -36,7 +37,7 @@ public class DoorObj : MonoBehaviour
     public void Open()
     {
         pressedButtonsNumber++;
-        Debug.Log(pressedButtonsNumber);
+        //Debug.Log(pressedButtonsNumber);
         if (!isOpen && (pressedButtonsNumber == requiredButtonNumber) )
         {
             startLerpTime = Time.time;
@@ -62,32 +63,34 @@ public class DoorObj : MonoBehaviour
     IEnumerator OpenDoor()
     {
         myParticle.Play();
+        myParticle.loop = true;
         while (exitTime < 1  )
         {
-           exitTime += ((Time.time - startLerpTime) / lerptime);
+           exitTime += ((Time.time - startLerpTime) / lerptimeOpen);
             transform.position = Vector3.Lerp(initialPos, initialPos + Vector3.up * doorTranslation, (exitTime));
             yield return new WaitForEndOfFrame();
         }
-        myParticle.Stop();
+        myParticle.loop = false;
        
     }
 
     IEnumerator CloseDoor()
     {
         myParticle.Play();
+        myParticle.loop = true;
         while (exitTime > 0)
         {
-            exitTime -= ((Time.time - startLerpTime) / lerptime);
+            exitTime -= ((Time.time - startLerpTime) / lerptimeClose);
             transform.position = Vector3.Lerp(initialPos, initialPos + Vector3.up * doorTranslation, (exitTime ));
             yield return new WaitForEndOfFrame();
         }
-        myParticle.Stop();
+        myParticle.loop = false;
     }
 
     public void AddRequiredButton()
     {
         requiredButtonNumber++;
-        Debug.Log(requiredButtonNumber);
+        //Debug.Log(requiredButtonNumber);
     }
 
 

@@ -48,8 +48,11 @@ public class Column : SoundAffected {
             {
                 columnChild.transform.localPosition = initialPos - Vector3.forward * fallDistance * 1 / transform.localScale.x + Vector3.up / 2 * 1 / transform.localScale.y;
             }
+            columnChild.layer = LayerMask.NameToLayer("Repairable");
+            gameObject.layer = LayerMask.NameToLayer("Repairable");
         }
         bridgeCollider.SetActive(false);
+        //myParticle.Play();
     }
 	void Update(){
 
@@ -125,7 +128,7 @@ public class Column : SoundAffected {
 	void Fall(){
 
 		if(isRebuilding==false){
-            myParticle.Stop();
+            //myParticle.Stop();
 			if (lerpTime < 1  )
 			{
 				lerpTime += Time.deltaTime/fallTime;
@@ -140,6 +143,7 @@ public class Column : SoundAffected {
 				isFalling=false;
 				hasFallen = true;
 				rb.useGravity=true;
+                myParticle.Stop();
                 columnChild.layer = LayerMask.NameToLayer("Repairable");
                 gameObject.layer = LayerMask.NameToLayer("Repairable");
                 foreach (GameObject bridgeObstacle in bridgeObstacles)
