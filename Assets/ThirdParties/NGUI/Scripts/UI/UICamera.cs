@@ -372,6 +372,8 @@ public class UICamera : MonoBehaviour
 		{
 			return (currentCamera != null && currentTouch != null) ?
 				currentCamera.ScreenPointToRay(currentTouch.pos) : new Ray();
+
+           
 		}
 	}
 
