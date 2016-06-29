@@ -50,7 +50,7 @@ public class PushObj : SoundAffected {
 
     public void Block()
     {
-        isBlocked = true;
+        //isBlocked = true;
         rb.velocity = Vector3.zero;
     }
 }

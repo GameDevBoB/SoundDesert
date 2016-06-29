@@ -57,7 +57,7 @@ public class FallObj : SoundAffected
             gameObject.layer = LayerMask.NameToLayer("Repairable");
         }
 
-        if ((col.gameObject.tag == "Enemy" || col.gameObject.tag == "Player") && rb.velocity.magnitude > 1)
+        if ((col.gameObject.tag == "Enemy" || col.gameObject.tag == "Player") && rb.velocity.magnitude > 0.5f)
         {
 
             col.gameObject.SendMessage("GetDamage");
@@ -85,11 +85,11 @@ public class FallObj : SoundAffected
             hasFallen = true;
             gameObject.layer = LayerMask.NameToLayer("Repairable");
         }
-        if ((col.gameObject.tag == "Enemy" || col.gameObject.tag == "Player") && rb.velocity.magnitude > 0.5f)
-        {
+        //if ((col.gameObject.tag == "Enemy" || col.gameObject.tag == "Player") && rb.velocity.magnitude > 0.5f)
+        //{
 
-            col.gameObject.SendMessage("GetDamage");
-        }
+            //col.gameObject.SendMessage("GetDamage");
+        //}
     }
 
     public void Repair()

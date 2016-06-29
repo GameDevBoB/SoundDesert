@@ -270,6 +270,7 @@
      <None Include="Assets\ThirdParties\ShaderForge\Example Assets\Shaders\PixelRotator.shader" />
      <None Include="Assets\ThirdParties\NGUI\Examples\Atlases\Refractive\Refractive Font - Header.txt" />
      <None Include="Assets\ThirdParties\NGUI\Examples\Shaders\Refractive.shader" />
+     <None Include="Assets\Shaders\m_mech_01.shader" />
      <None Include="Assets\ThirdParties\ShaderForge\Example Assets\Shaders\CustomLighting.shader" />
      <None Include="Assets\Textures\shader_colonna.shader" />
      <None Include="Assets\ThirdParties\NGUI\Resources\Shaders\Unlit - Text (TextureClip).shader" />
@@ -279,17 +280,11 @@
      <None Include="Assets\ThirdParties\NGUI\Examples\Resources\Localization.txt" />
      <None Include="Assets\Textures\shader_column.shader" />
      <None Include="Assets\ThirdParties\ShaderForge\Editor\InternalResources\Shader Presets\PresetSky.shader" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>

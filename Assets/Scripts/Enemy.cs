@@ -114,6 +114,16 @@ public class Enemy : MonoBehaviour {
                             soundObj = null;
                         }
                     }
+                    if (soundObj != null && soundObj.layer != LayerMask.NameToLayer("Repairable"))
+                    {
+                        myRepairParticle.SetActive(false);
+                        //Debug.Log("spengo il particellare");
+                        myAgent.Resume();
+                        myState = EnemyState.Idle;
+                        SetEmissive(idleColor);
+                        isRepairing = false;
+                        soundObj = null;
+                    }
                     else
                     {
                         myRepairParticle.SetActive(false);
@@ -190,17 +200,33 @@ public class Enemy : MonoBehaviour {
     {
         Debug.Log("Controllo se posso riparare qualcosa");
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, repairRange, 1 << LayerMask.NameToLayer("Repairable"));
-        if(hitColliders.Length > 0)
+        if (hitColliders.Length > 0)
         {
-            myState = EnemyState.SoundCheck;
-            SetEmissive(soundCheckColor);
+            Vector3 direction = Vector3.zero;
             if (hitColliders[0].gameObject.tag == "Column")
+            {
                 soundObj = hitColliders[0].transform.parent.gameObject;
+                direction = soundObj.transform.position;
+            }
             else if (hitColliders[0].gameObject.tag == "Capital")
+            {
                 soundObj = hitColliders[0].gameObject;
-            myAgent.Resume();
-            //Debug.Log("posizione soundobj " + soundObj.transform.position + " nome " + soundObj.name);
-            myAgent.SetDestination(soundObj.transform.position);
+                direction = soundObj.GetComponent<Renderer>().bounds.center;
+            }
+
+            if (!Physics.Linecast(transform.position, direction, 1 << LayerMask.NameToLayer("Floor")))
+            {
+                myState = EnemyState.SoundCheck;
+                SetEmissive(soundCheckColor);
+
+
+                //Debug.Log();
+                //Debug.DrawLine(direction, transform.position, Color.red, 1);
+
+                myAgent.Resume();
+                //Debug.Log("posizione soundobj " + soundObj.transform.position + " nome " + soundObj.name);
+                myAgent.SetDestination(soundObj.transform.position);
+            }
         }
     }
 

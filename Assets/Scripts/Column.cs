@@ -13,6 +13,7 @@ public class Column : SoundAffected {
     public GameObject[] bridgeObstacles;
     public GameObject bridgeCollider;
     public ParticleSystem myParticle;
+    public Transform fallPosition;
 
     //private Material elementMat;
     private float hiddenColumn = 0.2f;
@@ -69,7 +70,7 @@ public class Column : SoundAffected {
 
 		}
         if (Input.GetKeyDown(KeyCode.R))
-            isRebuilding = true;
+            Repair();
 		if(isRebuilding==true){
 
 			Rebuild();
@@ -80,6 +81,7 @@ public class Column : SoundAffected {
 
     void OnCollisionEnter(Collision col)
     {
+        Debug.Log(col.gameObject.name);
         if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
             if (!hasFallen)
             {
@@ -106,6 +108,7 @@ public class Column : SoundAffected {
 
     void OnTriggerEnter(Collider col)
     {
+        Debug.Log(col.gameObject.name);
         if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj)
         {
             if (!hasFallen)
@@ -146,6 +149,7 @@ public class Column : SoundAffected {
                 myParticle.Stop();
                 columnChild.layer = LayerMask.NameToLayer("Repairable");
                 gameObject.layer = LayerMask.NameToLayer("Repairable");
+                MakeSound(fallPosition.position);
                 foreach (GameObject bridgeObstacle in bridgeObstacles)
                     bridgeObstacle.SetActive(false);
                 lerpTime =0;
@@ -159,6 +163,8 @@ public class Column : SoundAffected {
     public void Repair()
     {
         isRebuilding = true;
+        foreach (GameObject bridgeObstacle in bridgeObstacles)
+            bridgeObstacle.SetActive(true);
     }
 
     public void Rebuild(){
@@ -190,8 +196,6 @@ public class Column : SoundAffected {
                     columnChild.layer = LayerMask.NameToLayer("Default");
                     gameObject.layer = LayerMask.NameToLayer("Default");
 
-                    foreach (GameObject bridgeObstacle in bridgeObstacles)
-                        bridgeObstacle.SetActive(true);
 
                     lerpTime =0;
 					}
