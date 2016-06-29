@@ -1,0 +1,127 @@
+fileFormatVersion: 2
+guid: 94215c99ad367734e98008ddb0e4aa8a
+timeCreated: 1466695903
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: body
+    100002: gun
+    100004: ring_body_01
+    100006: ring_body_02
+    100008: ring_body_03
+    100010: ring_gun_02
+    100012: ring_gun_03
+    100014: ring_gun_04
+    100016: rings
+    100018: //RootNode
+    100020: shoulder
+    100022: wings
+    400000: body
+    400002: gun
+    400004: ring_body_01
+    400006: ring_body_02
+    400008: ring_body_03
+    400010: ring_gun_02
+    400012: ring_gun_03
+    400014: ring_gun_04
+    400016: rings
+    400018: //RootNode
+    400020: shoulder
+    400022: wings
+    2300000: body
+    2300002: gun
+    2300004: ring_body_01
+    2300006: ring_body_02
+    2300008: ring_body_03
+    2300010: ring_gun_02
+    2300012: ring_gun_03
+    2300014: ring_gun_04
+    2300016: shoulder
+    2300018: wings
+    3300000: body
+    3300002: gun
+    3300004: ring_body_01
+    3300006: ring_body_02
+    3300008: ring_body_03
+    3300010: ring_gun_02
+    3300012: ring_gun_03
+    3300014: ring_gun_04
+    3300016: shoulder
+    3300018: wings
+    4300000: body
+    4300002: wings
+    4300004: shoulder
+    4300006: ring_body_01
+    4300008: ring_body_02
+    4300010: ring_body_03
+    4300012: gun
+    4300014: ring_gun_03
+    4300016: ring_gun_02
+    4300018: ring_gun_04
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

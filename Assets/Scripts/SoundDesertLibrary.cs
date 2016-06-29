@@ -20,9 +20,11 @@ namespace SoundDesertLibrary
         private static GameObject[] optionMenuPage = new GameObject[3];
         private static GameObject mainMenu;
         private static GameObject menu;
+        private static bool controllo;
 
         public static void AtAwake()
         {
+            controllo = false;
             if (Application.loadedLevelName == "MainMenu")
             {
                 Debug.Log("Jeppetto");
@@ -30,9 +32,10 @@ namespace SoundDesertLibrary
             }
             else
             {
-                menu = GameObject.Find("Option Menu");
-                
+                menu = GameObject.Find("First Menu");
+                Debug.Log(menu.name);
             }
+            
             mouseSpeed = GameObject.Find("Mouse Sensitivity").GetComponent<UISlider>();
             /*keyboardAndMouse = Resources.Load("Keyboard Map") as UISprite;
             controller = Resources.Load("Controller Map") as UISprite;*/
@@ -51,9 +54,20 @@ namespace SoundDesertLibrary
             optionMenuPage[1].SetActive(false);
             optionMenuPage[2].SetActive(false);
             optionMenu.SetActive(false);
+            if(Application.loadedLevelName != "MainMenu")
+            {
+                menu.SetActive(false);
+            }
+
+            mouseSpeed.value = RPG_Camera.mouseSpeed / 8;
             
 
 
+        }
+
+        public static void AtUpdate()
+        {
+            Debug.Log(controllo);
         }
 
         public static void Quit()
@@ -64,7 +78,7 @@ namespace SoundDesertLibrary
 
         public static void MouseSensitivity()
         {
-            RPG_Camera.mouseSpeed = mouseSpeed.value * 8f;
+            RPG_Camera.mouseSpeed = (mouseSpeed.value * 8f) + 0.5f;
 
         }
 
@@ -90,7 +104,9 @@ namespace SoundDesertLibrary
 
         public static void Options()
         {
+            Debug.Log("GianniGianni");
             optionMenu.SetActive(true);
+            Debug.Log("cccc");
             if (mainMenu != null)
             {
                 mainMenu.SetActive(false);
@@ -130,13 +146,15 @@ namespace SoundDesertLibrary
         public static void OptionBack()
         {
             optionMenu.SetActive(false);
+            PlayerPrefs.SetFloat("Mouse Sensitivity", RPG_Camera.mouseSpeed);
             if (mainMenu != null)
             {
                 mainMenu.SetActive(true);
             }
             else
             {
-                Time.timeScale = 1;
+                menu.SetActive(true);
+                
             }
 
         }
@@ -148,8 +166,18 @@ namespace SoundDesertLibrary
         }
         public static void CloseMenu()
         {
+            controllo = true;
             Time.timeScale = 1;
             menu.SetActive(false);
+            
+        }
+
+        public static void JoypadCheckBox()
+        {
+            if(!GameController.instance.joyPad)
+                GameController.instance.joyPad = true;
+            else
+                GameController.instance.joyPad = false;
         }
     }
 }

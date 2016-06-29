@@ -16,6 +16,7 @@ public class RPG_Camera : MonoBehaviour {
     public float characterFadeThreshold = 1.8f;
     public Renderer playerRenderer;
     public float mouseCane;
+    public LayerMask playermask;
 
     private Vector3 desiredPosition;
     private float desiredDistance;
@@ -42,6 +43,7 @@ public class RPG_Camera : MonoBehaviour {
     
 
     void Awake() {
+        mouseSpeed = PlayerPrefs.GetFloat("Mouse Sensitivity");
         instance = this;
         //playerRenderer = GameObject.Find("robot").GetComponent<Renderer>();
     }
@@ -84,6 +86,7 @@ public class RPG_Camera : MonoBehaviour {
     
     void Update()
     {
+        Debug.Log(mouseSpeed);
         //mouseSpeed = mouseCane;
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -236,7 +239,7 @@ public class RPG_Camera : MonoBehaviour {
     void CharacterFade() {
         if (RPG_Animation_CharacterFadeOnly.instance == null)
             return;
-        //Debug.Log("Jesoo è grande");
+        Debug.Log("Jesoo è grande");
         if (distance < firstPersonThreshold)
             playerRenderer.enabled = false;
 
@@ -244,11 +247,11 @@ public class RPG_Camera : MonoBehaviour {
             playerRenderer.enabled = true;
 
             float characterAlpha = 1 - (characterFadeThreshold - distance) / (characterFadeThreshold - firstPersonThreshold);
-            if (RPG_Animation_CharacterFadeOnly.instance.transform.GetChild(0).GetComponent<Renderer>().material.color.a != characterAlpha)
+            if (RPG_Animation_CharacterFadeOnly.instance.transform.GetComponent<Renderer>().material.color.a != characterAlpha)
             {
                 // DA RIVEDERE COI NUOVI MATERIALI
                 //RPG_Animation_CharacterFadeOnly.instance.transform.GetChild(0).GetComponent<Renderer>().material.color = new Color(RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.r, RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.g, RPG_Animation_CharacterFadeOnly.instance.GetComponent<Renderer>().material.color.b, characterAlpha);
-                //Debug.Log("Il grande Jesoo è entrato ed ha alphizzato tutto ");
+                Debug.Log("Il grande Jesoo è entrato ed ha alphizzato tutto ");
             }
 	    } else {
 
@@ -286,22 +289,22 @@ public class RPG_Camera : MonoBehaviour {
         Debug.DrawLine(from + transform.right * halfPlaneWidth - transform.up * halfPlaneHeight, clipPlane.LowerRight, Color.cyan);
 
 
-        if (Physics.Linecast(from, to, out hitInfo) && hitInfo.collider.tag != "Player")
+        if (Physics.Linecast(from, to, out hitInfo, playermask, QueryTriggerInteraction.Ignore) && hitInfo.collider.tag != "Player")
             closestDistance = hitInfo.distance - Camera.main.nearClipPlane;
         
-        if (Physics.Linecast(from - transform.right * halfPlaneWidth + transform.up * halfPlaneHeight, clipPlane.UpperLeft, out hitInfo) && hitInfo.collider.tag != "Player")
+        if (Physics.Linecast(from - transform.right * halfPlaneWidth + transform.up * halfPlaneHeight, clipPlane.UpperLeft, out hitInfo, playermask, QueryTriggerInteraction.Ignore) && hitInfo.collider.tag != "Player")
             if (hitInfo.distance < closestDistance || closestDistance == -1)
                 closestDistance = Vector3.Distance(hitInfo.point + transform.right * halfPlaneWidth - transform.up * halfPlaneHeight, from);
 
-        if (Physics.Linecast(from + transform.right * halfPlaneWidth + transform.up * halfPlaneHeight, clipPlane.UpperRight, out hitInfo) && hitInfo.collider.tag != "Player")
+        if (Physics.Linecast(from + transform.right * halfPlaneWidth + transform.up * halfPlaneHeight, clipPlane.UpperRight, out hitInfo, playermask, QueryTriggerInteraction.Ignore) && hitInfo.collider.tag != "Player")
             if (hitInfo.distance < closestDistance || closestDistance == -1)
                 closestDistance = Vector3.Distance(hitInfo.point - transform.right * halfPlaneWidth - transform.up * halfPlaneHeight, from);
         
-        if (Physics.Linecast(from - transform.right * halfPlaneWidth - transform.up * halfPlaneHeight, clipPlane.LowerLeft, out hitInfo) && hitInfo.collider.tag != "Player")
+        if (Physics.Linecast(from - transform.right * halfPlaneWidth - transform.up * halfPlaneHeight, clipPlane.LowerLeft, out hitInfo, playermask, QueryTriggerInteraction.Ignore) && hitInfo.collider.tag != "Player")
             if (hitInfo.distance < closestDistance || closestDistance == -1)
                 closestDistance = Vector3.Distance(hitInfo.point + transform.right * halfPlaneWidth + transform.up * halfPlaneHeight, from);
         
-        if (Physics.Linecast(from + transform.right * halfPlaneWidth - transform.up * halfPlaneHeight, clipPlane.LowerRight, out hitInfo) && hitInfo.collider.tag != "Player")
+        if (Physics.Linecast(from + transform.right * halfPlaneWidth - transform.up * halfPlaneHeight, clipPlane.LowerRight, out hitInfo, playermask, QueryTriggerInteraction.Ignore) && hitInfo.collider.tag != "Player")
             if (hitInfo.distance < closestDistance || closestDistance == -1)
                 closestDistance = Vector3.Distance(hitInfo.point - transform.right * halfPlaneWidth + transform.up * halfPlaneHeight, from);
 

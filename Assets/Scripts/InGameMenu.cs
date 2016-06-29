@@ -6,7 +6,7 @@ public class InGameMenu : MonoBehaviour {
 
     private bool menu;
     public static InGameMenu instance;
-
+   
     void Awake()
     {
         if(InGameMenu.instance == null)
@@ -18,26 +18,30 @@ public class InGameMenu : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        //GameObject optionMenu = Resources.Load("Assets/Resources/Prefabs/UI Root") as GameObject;
+        
         //optionMenu = Instantiate(optionMenu, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
-        GUIController.AtAwake();
+        //GUIController.AtAwake();
 
     }
 
-	void Update () {
+	void LateUpdate () {
+        GUIController.MouseSensitivity();
         //GUIController.Volume();
-
+        GUIController.AtUpdate();
         if (GameController.instance.joyPad == false)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (menu == false)
                 {
+                    //GameObject.Find("Player").SetActive(false);
+                    Physics.queriesHitTriggers = true;
                     GUIController.OpenMenu();
                     menu = true;
                 }
                 else
                 {
+                    Physics.queriesHitTriggers = false;
                     GUIController.CloseMenu();
                     menu = false;
                 }
@@ -47,13 +51,17 @@ public class InGameMenu : MonoBehaviour {
         {
             if (Input.GetButtonDown("Pause"))
             {
+                Physics.queriesHitTriggers = true;
                 if (menu == false)
                 {
                     GUIController.OpenMenu();
+                    menu = true;
                 }
                 else
                 {
+                    Physics.queriesHitTriggers = false;
                     GUIController.CloseMenu();
+                    menu = false;
                 }
             }
         }
@@ -73,6 +81,7 @@ public class InGameMenu : MonoBehaviour {
 
     public void OptionMenu()
     {
+        Debug.Log("ssss");
         GUIController.Options();
         GUIController.AudioPage();
         
@@ -100,5 +109,20 @@ public class InGameMenu : MonoBehaviour {
     {
         GUIController.OptionBack();
 
+    }
+
+    public void Resume()
+    {
+        Physics.queriesHitTriggers = false;
+        GUIController.CloseMenu();
+        menu = false;
+    }
+
+    public void Joypad()
+    {
+        
+        GUIController.JoypadCheckBox();
+
+        Debug.Log("Joypad cane = " + GameController.instance.joyPad);
     }
 }
