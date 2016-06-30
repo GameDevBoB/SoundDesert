@@ -78,7 +78,7 @@ public class GameController : MonoBehaviour {
         ClearCheckpoint();
         Debug.Log("Bravo hai finito il livello!");
         Time.timeScale = 0;
-        Application.LoadLevel(1);
+        Application.LoadLevel(2);
     }
 
     public void DeleteSaving()
