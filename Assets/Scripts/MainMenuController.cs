@@ -29,6 +29,7 @@ public class MainMenuController : MonoBehaviour {
     public void NewGame()
     {
         GameController.instance.DeleteSaving();
+        Application.LoadLevel("Tutorial");
     }
 
     /*public void Load()
@@ -69,5 +70,10 @@ public class MainMenuController : MonoBehaviour {
     {
         GUIController.OptionBack();
 
+    }
+
+    public void Continue()
+    {
+        GUIController.Continue();
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.Audio;
 using SoundDesertLibrary;
+using UnityEngine.Audio;
 
 
 namespace SoundDesertLibrary
@@ -179,5 +180,52 @@ namespace SoundDesertLibrary
             else
                 GameController.instance.joyPad = false;
         }
+
+        public static void Continue()
+        {
+            int levelToLoad = PlayerPrefs.GetInt("CompletedLevel");
+            if(levelToLoad > 0)
+            {
+                Application.LoadLevel(levelToLoad);
+            }
+        }
     }
+
+   
+    public class AudioController : MonoBehaviour
+    {
+
+        private static AudioSource musicSource;
+        private static AudioSource efxSource;
+        
+
+        void AtAwake()
+        {
+            musicSource = GameObject.Find("Music").GetComponent<AudioSource>();
+            efxSource = GameObject.Find("Music").GetComponent<AudioSource>();
+        }
+
+
+        public static void MoveSound(AudioClip Sound)
+        {
+            if(!efxSource.isPlaying )
+                efxSource.PlayOneShot(Sound);
+        }
+
+        public static void ShootSound(AudioClip Sound)
+        {
+            efxSource.PlayOneShot(Sound);
+        }
+
+        public static void EnemyActivation()
+        {
+            //efxSource.PlayOneShot()
+        }
+
+
+
+
+    }
+
+
 }

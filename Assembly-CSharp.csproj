@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Abyss.cs" />
+     <Compile Include="Assets\Scripts\AudioController.cs" />
      <Compile Include="Assets\Scripts\BreakableBridgeObj.cs" />
      <Compile Include="Assets\Scripts\ButtonObj.cs" />
      <Compile Include="Assets\Scripts\CheckpointObj.cs" />
@@ -218,6 +219,7 @@
      <None Include="Assets\ThirdParties\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
      <None Include="Assets\ThirdParties\NGUI\Resources\Shaders\Unlit - Transparent Masked 2.shader" />
      <None Include="Assets\ThirdParties\NGUI\Examples\Models\Orc\Orc Skin.shader" />
+     <None Include="Assets\m_enemy\m_enemy.shader" />
      <None Include="Assets\ThirdParties\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
      <None Include="Assets\ThirdParties\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
      <None Include="Assets\ThirdParties\ShaderForge\Editor\InternalResources\Shader Presets\PresetParticleMultiplicative.shader" />
@@ -242,6 +244,7 @@
      <None Include="Assets\ThirdParties\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
      <None Include="Assets\ThirdParties\ShaderForge\Editor\InternalResources\Shader Presets\PresetUnlit.shader" />
      <None Include="Assets\ThirdParties\NGUI\Resources\Shaders\Unlit - Transparent Colored 3.shader" />
+     <None Include="Assets\Materials\m_enemy.shader" />
      <None Include="Assets\ThirdParties\NGUI\Examples\Atlases\Refractive\Refractive Font - Normal.txt" />
      <None Include="Assets\ThirdParties\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 2.shader" />
      <None Include="Assets\ThirdParties\ShaderForge\Example Assets\Shaders\Refraction.shader" />
@@ -252,7 +255,6 @@
      <None Include="Assets\ThirdParties\ShaderForge\Example Assets\Shaders\LightWrapping.shader" />
      <None Include="Assets\ThirdParties\NGUI\Resources\Shaders\Unlit - Transparent Packed 1.shader" />
      <None Include="Assets\ThirdParties\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 1.shader" />
-     <None Include="Assets\Shaders\enemy.shader" />
      <None Include="Assets\ThirdParties\NGUI\Resources\Shaders\Unlit - Premultiplied Colored.shader" />
      <None Include="Assets\Shaders\colonna_enorme.shader" />
      <None Include="Assets\ThirdParties\NGUI\Resources\Shaders\Unlit - Transparent Colored.shader" />
@@ -262,9 +264,7 @@
      <None Include="Assets\ThirdParties\NGUI\Resources\Shaders\Unlit - Transparent Packed.shader" />
      <None Include="Assets\ThirdParties\ShaderForge\Editor\InternalResources\Shader Presets\PresetBasic.shader" />
      <None Include="Assets\ThirdParties\NGUI\Resources\Shaders\Unlit - Transparent Packed 3.shader" />
-     <None Include="Assets\Textures\shader_enemy.shader" />
      <None Include="Assets\ThirdParties\ShaderForge\Example Assets\Shaders\Tiles.shader" />
-     <None Include="Assets\Textures\shader_enemy 1.shader" />
      <None Include="Assets\ThirdParties\NGUI\Examples\Shaders\Unlit - Additive Colored.shader" />
      <None Include="Assets\ThirdParties\NGUI\Resources\Shaders\Unlit - Transparent Masked.shader" />
      <None Include="Assets\ThirdParties\ShaderForge\Example Assets\Shaders\PixelRotator.shader" />
@@ -280,17 +280,11 @@
      <None Include="Assets\ThirdParties\NGUI\Examples\Resources\Localization.txt" />
      <None Include="Assets\Textures\shader_column.shader" />
      <None Include="Assets\ThirdParties\ShaderForge\Editor\InternalResources\Shader Presets\PresetSky.shader" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
