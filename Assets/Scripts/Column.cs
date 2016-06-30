@@ -81,7 +81,7 @@ public class Column : SoundAffected {
 
     void OnCollisionEnter(Collision col)
     {
-        Debug.Log(col.gameObject.name);
+        //Debug.Log(col.gameObject.name);
         if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
             if (!hasFallen)
             {
