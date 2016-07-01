@@ -60,6 +60,9 @@ ModelImporter:
     4300016: ring_gun_02
     4300018: ring_gun_04
     7400000: Take 001
+    7400002: Take 0010
+    7400004: Take 0011
+    7400006: Take 0012
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -80,7 +83,207 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: body
+        weight: 1
+      - path: gun
+        weight: 1
+      - path: gun/ring_gun_02
+        weight: 1
+      - path: gun/ring_gun_03
+        weight: 1
+      - path: gun/ring_gun_04
+        weight: 1
+      - path: rings
+        weight: 1
+      - path: rings/ring_body_01
+        weight: 1
+      - path: rings/ring_body_02
+        weight: 1
+      - path: rings/ring_body_03
+        weight: 1
+      - path: shoulder
+        weight: 1
+      - path: wings
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Take 0010
+      takeName: Take 001
+      firstFrame: 24
+      lastFrame: 48
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: body
+        weight: 1
+      - path: gun
+        weight: 1
+      - path: gun/ring_gun_02
+        weight: 1
+      - path: gun/ring_gun_03
+        weight: 1
+      - path: gun/ring_gun_04
+        weight: 1
+      - path: rings
+        weight: 1
+      - path: rings/ring_body_01
+        weight: 1
+      - path: rings/ring_body_02
+        weight: 1
+      - path: rings/ring_body_03
+        weight: 1
+      - path: shoulder
+        weight: 1
+      - path: wings
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Take 0011
+      takeName: Take 001
+      firstFrame: 48
+      lastFrame: 72
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: body
+        weight: 1
+      - path: gun
+        weight: 1
+      - path: gun/ring_gun_02
+        weight: 1
+      - path: gun/ring_gun_03
+        weight: 1
+      - path: gun/ring_gun_04
+        weight: 1
+      - path: rings
+        weight: 1
+      - path: rings/ring_body_01
+        weight: 1
+      - path: rings/ring_body_02
+        weight: 1
+      - path: rings/ring_body_03
+        weight: 1
+      - path: shoulder
+        weight: 1
+      - path: wings
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Take 0012
+      takeName: Take 001
+      firstFrame: 62
+      lastFrame: 96
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: body
+        weight: 1
+      - path: gun
+        weight: 1
+      - path: gun/ring_gun_02
+        weight: 1
+      - path: gun/ring_gun_03
+        weight: 1
+      - path: gun/ring_gun_04
+        weight: 1
+      - path: rings
+        weight: 1
+      - path: rings/ring_body_01
+        weight: 1
+      - path: rings/ring_body_02
+        weight: 1
+      - path: rings/ring_body_03
+        weight: 1
+      - path: shoulder
+        weight: 1
+      - path: wings
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []

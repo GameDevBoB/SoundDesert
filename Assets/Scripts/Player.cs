@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     public bool isMoving;
     //public GameObject weapon;
     //public GameObject weaponTarget;
+    public Animator anim;
     [HideInInspector]
     public float xl;
     [HideInInspector]
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
         //lookAt.position = transform.position;
         rb = GetComponent<Rigidbody>();
         Physics.queriesHitTriggers = false;
+        
     //    myAimPreview = GetComponent<LineRenderer>();
     }
 
@@ -54,6 +56,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         isMoving = false;
         // cameraPos.position = camera.position;
         if (GameController.instance.joyPad == true)
@@ -84,14 +87,41 @@ public class Player : MonoBehaviour
         if (GameController.instance.joyPad == false)
         {
             if (Input.GetKey(KeyCode.W))
+            {
+                anim.SetFloat("move", 1);
                 Move(transform.forward);
+            }
+            else
+            {
+                anim.SetFloat("move", 0);
+            }
             if (Input.GetKey(KeyCode.S))
+            {
+                anim.SetFloat("move", 1);
                 Move(-transform.forward);
+            }
+            else
+            {
+                anim.SetFloat("move", 0);
+            }
             if (Input.GetKey(KeyCode.D))
+            {
+                anim.SetFloat("move", 1);
                 Move(transform.right);
+            }
+            else
+            {
+                anim.SetFloat("move", 0);
+            }
             if (Input.GetKey(KeyCode.A))
+            {
+                anim.SetFloat("move", 1);
                 Move(-transform.right);
-
+            }
+            else
+            {
+                anim.SetFloat("move", 0);
+            }
             if (Input.GetMouseButtonDown(0))
             {
                 if ((Time.time - startTimeShoot) > coolDown || startTimeShoot == 0)
@@ -144,18 +174,21 @@ public class Player : MonoBehaviour
         Debug.Log(rb.position);
         if (x > 0.1)
         {
+            anim.SetFloat("move", x);
             Vector3 s = transform.right * speed * x * Time.deltaTime;
             rb.MovePosition(rb.position + s);
             isMoving = true;
         }
         if (x < -0.1)
         {
+            anim.SetFloat("move", -x);
             Vector3 s = transform.right * speed * x * Time.deltaTime;
             rb.MovePosition(rb.position + s);
             isMoving = true;
         }
         if (y > 0.1)
         {
+            anim.SetFloat("move", y);
             Vector3 s = -transform.forward * speed * y * Time.deltaTime;
             //Vector3 s = new Vector3(transform.forward.x * speed * y, transform.forward.y, transform.forward.z * speed * y);
             rb.MovePosition(rb.position + s);
@@ -163,6 +196,7 @@ public class Player : MonoBehaviour
         }
         if (y < -0.1)
         {
+            anim.SetFloat("move", -y);
             Vector3 s = -transform.forward * speed * y * Time.deltaTime;
             //Vector3 s = new Vector3(transform.forward.x * speed * y, transform.forward.y, transform.forward.z * speed * y);
             rb.MovePosition(rb.position + s);
