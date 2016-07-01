@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class DestroyObj : SoundAffected {
 
     public ParticleSystem myParticle;
+    public GameObject[] obstacles;
 
     private MeshRenderer myMesh;
     private Collider myCollider;
@@ -26,6 +27,11 @@ public class DestroyObj : SoundAffected {
             {
                 myChildrenMeshes.Add(transform.GetChild(i).gameObject.GetComponent<MeshRenderer>());
                 myChildrenColliders.Add(transform.GetChild(i).gameObject.GetComponent<Collider>());
+            }
+
+            foreach (GameObject obstacle in obstacles)
+            {
+                obstacle.SetActive(false);
             }
         }
     }
@@ -50,6 +56,10 @@ public class DestroyObj : SoundAffected {
                     child.enabled = false;
                 foreach (Collider child in myChildrenColliders)
                     child.enabled = false;
+                foreach (GameObject obstacle in obstacles)
+                {
+                    obstacle.SetActive(true);
+                }
             }
             else
             {
@@ -78,6 +88,10 @@ public class DestroyObj : SoundAffected {
                     child.enabled = false;
                 foreach (Collider child in myChildrenColliders)
                     child.enabled = false;
+                foreach (GameObject obstacle in obstacles)
+                {
+                    obstacle.SetActive(true);
+                }
             }
             else
             {
