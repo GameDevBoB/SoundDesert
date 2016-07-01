@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour {
     private bool isAttacking;
     private bool isRepairing;
     private GameObject soundObj;
+    private Animator anim;
 
     //private bool isActive;
 
@@ -57,6 +58,7 @@ public class Enemy : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
+        anim = gameObject.GetComponent<Animator>();
         soundTrigger = GetComponent<SphereCollider>();
         myAgent = GetComponent<NavMeshAgent>();
         myMaterial = GetComponent<MeshRenderer>().material;
@@ -154,6 +156,7 @@ public class Enemy : MonoBehaviour {
     {
         if (Vector3.Distance(player.transform.position, transform.position) < viewRange)
         {
+            anim.SetBool("canActivate", true);
             //Debug.Log(CheckIfPlayerInAttackRange());
             if (CheckIfPlayerInAttackRange())
             {
@@ -253,6 +256,7 @@ public class Enemy : MonoBehaviour {
 
     IEnumerator Attack()
     {
+        anim.SetBool("canAttack", true);
         isAttacking = true;
         float attackTimer = 0;
         while(attackTimer < attackTime)
@@ -272,6 +276,7 @@ public class Enemy : MonoBehaviour {
             }
             //Debug.Log("Sto attaccando!" + attackTimer);
             yield return new WaitForSeconds(0.01f);
+            anim.SetBool("canAttack", false);
         }
         myState = EnemyState.Idle;
         SetEmissive(idleColor);
@@ -279,6 +284,7 @@ public class Enemy : MonoBehaviour {
     }
 
 	public void GetDamage(){
+        anim.SetBool("isDead", true);
 		gameObject.SetActive(false);
 	}
 
