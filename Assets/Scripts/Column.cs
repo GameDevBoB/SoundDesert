@@ -85,15 +85,19 @@ public class Column : SoundAffected {
         if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
             if (!hasFallen)
             {
-				isFalling=true;
+                isFalling = true;
+                //Debug.Log("faccio suono");
                 //transform.RotateAround(transform.position, transform.right, -90);
-			//	Quaternion.Slerp(transform.rotation,Quaternion.Euler(-90,transform.rotation.y,transform.rotation.z),1);
-                MakeSound(col.transform.position);
+                //	Quaternion.Slerp(transform.rotation,Quaternion.Euler(-90,transform.rotation.y,transform.rotation.z),1);
+                //MakeSound(col.transform.position);
                 hasFallen = true;
 
             }
             else if (col.gameObject.tag == "SoundWave")
-                MakeSound(col.transform.position);
+            {
+                //MakeSound(col.transform.position);
+                Debug.Log("faccio suono");
+            }
             
         }
 		if (col.gameObject.tag == "Enemy" && rb.velocity!=Vector3.zero) {
@@ -108,18 +112,22 @@ public class Column : SoundAffected {
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log(col.gameObject.name);
+        //Debug.Log(col.gameObject.name);
         if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj)
         {
             if (!hasFallen)
             {
 				isFalling=true;
-			
-                MakeSound(col.transform.position);
+
+                //Debug.Log("faccio suono");
+                //MakeSound(col.transform.position);
                 
             }
             else if (col.gameObject.tag == "SoundWave")
-                MakeSound(col.transform.position);
+            {
+                //MakeSound(col.transform.position);
+                //Debug.Log("faccio suono");
+            }
 
         }
 		if (col.gameObject.tag == "Enemy" && rb.velocity!=Vector3.zero) {
