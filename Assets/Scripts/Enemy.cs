@@ -258,6 +258,8 @@ public class Enemy : MonoBehaviour {
     {
         anim.SetBool("canAttack", true);
         isAttacking = true;
+        GetComponent<Rigidbody>().isKinematic = true;
+        myAgent.enabled = false;
         float attackTimer = 0;
         while(attackTimer < attackTime)
         {
@@ -281,6 +283,8 @@ public class Enemy : MonoBehaviour {
         myState = EnemyState.Idle;
         SetEmissive(idleColor);
         isAttacking = false;
+        myAgent.enabled = true;
+        GetComponent<Rigidbody>().isKinematic = false;
     }
 
 	public void GetDamage(){
