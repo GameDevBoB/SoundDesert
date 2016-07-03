@@ -17,6 +17,8 @@ public class RPG_Camera : MonoBehaviour {
     public Renderer playerRenderer;
     public float mouseCane;
     public LayerMask playermask;
+    public float startMouseX;
+   
 
     private Vector3 desiredPosition;
     private float desiredDistance;
@@ -58,8 +60,10 @@ public class RPG_Camera : MonoBehaviour {
         halfPlaneHeight = Camera.main.nearClipPlane * Mathf.Tan(halfFieldOfView);
         halfPlaneWidth = halfPlaneHeight * planeAspect;
 
-        mouseX = 0f;
-        mouseY = 15f;        
+        //mouseX = 0f;
+        mouseY = 15f;      
+        mouseX = startMouseX;
+       
     }
 
 
