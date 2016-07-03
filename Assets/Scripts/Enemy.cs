@@ -217,18 +217,21 @@ public class Enemy : MonoBehaviour {
                 direction = soundObj.GetComponent<Renderer>().bounds.center;
             }
 
+            //Debug.Log(Physics.Linecast(transform.position, direction, 1 << LayerMask.NameToLayer("Floor")));
+            //Debug.DrawLine(direction, transform.position, Color.red, 1);
+
             if (!Physics.Linecast(transform.position, direction, 1 << LayerMask.NameToLayer("Floor")))
             {
                 myState = EnemyState.SoundCheck;
                 SetEmissive(soundCheckColor);
 
 
-                //Debug.Log();
+                //Debug.Log("vado a riparare");
                 //Debug.DrawLine(direction, transform.position, Color.red, 1);
 
                 myAgent.Resume();
                 //Debug.Log("posizione soundobj " + soundObj.transform.position + " nome " + soundObj.name);
-                myAgent.SetDestination(soundObj.transform.position);
+                myAgent.SetDestination(direction);
             }
         }
     }
