@@ -57,7 +57,7 @@ public class FallObj : SoundAffected
             gameObject.layer = LayerMask.NameToLayer("Repairable");
         }
 
-        if ((col.gameObject.tag == "Enemy" || col.gameObject.tag == "Player") && rb.velocity.magnitude > 0.5f)
+        if ((col.gameObject.tag == "Enemy" || col.gameObject.tag == "Player") && rb.velocity.magnitude > 0.5f && !hasFallen)
         {
 
             col.gameObject.SendMessage("GetDamage");
