@@ -29,7 +29,7 @@ public class MainMenuController : MonoBehaviour {
     public void NewGame()
     {
         GameController.instance.DeleteSaving();
-        Application.LoadLevel("Tutorial");
+        Application.LoadLevel("TutorialCatacombs");
     }
 
     /*public void Load()

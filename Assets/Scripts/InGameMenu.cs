@@ -125,4 +125,9 @@ public class InGameMenu : MonoBehaviour {
 
         Debug.Log("Joypad cane = " + GameController.instance.joyPad);
     }
+
+    public void Restart()
+    {
+        Application.LoadLevel(Application.loadedLevel);
+    }
 }
