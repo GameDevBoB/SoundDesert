@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(anim.GetFloat("move"));
         isMoving = false;
         // cameraPos.position = camera.position;
         if (GameController.instance.joyPad == true)
@@ -88,40 +88,35 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.W))
             {
-                anim.SetFloat("move", 1);
+               
                 Move(transform.forward);
             }
-            else
-            {
-                anim.SetFloat("move", 0);
-            }
+            
             if (Input.GetKey(KeyCode.S))
             {
-                anim.SetFloat("move", 1);
                 Move(-transform.forward);
             }
-            else
-            {
-                anim.SetFloat("move", 0);
-            }
+          
             if (Input.GetKey(KeyCode.D))
             {
                 anim.SetFloat("move", 1);
                 Move(transform.right);
             }
-            else
-            {
-                anim.SetFloat("move", 0);
-            }
+           
             if (Input.GetKey(KeyCode.A))
             {
-                anim.SetFloat("move", 1);
                 Move(-transform.right);
+            }
+
+            if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+            {
+                anim.SetFloat("move", 1);
             }
             else
             {
                 anim.SetFloat("move", 0);
             }
+
             if (Input.GetMouseButtonDown(0))
             {
                 if ((Time.time - startTimeShoot) > coolDown || startTimeShoot == 0)
