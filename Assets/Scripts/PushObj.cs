@@ -18,6 +18,7 @@ public class PushObj : SoundAffected {
     void Start()
     {
         isBlocked = false;
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Cube"), true);
     }
 
 	// Update is called once per frame

@@ -4,8 +4,8 @@ using System.Collections;
 public class SoundAffected : MonoBehaviour {
 	public GameObject soundSpherePrefab;
     //public AudioClip soundAudio;
-    
-	protected GameObject soundObj;
+
+    protected GameObject soundObj;
 
 	// Use this for initialization
 	void Start () {

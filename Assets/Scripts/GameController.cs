@@ -92,6 +92,7 @@ public class GameController : MonoBehaviour {
     {
         Debug.Log("Game Over!");
         Time.timeScale = 0;
+        Application.LoadLevel(levelIndex);
     }
 
     public void PlayAudio(AudioClip audio)

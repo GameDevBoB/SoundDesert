@@ -68,7 +68,7 @@ namespace SoundDesertLibrary
 
         public static void AtUpdate()
         {
-            Debug.Log(controllo);
+            //Debug.Log(controllo);
         }
 
         public static void Quit()
