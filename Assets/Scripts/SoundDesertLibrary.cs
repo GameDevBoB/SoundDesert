@@ -147,7 +147,7 @@ namespace SoundDesertLibrary
         public static void OptionBack()
         {
             optionMenu.SetActive(false);
-            PlayerPrefs.SetFloat("Mouse Sensitivity", RPG_Camera.mouseSpeed);
+            PlayerPrefs.SetFloat("Mouse Sensitivity", RPG_Camera.mouseSpeed - 0.5f);
             if (mainMenu != null)
             {
                 mainMenu.SetActive(true);
