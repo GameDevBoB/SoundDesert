@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(anim.GetFloat("move"));
+        //Debug.Log(anim.GetFloat("move"));
         isMoving = false;
         // cameraPos.position = camera.position;
         if (GameController.instance.joyPad == true)

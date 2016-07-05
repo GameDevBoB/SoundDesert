@@ -4,6 +4,8 @@ using System.Collections;
 public class MainHUBController : MonoBehaviour {
     public Transform[] spawnPoints;
     public GameObject[] myBasReliefs;
+    public GameObject[] doorOpenerCubes;
+    public GameObject[] loadingDoors;
 
     private Material[] myBasReliefsMaterials;
     private Color myBasReliefColorActive;
@@ -20,6 +22,8 @@ public class MainHUBController : MonoBehaviour {
         myBasReliefColorActive = myBasReliefsMaterials[0].GetColor("_EmissionColor");
         myBasReliefColorDisactive = myBasReliefsMaterials[0].GetColor("_EmissionColor") * 0;
         player = GameObject.FindGameObjectWithTag("Player");
+        //if (PlayerPrefs.GetInt("ExitLevel") < Application.loadedLevel)
+            //PlayerPrefs.SetInt("ExitLevel", Application.loadedLevel);
     }
 
     void Start () {
@@ -30,7 +34,18 @@ public class MainHUBController : MonoBehaviour {
             else
                 myBasReliefsMaterials[i].SetColor("_EmissionColor", myBasReliefColorDisactive);
         }
-        player.transform.position = spawnPoints[PlayerPrefs.GetInt("ExitLevel") - Application.loadedLevel].position;
+        //Debug.Log(PlayerPrefs.GetInt("ExitLevel") - Application.loadedLevel);
+        if (PlayerPrefs.GetInt("ExitLevel") - Application.loadedLevel >= 0)
+            player.transform.position = spawnPoints[PlayerPrefs.GetInt("ExitLevel") - Application.loadedLevel].position;
+        loadingDoors[0].SendMessage("AddRequiredButton");
+        loadingDoors[0].SendMessage("Open");
+        for (int i = 0; i < (PlayerPrefs.GetInt("ExitLevel") - Application.loadedLevel + 1); i++)
+        {
+            doorOpenerCubes[i].SetActive(true);
+            loadingDoors[i+1].SendMessage("AddRequiredButton");
+            loadingDoors[i+1].SendMessage("Open");
+            Debug.Log(i);
+        }
 	}
 	
 	// Update is called once per frame
