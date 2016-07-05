@@ -36,7 +36,7 @@ public class MainHUBController : MonoBehaviour {
         }
         //Debug.Log(PlayerPrefs.GetInt("ExitLevel") - Application.loadedLevel);
         if (PlayerPrefs.GetInt("ExitLevel") - Application.loadedLevel >= 0)
-            player.transform.position = spawnPoints[PlayerPrefs.GetInt("ExitLevel") - Application.loadedLevel].position;
+            player.transform.position = spawnPoints[PlayerPrefs.GetInt("ExitLevel") - Application.loadedLevel-1].position;
         loadingDoors[0].SendMessage("AddRequiredButton");
         loadingDoors[0].SendMessage("Open");
         for (int i = 0; i < (PlayerPrefs.GetInt("ExitLevel") - Application.loadedLevel + 1); i++)
