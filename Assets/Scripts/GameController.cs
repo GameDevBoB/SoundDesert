@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour {
 
     void Awake()
     {
+        levelIndex = Application.loadedLevel;
         Time.timeScale = 1;
         //Cursor.lockState = CursorLockMode.Locked;
         instance = this;
@@ -32,7 +33,7 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        levelIndex = Application.loadedLevel;
+
     }
 	
 	// Update is called once per frame

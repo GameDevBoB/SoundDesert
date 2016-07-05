@@ -65,6 +65,7 @@ public class DestroyObj : SoundAffected {
             {
                 myMesh.enabled = false;
                 myCollider.enabled = false;
+                myObstacle.enabled = false;
             }
             if (gameObject.tag == "Bridge")
                 gameObject.SendMessage("FallEnemy");
