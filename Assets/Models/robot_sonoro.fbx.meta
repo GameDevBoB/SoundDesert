@@ -59,10 +59,10 @@ ModelImporter:
     4300014: ring_gun_03
     4300016: ring_gun_02
     4300018: ring_gun_04
-    7400000: Take 001
-    7400002: Take 0010
-    7400004: Take 0011
-    7400006: Take 0012
+    7400000: move
+    7400002: start_Move
+    7400004: end_Move
+    7400006: idle
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -85,10 +85,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: move
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 24
+      lastFrame: 23
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -135,7 +135,7 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Take 0010
+      name: start_Move
       takeName: Take 001
       firstFrame: 24
       lastFrame: 48
@@ -144,7 +144,7 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -185,16 +185,16 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Take 0011
+      name: end_Move
       takeName: Take 001
-      firstFrame: 48
+      firstFrame: 49
       lastFrame: 72
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -235,9 +235,9 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Take 0012
+      name: idle
       takeName: Take 001
-      firstFrame: 62
+      firstFrame: 72
       lastFrame: 96
       wrapMode: 0
       orientationOffsetY: 0

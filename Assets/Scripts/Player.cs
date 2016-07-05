@@ -126,6 +126,7 @@ public class Player : MonoBehaviour
                     startTimeShoot = Time.time;
                 }
             }
+           
 
             /*if (Input.GetKey(KeyCode.Space))
             {
@@ -166,14 +167,16 @@ public class Player : MonoBehaviour
 
     void MoveJoyPad()
     {
-        Debug.Log(rb.position);
+       
         if (x > 0.1)
         {
+            
             anim.SetFloat("move", x);
             Vector3 s = transform.right * speed * x * Time.deltaTime;
             rb.MovePosition(rb.position + s);
             isMoving = true;
         }
+        
         if (x < -0.1)
         {
             anim.SetFloat("move", -x);
@@ -196,6 +199,10 @@ public class Player : MonoBehaviour
             //Vector3 s = new Vector3(transform.forward.x * speed * y, transform.forward.y, transform.forward.z * speed * y);
             rb.MovePosition(rb.position + s);
             isMoving = true;
+        }
+        if (isMoving == false)
+        {
+            anim.SetFloat("move", 0);
         }
     }
 
