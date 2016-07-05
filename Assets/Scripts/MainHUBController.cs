@@ -42,9 +42,12 @@ public class MainHUBController : MonoBehaviour {
         for (int i = 0; i < (PlayerPrefs.GetInt("ExitLevel") - Application.loadedLevel + 1); i++)
         {
             doorOpenerCubes[i].SetActive(true);
-            loadingDoors[i+1].SendMessage("AddRequiredButton");
-            loadingDoors[i+1].SendMessage("Open");
-            Debug.Log(i);
+            if (loadingDoors.Length > (i + 1))
+            {
+                loadingDoors[i + 1].SendMessage("AddRequiredButton");
+                loadingDoors[i + 1].SendMessage("Open");
+            }
+            //Debug.Log(i);
         }
 	}
 	

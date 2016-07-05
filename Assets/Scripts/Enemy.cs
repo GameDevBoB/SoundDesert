@@ -30,7 +30,9 @@ public class Enemy : SoundAffected {
     public Color attackColor;
     public Color idleColor;
     public Color repairColor;
-    public ParticleSystem myAttackParticle;
+    public ParticleSystem myAttackParticle1;
+    public ParticleSystem myAttackParticle2;
+    public ParticleSystem myAttackParticle3;
     public GameObject myRepairParticle;
     public Transform attackPosition;
 
@@ -86,6 +88,7 @@ public class Enemy : SoundAffected {
         SetEmissive(Color.black);
         myAgent.enabled = false;
         myAgent.stoppingDistance = myAgent.radius + 0.5f;
+        myAttackParticle1.gameObject.transform.position = attackPosition.position;
     }
 	
 	// Update is called once per frame
@@ -171,7 +174,7 @@ public class Enemy : SoundAffected {
             //Debug.Log(CheckIfPlayerInAttackRange());
             if (CheckIfPlayerInAttackRange())
             {
-                Debug.Log("Giocatore in vista! Attacco");
+                //Debug.Log("Giocatore in vista! Attacco");
                 myState = EnemyState.Attack;
                 SetEmissive(attackColor);
                 myAgent.Stop();
@@ -290,7 +293,9 @@ public class Enemy : SoundAffected {
                     SetEmissive(idleColor);
                     //Debug.Log("Giocatore colpito!");
                 }
-                myAttackParticle.Play();
+                myAttackParticle1.Play();
+                myAttackParticle2.Play();
+                myAttackParticle3.Play();
                 MakeSound(attackPosition.position);
             }
             //Debug.Log("Sto attaccando!" + attackTimer);
