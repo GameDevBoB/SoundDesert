@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using SoundDesertLibrary;
 
 public enum EnemyState
 {
@@ -13,6 +14,9 @@ public enum EnemyState
 };
 
 public class Enemy : SoundAffected {
+    public AudioClip activationSound;
+    public AudioClip attackSound;
+    public AudioClip moveSound;
     public float activeSoundPerception;
     public float disactiveSoundPerception;
     public float viewRange;
@@ -36,6 +40,7 @@ public class Enemy : SoundAffected {
     public GameObject myRepairParticle;
     public Transform attackPosition;
 
+    private AudioSource generalSource;
     private NavMeshAgent myAgent;
     private SphereCollider soundTrigger;
     public EnemyState myState;
@@ -62,6 +67,7 @@ public class Enemy : SoundAffected {
 
     // Use this for initialization
     void Awake () {
+        generalSource = GameObject.Find("general source").GetComponent<AudioSource>();
         anim = gameObject.GetComponent<Animator>();
         soundTrigger = GetComponent<SphereCollider>();
         myAgent = GetComponent<NavMeshAgent>();
@@ -150,6 +156,7 @@ public class Enemy : SoundAffected {
                 else
                 {
                     myAgent.Resume();
+                    generalSource.transform.position = transform.position;
                 }
                 if ((Time.time - startSoundPerceived) > checkTime && myState != EnemyState.Attack)
                 {
@@ -255,6 +262,8 @@ public class Enemy : SoundAffected {
         {
             if (myState == EnemyState.Disactive)
             {
+                generalSource.gameObject.transform.position = transform.position;
+                AudioLib.ShootSound(activationSound, generalSource);
                 anim.SetBool("canActivate", true);
                 myAgent.enabled = true;
                 //GetComponent<Rigidbody>().isKinematic = true;
@@ -297,6 +306,8 @@ public class Enemy : SoundAffected {
                 myAttackParticle2.Play();
                 myAttackParticle3.Play();
                 MakeSound(attackPosition.position);
+                generalSource.gameObject.transform.position = transform.position;
+                AudioLib.ShootSound(attackSound, generalSource);
             }
             //Debug.Log("Sto attaccando!" + attackTimer);
             yield return new WaitForSeconds(0.01f);

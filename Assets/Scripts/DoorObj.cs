@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SoundDesertLibrary;
 
 
 public class DoorObj : MonoBehaviour
 {
+    public AudioClip sound;
     public float lerptimeOpen;
     public float lerptimeClose;
     public float doorTranslation;
@@ -15,10 +17,12 @@ public class DoorObj : MonoBehaviour
     private float exitTime;
     private int requiredButtonNumber;
     private int pressedButtonsNumber;
+    private AudioSource generalSource;
 
 
     void Awake()
     {
+        generalSource = GameObject.Find("general source").GetComponent<AudioSource>();
         requiredButtonNumber = 0;
         //lerptime = 1.5f;
         isOpen = false;
@@ -62,10 +66,13 @@ public class DoorObj : MonoBehaviour
 
     IEnumerator OpenDoor()
     {
+        
         myParticle.Play();
         myParticle.loop = true;
         while (exitTime < 1  )
         {
+            generalSource.transform.position = transform.position;
+            AudioLib.ShootSound(sound, generalSource);
            exitTime += ((Time.time - startLerpTime) / lerptimeOpen);
             transform.position = Vector3.Lerp(initialPos, initialPos + Vector3.up * doorTranslation, (exitTime));
             yield return new WaitForEndOfFrame();
@@ -80,6 +87,8 @@ public class DoorObj : MonoBehaviour
         myParticle.loop = true;
         while (exitTime > 0)
         {
+            generalSource.transform.position = transform.position;
+            AudioLib.ShootSound(sound, generalSource);
             exitTime -= ((Time.time - startLerpTime) / lerptimeClose);
             transform.position = Vector3.Lerp(initialPos, initialPos + Vector3.up * doorTranslation, (exitTime ));
             yield return new WaitForEndOfFrame();
