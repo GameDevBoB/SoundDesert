@@ -13,6 +13,7 @@ public class InGameMenu : MonoBehaviour {
    
     void Awake()
     {
+        Cursor.visible = false;
         volumes = PlayerPrefs.GetFloat("Audio Volume", 1);
         if (InGameMenu.instance == null)
         {
@@ -48,12 +49,14 @@ public class InGameMenu : MonoBehaviour {
                     Physics.queriesHitTriggers = true;
                     GUIController.OpenMenu();
                     menu = true;
+                    Cursor.visible = true;
                 }
                 else
                 {
                     Physics.queriesHitTriggers = false;
                     GUIController.CloseMenu();
                     menu = false;
+                    Cursor.visible = false;
                 }
             }
         }
@@ -66,12 +69,14 @@ public class InGameMenu : MonoBehaviour {
                 {
                     GUIController.OpenMenu();
                     menu = true;
+                    Cursor.visible = true;
                 }
                 else
                 {
                     Physics.queriesHitTriggers = false;
                     GUIController.CloseMenu();
                     menu = false;
+                    Cursor.visible = false;
                 }
             }
         }
@@ -130,6 +135,7 @@ public class InGameMenu : MonoBehaviour {
         Physics.queriesHitTriggers = false;
         GUIController.CloseMenu();
         menu = false;
+        Cursor.visible = false;
     }
 
     /*public void Joypad()
