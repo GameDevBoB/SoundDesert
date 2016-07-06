@@ -142,7 +142,7 @@ public class Enemy : SoundAffected {
                     }
                     else
                     {
-                        myRepairParticle.SetActive(false);
+                        //myRepairParticle.SetActive(false);
                         myState = EnemyState.Idle;
                         SetEmissive(idleColor);
                     }

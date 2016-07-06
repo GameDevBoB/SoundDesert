@@ -19,14 +19,15 @@ public class MainHUBController : MonoBehaviour {
         {
             myBasReliefsMaterials[i] = myBasReliefs[i].GetComponent<MeshRenderer>().material;
         }
-        myBasReliefColorActive = myBasReliefsMaterials[0].GetColor("_EmissionColor");
-        myBasReliefColorDisactive = myBasReliefsMaterials[0].GetColor("_EmissionColor") * 0;
+        myBasReliefColorActive = myBasReliefsMaterials[0].GetColor("_Emission");
+        myBasReliefColorDisactive = myBasReliefsMaterials[0].GetColor("_Emission") * 0;
         player = GameObject.FindGameObjectWithTag("Player");
         //if (PlayerPrefs.GetInt("ExitLevel") < Application.loadedLevel)
             //PlayerPrefs.SetInt("ExitLevel", Application.loadedLevel);
     }
 
     void Start () {
+        Debug.Log("Livelli completati " + PlayerPrefs.GetInt("CompletedLevel"));
 	    for(int i =0; i < myBasReliefsMaterials.Length; i++)
         {
             if(i < (PlayerPrefs.GetInt("CompletedLevel") - Application.loadedLevel))
