@@ -9,23 +9,27 @@ namespace SoundDesertLibrary
 {
     public  class GUIController : MonoBehaviour
     {
+        public static bool c;
         private static GameObject crossHair;
         private static UISlider mouseSpeed;
         private static UISprite keyboardAndMouse;
         private static UISprite controller;
-        private static UISlider masterVolume;
-        private static UISlider musicVolume;
+        //private static UISlider masterVolume;
+        //private static UISlider musicVolume;
         private static UISlider efxVolume;
-        private static AudioSource musicSource;
-        private static AudioSource efxSource;
+        //private static AudioSource musicSource;
+        private static AudioSource[] efxSource;
         private static GameObject optionMenu;
         private static GameObject[] optionMenuPage = new GameObject[3];
         private static GameObject mainMenu;
         private static GameObject menu;
         private static bool controllo;
+        //private static UIToggle joypadCheck;
 
         public static void AtAwake()
         {
+            
+            efxVolume.value = PlayerPrefs.GetFloat("Audio Volume");
             controllo = false;
             if (Application.loadedLevelName == "MainMenu")
             {
@@ -44,11 +48,12 @@ namespace SoundDesertLibrary
             controller = Resources.Load("Controller Map") as UISprite;*/
             //keyboardAndMouse.gameObject.SetActive(false);
             //controller.gameObject.SetActive(false);
-            masterVolume = GameObject.Find("Master Volume").GetComponent<UISlider>();
-            musicVolume = GameObject.Find("Music Volume").GetComponent<UISlider>();
+            //masterVolume = GameObject.Find("Master Volume").GetComponent<UISlider>();
+            //musicVolume = GameObject.Find("Music Volume").GetComponent<UISlider>();
             efxVolume = GameObject.Find("Efx Volume").GetComponent<UISlider>();
             //musicSource = GameObject.Find("Music").GetComponent<AudioSource>();
-            //efxSource = GameObject.Find("Music").GetComponent<AudioSource>();
+            efxSource[0] = GameObject.Find("general Source").GetComponent<AudioSource>();
+            efxSource[1] = GameObject.Find("Player").GetComponent<AudioSource>();
             optionMenu = GameObject.Find("Option Menu");
             optionMenuPage[0] = GameObject.Find("Audio Option");
             optionMenuPage[1] = GameObject.Find("Mouse Option");
@@ -61,8 +66,15 @@ namespace SoundDesertLibrary
             {
                 menu.SetActive(false);
             }
-
+            //joypadCheck = GameObject.Find("Toggle").GetComponent<UIToggle>();
+            
             mouseSpeed.value = RPG_Camera.mouseSpeed / 8;
+            
+
+            
+            //GameController.instance.joyPad = c;
+            
+            
             
 
 
@@ -71,6 +83,14 @@ namespace SoundDesertLibrary
         public static void AtUpdate()
         {
             //Debug.Log(controllo);
+            if (Input.GetJoystickNames()[0] != null)
+            {
+                GameController.instance.joyPad = true;
+            }
+            else
+            {
+                GameController.instance.joyPad = false;
+            }
         }
 
         public static void Quit()
@@ -100,8 +120,9 @@ namespace SoundDesertLibrary
 
         public static void Volume()
         {
-            musicSource.volume = musicVolume.value * masterVolume.value;
-            efxSource.volume = efxVolume.value * masterVolume.value;
+            //musicSource.volume = musicVolume.value * masterVolume.value;
+            efxSource[0].volume = efxVolume.value;
+            efxSource[1].volume = efxVolume.value;
 
         }
 
@@ -150,6 +171,8 @@ namespace SoundDesertLibrary
         {
             optionMenu.SetActive(false);
             PlayerPrefs.SetFloat("Mouse Sensitivity", RPG_Camera.mouseSpeed - 0.5f);
+            PlayerPrefs.SetFloat("Audio Volume", efxVolume.value);
+            
             if (mainMenu != null)
             {
                 mainMenu.SetActive(true);
@@ -160,6 +183,11 @@ namespace SoundDesertLibrary
                 
             }
 
+            if (GameController.instance.joyPad == true)
+                PlayerPrefs.GetInt("joypad", 1);
+
+            if (GameController.instance.joyPad == false)
+                PlayerPrefs.GetInt("joypad", 0);
         }
 
         public static void OpenMenu()
@@ -177,13 +205,13 @@ namespace SoundDesertLibrary
             
         }
 
-        public static void JoypadCheckBox()
+       /* public static void JoypadCheckBox()
         {
             if(!GameController.instance.joyPad)
                 GameController.instance.joyPad = true;
             else
                 GameController.instance.joyPad = false;
-        }
+        }*/
 
         public static void Continue()
         {

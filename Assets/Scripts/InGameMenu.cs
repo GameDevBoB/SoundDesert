@@ -25,7 +25,7 @@ public class InGameMenu : MonoBehaviour {
     }
 
 	void LateUpdate () {
-       
+        GUIController.AtUpdate();
         GUIController.MouseSensitivity();
         //GUIController.Volume();
         GUIController.AtUpdate();
@@ -119,13 +119,13 @@ public class InGameMenu : MonoBehaviour {
         menu = false;
     }
 
-    public void Joypad()
+    /*public void Joypad()
     {
         
         GUIController.JoypadCheckBox();
 
         Debug.Log("Joypad cane = " + GameController.instance.joyPad);
-    }
+    }*/
 
     public void Restart()
     {
