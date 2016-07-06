@@ -9,6 +9,7 @@ namespace SoundDesertLibrary
 {
     public  class GUIController : MonoBehaviour
     {
+        private static GameObject crossHair;
         private static UISlider mouseSpeed;
         private static UISprite keyboardAndMouse;
         private static UISprite controller;
@@ -33,6 +34,7 @@ namespace SoundDesertLibrary
             }
             else
             {
+                crossHair = GameObject.Find("mirino");
                 menu = GameObject.Find("First Menu");
                 Debug.Log(menu.name);
             }
@@ -162,11 +164,13 @@ namespace SoundDesertLibrary
 
         public static void OpenMenu()
         {
+            crossHair.SetActive(false);
             Time.timeScale = 0;
             menu.SetActive(true);
         }
         public static void CloseMenu()
         {
+            crossHair.SetActive(true);
             controllo = true;
             Time.timeScale = 1;
             menu.SetActive(false);
@@ -192,29 +196,29 @@ namespace SoundDesertLibrary
     }
 
    
-    public class AudioController : MonoBehaviour
+    public class AudioLib : MonoBehaviour
     {
 
         private static AudioSource musicSource;
         private static AudioSource efxSource;
         
 
-        void AtAwake()
+        public static void AtAwake()
         {
             musicSource = GameObject.Find("Music").GetComponent<AudioSource>();
             efxSource = GameObject.Find("Music").GetComponent<AudioSource>();
         }
 
 
-        public static void MoveSound(AudioClip Sound)
+        public static void MoveSound(AudioClip Sound, AudioSource source)
         {
-            if(!efxSource.isPlaying )
-                efxSource.PlayOneShot(Sound);
+            if(!source.isPlaying )
+                source.PlayOneShot(Sound);
         }
 
-        public static void ShootSound(AudioClip Sound)
+        public static void ShootSound(AudioClip Sound, AudioSource source)
         {
-            efxSource.PlayOneShot(Sound);
+            source.PlayOneShot(Sound);
         }
 
         public static void EnemyActivation()

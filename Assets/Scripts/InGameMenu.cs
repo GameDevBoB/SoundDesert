@@ -25,6 +25,7 @@ public class InGameMenu : MonoBehaviour {
     }
 
 	void LateUpdate () {
+       
         GUIController.MouseSensitivity();
         //GUIController.Volume();
         GUIController.AtUpdate();

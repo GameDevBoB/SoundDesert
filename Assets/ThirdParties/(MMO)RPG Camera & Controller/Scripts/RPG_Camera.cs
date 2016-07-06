@@ -18,6 +18,7 @@ public class RPG_Camera : MonoBehaviour {
     public float mouseCane;
     public LayerMask playermask;
     public float startMouseX;
+    public Transform crossHair;
    
 
     private Vector3 desiredPosition;
@@ -105,6 +106,7 @@ public class RPG_Camera : MonoBehaviour {
                 cursorOn = true;
             }
         }
+        
     }
     
     void LateUpdate() {
@@ -124,7 +126,12 @@ public class RPG_Camera : MonoBehaviour {
 
             CharacterFade();
         }
-	}
+
+      /*  float h = Screen.height / 2;
+        float w = Screen.width / 2;
+        crossHair.position = Camera.main.ScreenToWorldPoint(new Vector3(w, h, Camera.main.nearClipPlane));
+        crossHair.LookAt(cameraPivot);*/
+    }
 
 
     void GetInput() {
