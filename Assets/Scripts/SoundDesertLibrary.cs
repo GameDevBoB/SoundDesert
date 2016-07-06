@@ -16,9 +16,9 @@ namespace SoundDesertLibrary
         private static UISprite controller;
         //private static UISlider masterVolume;
         //private static UISlider musicVolume;
-        private static UISlider efxVolume;
+       // private static UISlider efxVolume;
         //private static AudioSource musicSource;
-        private static AudioSource[] efxSource;
+        //private static AudioSource[] efxSource;
         private static GameObject optionMenu;
         private static GameObject[] optionMenuPage = new GameObject[3];
         private static GameObject mainMenu;
@@ -29,7 +29,7 @@ namespace SoundDesertLibrary
         public static void AtAwake()
         {
             
-            efxVolume.value = PlayerPrefs.GetFloat("Audio Volume");
+            //efxVolume.value = PlayerPrefs.GetFloat("Audio Volume");
             controllo = false;
             if (Application.loadedLevelName == "MainMenu")
             {
@@ -50,15 +50,15 @@ namespace SoundDesertLibrary
             //controller.gameObject.SetActive(false);
             //masterVolume = GameObject.Find("Master Volume").GetComponent<UISlider>();
             //musicVolume = GameObject.Find("Music Volume").GetComponent<UISlider>();
-            efxVolume = GameObject.Find("Efx Volume").GetComponent<UISlider>();
+            //efxVolume = GameObject.Find("Efx Volume").GetComponent<UISlider>();
             //musicSource = GameObject.Find("Music").GetComponent<AudioSource>();
-            efxSource[0] = GameObject.Find("general Source").GetComponent<AudioSource>();
-            efxSource[1] = GameObject.Find("Player").GetComponent<AudioSource>();
+            //efxSource[0] = GameObject.Find("general Source").GetComponent<AudioSource>();
+            //efxSource[1] = GameObject.Find("Player").GetComponent<AudioSource>();
             optionMenu = GameObject.Find("Option Menu");
-            optionMenuPage[0] = GameObject.Find("Audio Option");
+            //optionMenuPage[0] = GameObject.Find("Audio Option");
             optionMenuPage[1] = GameObject.Find("Mouse Option");
             optionMenuPage[2] = GameObject.Find("Controls Option");
-            optionMenuPage[0].SetActive(true);
+            //optionMenuPage[0].SetActive(true);
             optionMenuPage[1].SetActive(false);
             optionMenuPage[2].SetActive(false);
             optionMenu.SetActive(false);
@@ -83,9 +83,17 @@ namespace SoundDesertLibrary
         public static void AtUpdate()
         {
             //Debug.Log(controllo);
-            if (Input.GetJoystickNames()[0] != null)
+            if (Input.GetJoystickNames().Length > 0)
             {
-                GameController.instance.joyPad = true;
+                if (string.IsNullOrEmpty ( Input.GetJoystickNames()[0]))
+                {
+                    GameController.instance.joyPad = false;
+
+                }
+                else
+                {
+                    GameController.instance.joyPad = true;
+                }
             }
             else
             {
@@ -121,8 +129,8 @@ namespace SoundDesertLibrary
         public static void Volume()
         {
             //musicSource.volume = musicVolume.value * masterVolume.value;
-            efxSource[0].volume = efxVolume.value;
-            efxSource[1].volume = efxVolume.value;
+            //efxSource[0].volume = efxVolume.value;
+            //efxSource[1].volume = efxVolume.value;
 
         }
 
@@ -151,13 +159,13 @@ namespace SoundDesertLibrary
 
         }
 
-        public static void AudioPage()
+        /*public static void AudioPage()
         {
             optionMenuPage[0].SetActive(true);
             optionMenuPage[1].SetActive(false);
             optionMenuPage[2].SetActive(false);
 
-        }
+        }*/
 
         public static void ControlsPage()
         {
@@ -171,7 +179,7 @@ namespace SoundDesertLibrary
         {
             optionMenu.SetActive(false);
             PlayerPrefs.SetFloat("Mouse Sensitivity", RPG_Camera.mouseSpeed - 0.5f);
-            PlayerPrefs.SetFloat("Audio Volume", efxVolume.value);
+            //PlayerPrefs.SetFloat("Audio Volume", efxVolume.value);
             
             if (mainMenu != null)
             {
@@ -193,8 +201,8 @@ namespace SoundDesertLibrary
         public static void OpenMenu()
         {
             crossHair.SetActive(false);
-            Time.timeScale = 0;
             menu.SetActive(true);
+            Time.timeScale = 0;
         }
         public static void CloseMenu()
         {
@@ -224,7 +232,7 @@ namespace SoundDesertLibrary
     }
 
    
-    public class AudioLib : MonoBehaviour
+ /*   public class AudioLib : MonoBehaviour
     {
 
         private static AudioSource musicSource;
@@ -257,7 +265,7 @@ namespace SoundDesertLibrary
 
 
 
-    }
+    }*/
 
 
 }

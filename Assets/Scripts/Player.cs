@@ -4,9 +4,9 @@ using SoundDesertLibrary;
 
 public class Player : MonoBehaviour
 {
-    public AudioSource playerSource;
+    /*public AudioSource playerSource;
     public AudioClip moveSound;
-    public AudioClip shootSound;
+    public AudioClip shootSound;*/
     public GameObject soundObj;
     public GameObject wavePrefab;
     public float speed;
@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
             if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
             {
                 anim.SetFloat("move", 1);
-                AudioLib.MoveSound(moveSound, playerSource);
+               // AudioLib.MoveSound(moveSound, playerSource);
             }
             else
             {
@@ -162,7 +162,7 @@ public class Player : MonoBehaviour
 
     void ShootSoundWave()
     {
-        AudioLib.ShootSound(shootSound, playerSource);
+        //AudioLib.ShootSound(shootSound, playerSource);
         GameObject wave = Instantiate(wavePrefab, spawnPointWave.position, spawnPointWave.rotation * wavePrefab.transform.rotation) as GameObject;
         wave.SendMessage("Shoot", new float[] { waveVelocity, waveDuration });
     }
@@ -178,7 +178,7 @@ public class Player : MonoBehaviour
        
         if (x > 0.1)
         {
-            AudioLib.MoveSound(moveSound, playerSource);
+            //AudioLib.MoveSound(moveSound, playerSource);
             anim.SetFloat("move", x);
             Vector3 s = transform.right * speed * x * Time.deltaTime;
             rb.MovePosition(rb.position + s);
@@ -187,7 +187,7 @@ public class Player : MonoBehaviour
         
         if (x < -0.1)
         {
-            AudioLib.MoveSound(moveSound, playerSource);
+            //AudioLib.MoveSound(moveSound, playerSource);
             anim.SetFloat("move", -x);
             Vector3 s = transform.right * speed * x * Time.deltaTime;
             rb.MovePosition(rb.position + s);
@@ -195,7 +195,7 @@ public class Player : MonoBehaviour
         }
         if (y > 0.1)
         {
-            AudioLib.MoveSound(moveSound, playerSource);
+            //AudioLib.MoveSound(moveSound, playerSource);
             anim.SetFloat("move", y);
             Vector3 s = -transform.forward * speed * y * Time.deltaTime;
             //Vector3 s = new Vector3(transform.forward.x * speed * y, transform.forward.y, transform.forward.z * speed * y);
@@ -204,7 +204,7 @@ public class Player : MonoBehaviour
         }
         if (y < -0.1)
         {
-            AudioLib.MoveSound(moveSound, playerSource);
+            //AudioLib.MoveSound(moveSound, playerSource);
             anim.SetFloat("move", -y);
             Vector3 s = -transform.forward * speed * y * Time.deltaTime;
             //Vector3 s = new Vector3(transform.forward.x * speed * y, transform.forward.y, transform.forward.z * speed * y);

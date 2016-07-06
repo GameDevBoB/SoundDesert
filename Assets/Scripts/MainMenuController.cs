@@ -40,7 +40,7 @@ public class MainMenuController : MonoBehaviour {
     public void Options()
     {
         GUIController.Options();
-        GUIController.AudioPage();
+        GUIController.MousePage();
     }
 
     public void Volume()
@@ -48,11 +48,11 @@ public class MainMenuController : MonoBehaviour {
         GUIController.Volume();
     }
 
-    public void AudioPage()
+   /* public void AudioPage()
     {
         GUIController.AudioPage();
 
-    }
+    }*/
 
     public void MousePage()
     {

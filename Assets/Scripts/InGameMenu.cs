@@ -25,10 +25,11 @@ public class InGameMenu : MonoBehaviour {
     }
 
 	void LateUpdate () {
+        Debug.Log("JOYPAD = " + GameController.instance.joyPad);
         GUIController.AtUpdate();
         GUIController.MouseSensitivity();
         //GUIController.Volume();
-        GUIController.AtUpdate();
+        
         if (GameController.instance.joyPad == false)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -66,6 +67,7 @@ public class InGameMenu : MonoBehaviour {
                 }
             }
         }
+        GUIController.AtUpdate();
     }
 
     public void Quit()
@@ -84,15 +86,15 @@ public class InGameMenu : MonoBehaviour {
     {
         Debug.Log("ssss");
         GUIController.Options();
-        GUIController.AudioPage();
+        GUIController.MousePage();
         
     }
 
-    public void AudioPage()
+   /* public void AudioPage()
     {
         GUIController.AudioPage();
 
-    }
+    }*/
 
     public void MousePage()
     {
