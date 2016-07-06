@@ -14,9 +14,9 @@ public enum EnemyState
 };
 
 public class Enemy : SoundAffected {
-    /*public AudioClip activationSound;
+    public AudioClip activationSound;
     public AudioClip attackSound;
-    public AudioClip moveSound;*/
+    //public AudioClip moveSound;
     public float activeSoundPerception;
     public float disactiveSoundPerception;
     public float viewRange;
@@ -40,7 +40,7 @@ public class Enemy : SoundAffected {
     public GameObject myRepairParticle;
     public Transform attackPosition;
 
-   // private AudioSource generalSource;
+    public AudioSource mySource;
     private NavMeshAgent myAgent;
     private SphereCollider soundTrigger;
     public EnemyState myState;
@@ -68,6 +68,7 @@ public class Enemy : SoundAffected {
     // Use this for initialization
     void Awake () {
         //generalSource = GameObject.Find("general source").GetComponent<AudioSource>();
+        //mySource = gameObject.GetComponent<AudioSource>();
         anim = gameObject.GetComponent<Animator>();
         soundTrigger = GetComponent<SphereCollider>();
         myAgent = GetComponent<NavMeshAgent>();
@@ -100,6 +101,8 @@ public class Enemy : SoundAffected {
 	// Update is called once per frame
 	void Update ()
     {
+
+        
         //Debug.DrawRay(transform.position, -transform.up, Color.red, 100);
         //Debug.Log(Physics.Raycast(transform.position + transform.up * 3, Vector3.down, out hit, 1000, 1 << LayerMask.NameToLayer("Bridge")));
         if (myAgent.enabled)
@@ -263,7 +266,7 @@ public class Enemy : SoundAffected {
             if (myState == EnemyState.Disactive)
             {
                 //generalSource.gameObject.transform.position = transform.position;
-                //AudioLib.ShootSound(activationSound, generalSource);
+                AudioLib.GeneralSound(activationSound, mySource);
                 anim.SetBool("canActivate", true);
                 myAgent.enabled = true;
                 //GetComponent<Rigidbody>().isKinematic = true;
@@ -307,7 +310,7 @@ public class Enemy : SoundAffected {
                 myAttackParticle3.Play();
                 MakeSound(attackPosition.position);
                 //generalSource.gameObject.transform.position = transform.position;
-                //AudioLib.ShootSound(attackSound, generalSource);
+                AudioLib.GeneralSound(attackSound, mySource);
             }
             //Debug.Log("Sto attaccando!" + attackTimer);
             yield return new WaitForSeconds(0.01f);

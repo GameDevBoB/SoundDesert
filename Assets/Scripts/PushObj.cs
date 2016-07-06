@@ -5,17 +5,18 @@ using SoundDesertLibrary;
 public class PushObj : SoundAffected {
 	//public Vector3 fallRotation;
 	public float pushForce;
-    //public AudioClip sound;
+    public AudioClip sound;
 
     //private bool hasPulled;
 	private Rigidbody rb;
     private bool isBlocked;
-    //private AudioSource generalSource;
+    private AudioSource mySource;
 	
 	// Use this for initialization
 	void Awake () {
         //hasPulled = false;
         //generalSource = GameObject.Find("general source").GetComponent<AudioSource>();
+        mySource = gameObject.GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody> (); 
 	}
 	
@@ -37,9 +38,9 @@ public class PushObj : SoundAffected {
             Vector3 pushVector = new Vector3(col.transform.forward.x, 0, col.transform.forward.z);
 			rb.AddForce(transform.position + pushVector * pushForce);
                 MakeSound(col.transform.position);
-            //AudioLib.ShootSound(sound, generalSource);
-			//hasPulled = true;
-		}
+            AudioLib.GeneralSound(sound, mySource);
+            //hasPulled = true;
+        }
 	}
 	
 	void OnTriggerEnter(Collider col)
@@ -50,8 +51,9 @@ public class PushObj : SoundAffected {
             Vector3 pushVector = new Vector3(col.transform.forward.x, 0, col.transform.forward.z);
             rb.AddForce(transform.position + pushVector * pushForce);
             MakeSound(col.transform.position);
-			//hasPulled = true;
-		}
+            AudioLib.GeneralSound(sound, mySource);
+            //hasPulled = true;
+        }
 	}
 
     public void Block()

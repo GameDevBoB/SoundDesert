@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using SoundDesertLibrary;
 
 public class DestroyObj : SoundAffected {
 
     public ParticleSystem myParticle;
     public GameObject[] obstacles;
+    public AudioClip mySound;
 
     private MeshRenderer myMesh;
     private Collider myCollider;
@@ -13,6 +15,7 @@ public class DestroyObj : SoundAffected {
 
     private List<Collider> myChildrenColliders = new List<Collider>();
     private List<MeshRenderer> myChildrenMeshes = new List<MeshRenderer>();
+    private AudioSource mySource;
 	
 	void Awake()
 	{
@@ -20,6 +23,7 @@ public class DestroyObj : SoundAffected {
 		//myParticle = GetComponent<ParticleSystem> ();
         myCollider = GetComponent<Collider>();
         myObstacle = GetComponent<NavMeshObstacle>();
+        mySource = GetComponent<AudioSource>();
 
         if (gameObject.tag == "Bridge")
         {
@@ -50,6 +54,8 @@ public class DestroyObj : SoundAffected {
 	void OnCollisionEnter(Collision col)
 	{
 		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
+            Debug.Log(mySound.name);
+            AudioLib.GeneralSound(mySound, mySource);
             if (gameObject.tag == "Bridge")
             {
                 foreach (MeshRenderer child in myChildrenMeshes)
@@ -74,6 +80,7 @@ public class DestroyObj : SoundAffected {
             if(col.gameObject.tag == "SoundWave")
                 MakeSound(col.transform.position);
             myParticle.Play();
+            //AudioLib.GeneralSound(mySound, mySource);
         }
 
 	}
@@ -81,6 +88,8 @@ public class DestroyObj : SoundAffected {
 	void OnTriggerEnter(Collider col)
 	{
 		if ((col.gameObject.tag == "Sound" || col.gameObject.tag == "SoundWave") && col.gameObject != soundObj) {
+            Debug.Log(mySound.name);
+            AudioLib.GeneralSound(mySound, mySource);
             if (gameObject.tag == "Bridge")
                 gameObject.SendMessage("FallEnemy");
             if (gameObject.tag == "Bridge")
@@ -104,6 +113,7 @@ public class DestroyObj : SoundAffected {
             if (col.gameObject.tag == "SoundWave")
                 MakeSound(col.transform.position);
 			myParticle.Play();
-		}
+            //AudioLib.GeneralSound(mySound, mySource);
+        }
 	}
 }

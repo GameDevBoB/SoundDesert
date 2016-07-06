@@ -6,10 +6,15 @@ public class InGameMenu : MonoBehaviour {
 
     private bool menu;
     public static InGameMenu instance;
+    public AudioSource[] efxSource;
+    public static float volumes;
+    
+
    
     void Awake()
     {
-        if(InGameMenu.instance == null)
+        volumes = PlayerPrefs.GetFloat("Audio Volume", 1);
+        if (InGameMenu.instance == null)
         {
             instance = this;
         }
@@ -17,8 +22,11 @@ public class InGameMenu : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+        for (int i = 0; i < efxSource.Length; i++)
+        {
+            efxSource[i].volume = volumes;
+        }
 
-        
         //optionMenu = Instantiate(optionMenu, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
         //GUIController.AtAwake();
 
@@ -90,11 +98,11 @@ public class InGameMenu : MonoBehaviour {
         
     }
 
-   /* public void AudioPage()
+    public void AudioPage()
     {
         GUIController.AudioPage();
 
-    }*/
+    }
 
     public void MousePage()
     {
@@ -111,7 +119,10 @@ public class InGameMenu : MonoBehaviour {
     public void OptionBack()
     {
         GUIController.OptionBack();
-
+        for(int i = 0; i < efxSource.Length; i++)
+        {
+            efxSource[i].volume = volumes;
+        }
     }
 
     public void Resume()

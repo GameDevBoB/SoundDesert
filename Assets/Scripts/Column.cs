@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SoundDesertLibrary;
 
 public class Column : SoundAffected {
     //public Vector3 fallRotation;
-    
+    public AudioClip fallSound;
+    public AudioClip rebuildingSound;
+    public AudioClip fallenSound;   //inteso come suono per quando viene colpita quando è a terra
     public GameObject mymesh;
 	public GameObject columnChild;
 	public float fallTime=2;
@@ -14,6 +17,7 @@ public class Column : SoundAffected {
     public GameObject bridgeCollider;
     public ParticleSystem myParticle;
     public Transform fallPosition;
+    public AudioSource mySource;
 
     //private Material elementMat;
     private float hiddenColumn = 0.2f;
@@ -25,6 +29,7 @@ public class Column : SoundAffected {
 	private Rigidbody rb;
 	private Vector3 initialRot;
 	private Vector3 initialPos;
+   
 
 
     void Awake()
@@ -32,6 +37,7 @@ public class Column : SoundAffected {
         //elementMat = mymesh.GetComponent<MeshRenderer>().material;
         //prevColor = elementMat.color;
 		rb = GetComponent<Rigidbody> ();
+        //mySource = gameObject.GetComponent<AudioSource>();
     }
 
 	// Use this for initialization
@@ -56,7 +62,7 @@ public class Column : SoundAffected {
         //myParticle.Play();
     }
 	void Update(){
-
+        Debug.Log(mySource.volume + " cane");
 	/*	Debug.Log ("isRebuilding: "+ isRebuilding);
 		Debug.Log ("hasFallen: "+ hasFallen);
 		Debug.Log ("lerpTime: "+lerpTime);
@@ -91,12 +97,13 @@ public class Column : SoundAffected {
                 //	Quaternion.Slerp(transform.rotation,Quaternion.Euler(-90,transform.rotation.y,transform.rotation.z),1);
                 //MakeSound(col.transform.position);
                 hasFallen = true;
-
+                
             }
             else if (col.gameObject.tag == "SoundWave")
             {
                 //MakeSound(col.transform.position);
                 Debug.Log("faccio suono");
+                AudioLib.GeneralSound(fallenSound, mySource);
             }
             
         }
@@ -163,13 +170,15 @@ public class Column : SoundAffected {
                 lerpTime =0;
 
 			}
-		}
+            AudioLib.GeneralSound(fallSound, mySource);
+        }
 			
 
 	}
 
     public void Repair()
     {
+        
         isRebuilding = true;
         foreach (GameObject bridgeObstacle in bridgeObstacles)
             bridgeObstacle.SetActive(true);
@@ -203,7 +212,7 @@ public class Column : SoundAffected {
 
                     columnChild.layer = LayerMask.NameToLayer("Default");
                     gameObject.layer = LayerMask.NameToLayer("Default");
-
+                    AudioLib.GeneralSound(rebuildingSound, mySource);
 
                     lerpTime =0;
 					}

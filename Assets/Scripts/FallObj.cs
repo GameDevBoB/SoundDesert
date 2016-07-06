@@ -1,20 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SoundDesertLibrary;
 
 public class FallObj : SoundAffected
 {
     public float timeToRebuild = 2;
-
+    public AudioClip fallSound;
+    public AudioClip repairSound;
     private Rigidbody rb;
     private bool hasFallen;
     private Vector3 startPosition;
     private Quaternion startRotation;
+    private AudioSource mySource;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         startPosition = transform.position;
         startRotation = transform.rotation;
+        mySource = GetComponent<AudioSource>();
     }
 
     // Use this for initialization
@@ -55,11 +59,12 @@ public class FallObj : SoundAffected
             MakeSound(posSound);
             hasFallen = true;
             gameObject.layer = LayerMask.NameToLayer("Repairable");
+            AudioLib.GeneralSound(fallSound, mySource);
         }
 
         if ((col.gameObject.tag == "Enemy" || col.gameObject.tag == "Player") && rb.velocity.magnitude > 0.5f && !hasFallen)
         {
-
+            AudioLib.GeneralSound(fallSound, mySource);
             col.gameObject.SendMessage("GetDamage");
         }
     }
@@ -94,8 +99,10 @@ public class FallObj : SoundAffected
 
     public void Repair()
     {
+        
         StartCoroutine("BackAtStart");
         Debug.Log("posizione fallobj " + transform.position);
+        AudioLib.GeneralSound(repairSound, mySource);
     }
 
     IEnumerator BackAtStart()
