@@ -93,6 +93,7 @@
     <Compile Include="Assets\Scripts\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PushObj.cs" />
+    <Compile Include="Assets\Scripts\SemeObj.cs" />
     <Compile Include="Assets\Scripts\SoundAffected.cs" />
     <Compile Include="Assets\Scripts\SoundDesertLibrary.cs" />
     <Compile Include="Assets\Scripts\SoundSphere.cs" />
@@ -246,6 +247,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Materials\m_enemy.shader" />
+    <None Include="Assets\Models\m_enemy\m_enemy.shader" />
     <None Include="Assets\Shaders\colonna_enorme.shader" />
     <None Include="Assets\Shaders\m_mech_01.shader" />
     <None Include="Assets\Textures\shader_colonna.shader" />
@@ -311,7 +313,6 @@
     <None Include="Assets\ThirdParties\ShaderForge\Example Assets\Shaders\VertexAnimation.shader" />
     <None Include="Assets\ThirdParties\ShaderForge\Example Assets\Shaders\VertexColorRounding.shader" />
     <None Include="Assets\ThirdParties\ShaderForge\Readme.txt" />
-    <None Include="Assets\m_enemy\m_enemy.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
