@@ -33,6 +33,7 @@ public class SemeObj : MonoBehaviour
         {
             myAnim.SetTrigger("Bloom");
         }
+        Invoke("LoadCredits", 2);
     }
 
     public void Close()
@@ -44,5 +45,10 @@ public class SemeObj : MonoBehaviour
     {
         requiredButtonNumber++;
         //Debug.Log(requiredButtonNumber);
+    }
+
+    private void LoadCredits()
+    {
+        Application.LoadLevel(5);
     }
 }

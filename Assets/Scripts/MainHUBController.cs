@@ -6,6 +6,7 @@ public class MainHUBController : MonoBehaviour {
     public GameObject[] myBasReliefs;
     public GameObject[] doorOpenerCubes;
     public GameObject[] loadingDoors;
+    public GameObject[] enterLevels;
 
     private Material[] myBasReliefsMaterials;
     private Color myBasReliefColorActive;
@@ -40,7 +41,7 @@ public class MainHUBController : MonoBehaviour {
             player.transform.position = spawnPoints[PlayerPrefs.GetInt("ExitLevel") - Application.loadedLevel-1].position;
         loadingDoors[0].SendMessage("AddRequiredButton");
         loadingDoors[0].SendMessage("Open");
-        for (int i = 0; i < (PlayerPrefs.GetInt("ExitLevel") - Application.loadedLevel); i++)
+        /*for (int i = 0; i < (PlayerPrefs.GetInt("ExitLevel") - Application.loadedLevel); i++)
         {
             doorOpenerCubes[i].SetActive(true);
             //if (loadingDoors.Length > (i + 1))
@@ -49,7 +50,7 @@ public class MainHUBController : MonoBehaviour {
                 //loadingDoors[i + 1].SendMessage("Open");
             //}
             //Debug.Log(i);
-        }
+        }*/
 
         int levelcompleted = PlayerPrefs.GetInt("ExitLevel") - Application.loadedLevel;
         if (levelcompleted >= 1)
@@ -58,11 +59,15 @@ public class MainHUBController : MonoBehaviour {
             loadingDoors[1].SendMessage("Open");
             loadingDoors[2].SendMessage("AddRequiredButton");
             loadingDoors[2].SendMessage("Open");
+            enterLevels[0].SetActive(false);
         }
         if(levelcompleted >=2)
         {
             loadingDoors[3].SendMessage("AddRequiredButton");
             loadingDoors[3].SendMessage("Open");
+            doorOpenerCubes[0].SetActive(false);
+            doorOpenerCubes[1].SetActive(true);
+            enterLevels[1].SetActive(false);
         }
     }
 
