@@ -28,7 +28,7 @@ public class PushObj : SoundAffected {
 
 	// Update is called once per frame
 	void Update () {
-		
+        mySource.volume = mySource.volume / 2;
 	}
 
     void OnCollisionEnter(Collision col)

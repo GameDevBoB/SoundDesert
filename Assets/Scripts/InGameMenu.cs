@@ -38,7 +38,14 @@ public class InGameMenu : MonoBehaviour {
         GUIController.AtUpdate();
         GUIController.MouseSensitivity();
         //GUIController.Volume();
-        
+        if(menu == false)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
         if (GameController.instance.joyPad == false)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
