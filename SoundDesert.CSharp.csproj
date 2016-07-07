@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\ButtonObj.cs" />
     <Compile Include="Assets\Scripts\CheckpointObj.cs" />
     <Compile Include="Assets\Scripts\Column.cs" />
+    <Compile Include="Assets\Scripts\CreditsController.cs" />
     <Compile Include="Assets\Scripts\DestroyObj.cs" />
     <Compile Include="Assets\Scripts\DoorObj.cs" />
     <Compile Include="Assets\Scripts\EndLevelObj.cs" />

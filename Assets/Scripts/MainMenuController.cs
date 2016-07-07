@@ -43,6 +43,11 @@ public class MainMenuController : MonoBehaviour {
         GUIController.MousePage();
     }
 
+    public void Credits()
+    {
+        Application.LoadLevel(5);
+    }
+
     public void Volume()
     {
         GUIController.Volume();
