@@ -32,7 +32,7 @@ public class SemeObj : MonoBehaviour
         if ((pressedButtonsNumber == requiredButtonNumber))
         {
             myAnim.SetTrigger("Bloom");
-            Invoke("LoadCredits", 2);
+            Invoke("LoadCredits", 5);
         }
     }
 

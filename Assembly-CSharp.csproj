@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\ButtonObj.cs" />
      <Compile Include="Assets\Scripts\CheckpointObj.cs" />
      <Compile Include="Assets\Scripts\Column.cs" />
+     <Compile Include="Assets\Scripts\CreditsController.cs" />
      <Compile Include="Assets\Scripts\DestroyObj.cs" />
      <Compile Include="Assets\Scripts\DoorObj.cs" />
      <Compile Include="Assets\Scripts\EndLevelObj.cs" />
@@ -63,6 +64,7 @@
      <Compile Include="Assets\Scripts\MainMenuController.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PushObj.cs" />
+     <Compile Include="Assets\Scripts\SemeObj.cs" />
      <Compile Include="Assets\Scripts\SoundAffected.cs" />
      <Compile Include="Assets\Scripts\SoundDesertLibrary.cs" />
      <Compile Include="Assets\Scripts\SoundSphere.cs" />
@@ -219,7 +221,7 @@
      <None Include="Assets\ThirdParties\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
      <None Include="Assets\ThirdParties\NGUI\Resources\Shaders\Unlit - Transparent Masked 2.shader" />
      <None Include="Assets\ThirdParties\NGUI\Examples\Models\Orc\Orc Skin.shader" />
-     <None Include="Assets\m_enemy\m_enemy.shader" />
+     <None Include="Assets\Models\m_enemy\m_enemy.shader" />
      <None Include="Assets\ThirdParties\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
      <None Include="Assets\ThirdParties\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
      <None Include="Assets\ThirdParties\ShaderForge\Editor\InternalResources\Shader Presets\PresetParticleMultiplicative.shader" />
