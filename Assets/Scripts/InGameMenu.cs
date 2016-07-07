@@ -45,6 +45,7 @@ public class InGameMenu : MonoBehaviour {
         else
         {
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         if (GameController.instance.joyPad == false)
         {
