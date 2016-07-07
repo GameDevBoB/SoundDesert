@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using SoundDesertLibrary;
+using UnityEngine.Audio;
 
 public class Player : MonoBehaviour
 {
     public AudioSource playerSource;
+    public AudioSource moveSource;
     public AudioClip moveSound;
     public AudioClip shootSound;
     public GameObject soundObj;
@@ -45,7 +47,9 @@ public class Player : MonoBehaviour
         //lookAt.position = transform.position;
         rb = GetComponent<Rigidbody>();
         Physics.queriesHitTriggers = false;
-        
+        moveSource.clip = moveSound;
+        moveSource.loop = true;
+        moveSource.Play();
     //    myAimPreview = GetComponent<LineRenderer>();
     }
 
@@ -116,11 +120,13 @@ public class Player : MonoBehaviour
             if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
             {
                 anim.SetFloat("move", 1);
-                AudioLib.RepeatedSound(moveSound, playerSource);
+                //AudioLib.RepeatedSound(moveSound, playerSource);
+                moveSource.volume = InGameMenu.volumes / 2;
             }
             else
             {
                 anim.SetFloat("move", 0);
+                moveSource.volume = 0;
             }
 
             if (Input.GetMouseButtonDown(0) && Time.timeScale > 0.1)
@@ -178,7 +184,8 @@ public class Player : MonoBehaviour
        
         if (x > 0.1)
         {
-            AudioLib.RepeatedSound(moveSound, playerSource);
+            //AudioLib.RepeatedSound(moveSound, playerSource);
+            moveSource.volume = InGameMenu.volumes/2;
             anim.SetFloat("move", x);
             Vector3 s = transform.right * speed * x * Time.deltaTime;
             rb.MovePosition(rb.position + s);
@@ -187,7 +194,8 @@ public class Player : MonoBehaviour
         
         if (x < -0.1)
         {
-            AudioLib.RepeatedSound(moveSound, playerSource);
+            //AudioLib.RepeatedSound(moveSound, playerSource);
+            moveSource.volume = InGameMenu.volumes/2;
             anim.SetFloat("move", -x);
             Vector3 s = transform.right * speed * x * Time.deltaTime;
             rb.MovePosition(rb.position + s);
@@ -195,7 +203,8 @@ public class Player : MonoBehaviour
         }
         if (y > 0.1)
         {
-            AudioLib.RepeatedSound(moveSound, playerSource);
+            //AudioLib.RepeatedSound(moveSound, playerSource);
+            moveSource.volume = InGameMenu.volumes/2;
             anim.SetFloat("move", y);
             Vector3 s = -transform.forward * speed * y * Time.deltaTime;
             //Vector3 s = new Vector3(transform.forward.x * speed * y, transform.forward.y, transform.forward.z * speed * y);
@@ -204,7 +213,8 @@ public class Player : MonoBehaviour
         }
         if (y < -0.1)
         {
-            AudioLib.RepeatedSound(moveSound, playerSource);
+            //AudioLib.RepeatedSound(moveSound, playerSource);
+            moveSource.volume = InGameMenu.volumes/2;
             anim.SetFloat("move", -y);
             Vector3 s = -transform.forward * speed * y * Time.deltaTime;
             //Vector3 s = new Vector3(transform.forward.x * speed * y, transform.forward.y, transform.forward.z * speed * y);
@@ -213,6 +223,7 @@ public class Player : MonoBehaviour
         }
         if (isMoving == false)
         {
+            moveSource.volume = 0;
             anim.SetFloat("move", 0);
         }
     }
