@@ -226,11 +226,12 @@ namespace SoundDesertLibrary
 
         public static void Continue()
         {
-            int levelToLoad = PlayerPrefs.GetInt("CompletedLevel");
+            /*int levelToLoad = PlayerPrefs.GetInt("CompletedLevel");
             if(levelToLoad > 0)
             {
                 Application.LoadLevel(levelToLoad);
-            }
+            }*/
+			Application.LoadLevel(2);
         }
     }
 
